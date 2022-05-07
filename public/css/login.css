@@ -1,0 +1,63 @@
+.login-completo {
+  border: 1px solid #769EC4;
+  box-shadow: 0 0 40px #1b417a; }
+
+.titulo {
+  background-color: #133e66;
+  color: white;
+  font-weight: 700;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #769EC4;
+  text-align: center; }
+
+form {
+  color: #FFF;
+  font-weight: 700;
+  font-size: 1.1rem; }
+
+.contenedor-formulario {
+  background-color: #133e66; }
+
+.boton {
+  background-color: #769EC4;
+  border: 1px solid #769EC4;
+  width: 210px;
+  height: 60px;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 20px; }
+  .boton:hover {
+    background-color: #91afca;
+    border: 1px solid #91afca; }
+
+.input-group-text {
+  background-color: #769EC4;
+  border: 1px solid #769EC4;
+  color: #FFF;
+  font-weight: 700;
+  font-size: 1.1rem; }
+
+.enlace {
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding-bottom: 10px; }
+  .enlace:hover {
+    color: #769EC4; }
+
+.div-boton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0; }
+
+label {
+  text-align: left;
+  margin-right: 0px;
+  margin-left: 50px; }
+
+.recuerdame {
+  margin-left: 15px; }
+
+/*# sourceMappingURL=login.css.map */

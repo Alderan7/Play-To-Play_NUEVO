@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAEA,OAAO;EACH,UAAU,EAAE,KAAK;;AAGrB,uCAAuC;EACnC,KAAK,ECLD,IAAI",
+"sources": ["../../resources/sass/margin.scss","../../resources/sass/_styles.scss"],
+"names": [],
+"file": "margin.css"
+}

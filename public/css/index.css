@@ -1,0 +1,109 @@
+h3 {
+  margin-left: 25px;
+  color: white;
+  text-align: center;
+  margin: auto auto;
+  font-weight: 900;
+  font-size: 1.7rem;
+  border-bottom: 2px solid #769EC4;
+  margin-bottom: 50px;
+  box-shadow: 0 4px 5px -2px #769EC4; }
+
+.slider2 .slider1 .slider3 {
+  margin-bottom: 100px;
+  padding-bottom: 100px; }
+
+img {
+  height: 700px;
+  width: 800px; }
+
+.info {
+  background-color: transparent;
+  font-weight: 500;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 2px black; }
+  .info a {
+    color: white;
+    text-decoration: none; }
+
+h5 {
+  font-weight: 900;
+  font-size: 2rem;
+  text-shadow: 3px 3px 5px black;
+  text-transform: uppercase; }
+
+.carousel {
+  height: 100%;
+  margin-bottom: 100px;
+  border: 1px solid #1b417a;
+  box-shadow: 0 0 20px #1b417a;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 100px; }
+
+.imagen-juego {
+  width: 320px;
+  height: 480px;
+  transition: width .6s, height .6s;
+  box-shadow: 0 0 30px #5f80b3; }
+
+.interno {
+  width: 360px;
+  height: 550px;
+  position: relative; }
+
+.galeria, .juego {
+  background-color: #06021d; }
+
+.galeria {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-evenly; }
+
+.nombre-juego {
+  opacity: 0;
+  top: 100px;
+  left: 20px;
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  font-size: 3rem;
+  background-color: black;
+  color: white;
+  transition: opacity .5s;
+  text-shadow: 3px 3px 5px black;
+  background: radial-gradient(circle, #020024 9%, rgba(0, 0, 0, 0) 70%);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.interno:hover > a > img {
+  width: 350px;
+  height: 520px;
+  cursor: pointer; }
+
+.interno:hover > a > .nombre-juego, .interno:hover > a > .precio-juego {
+  opacity: 1; }
+
+.precio-juego {
+  opacity: 0;
+  top: 280px;
+  left: 20px;
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  font-size: 3rem;
+  background-color: black;
+  color: white;
+  transition: opacity .5s;
+  text-shadow: 3px 3px 5px black;
+  background: radial-gradient(circle, #020024 9%, rgba(0, 0, 0, 0) 70%);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+/*# sourceMappingURL=index.css.map */
