@@ -1,7 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.header')
 
 @section('content')
-<div class="container">
+<link href="{{ asset('css/margin.css') }}" rel="stylesheet">
+<div class="container margen">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -11,10 +12,11 @@
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
+
                         </div>
                     @endif
-
                     {{ __('You are logged in!') }}
+                    <div><a href="/user" class="enlace">Ir a mi Biblioteca</a></div>
                 </div>
             </div>
         </div>

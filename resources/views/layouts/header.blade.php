@@ -28,10 +28,10 @@
                             <div class="dropdown-menu dropdown-menu-end contenedor" aria-labelledby="navbarDropdown">
                                 <ul class="list-group">
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <a class="dropdown-item" href="#">Todos los juegos</a></li>
+                                        <a class="dropdown-item" href="/games">Todos los juegos</a></li>
                                     @foreach($generos_juegos as $item)
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <a class="dropdown-item" href="#"><span>{{$item->name_of_genre}}</span></a>
+                                        <a class="dropdown-item" href="/genre_games/{{$item->name_of_genre}}"><span>{{$item->name_of_genre}}</span></a>
                                         <div class="circulo">{{$item->number_of_games}}</div>
                                     </li>
                                     @endforeach
@@ -45,10 +45,10 @@
                             <div class="dropdown-menu dropdown-menu-end contenedor" aria-labelledby="navbarDropdown">
                                 <ul class="list-group">
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <a class="dropdown-item" href="#">Todos los juegos</a></li>
+                                        <a class="dropdown-item" href="/projects">Todos los proyectos</a></li>
                                     @foreach($generos_proyectos as $item)
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <a class="dropdown-item" href="#"><span>{{$item->name_of_genre}}</span></a>
+                                        <a class="dropdown-item" href="/genre_projects/{{$item->name_of_genre}}"><span>{{$item->name_of_genre}}</span></a>
                                         <div class="circulo">{{$item->number_of_games}}</div>
                                     </li>
                                     @endforeach
@@ -86,7 +86,7 @@
                                         {{ Auth::user()->name }}
                                     </a>
 
-                                    <div id="menuUsuario" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <div id="menu_usuario" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="/user">Mi Biblioteca                                      
                                         </a>
                                         @if (Auth::user()->hasRole(['user']))     

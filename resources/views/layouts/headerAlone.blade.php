@@ -45,7 +45,7 @@
                                 {{ Auth::user()->name }}
                             </a>
 
-                            <div id="menuUsuario" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <div id="menu_usuario" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/user">Biblioteca                                      
                                 </a>
                                 @if (Auth::user()->hasRole(['user']))                            

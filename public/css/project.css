@@ -1,0 +1,59 @@
+select {
+  width: "260px";
+  height: "60px"; }
+
+.contenedor-juego {
+  display: grid;
+  grid-template: "vt cp";
+  grid-column: 3fr 1fr;
+  grid-gap: 30px; }
+
+.video-texto {
+  grid-area: vt; }
+
+.caratula-pago {
+  margin-top: 100px;
+  grid-area: cp; }
+
+.caratula {
+  width: 300px;
+  height: 400px; }
+
+.borde-luminoso {
+  margin-bottom: 50px;
+  border: 1px solid #1b417a;
+  box-shadow: 0 0 20px #1b417a;
+  border-radius: 20px;
+  overflow: hidden; }
+
+h1 {
+  margin-left: 25px;
+  color: white;
+  text-align: center;
+  margin: auto auto;
+  font-weight: 900;
+  font-size: 2.3rem;
+  border-bottom: 2px solid #769EC4;
+  margin-bottom: 50px;
+  box-shadow: 0 4px 5px -2px #769EC4; }
+  h1::first-letter {
+    text-transform: uppercase; }
+
+p {
+  font-size: 1.3rem; }
+
+iframe, .imagen {
+  border: 1px solid #1b417a;
+  box-shadow: 0 0 20px #1b417a;
+  border-radius: 20px;
+  height: 60vh;
+  width: 50vw;
+  margin-bottom: 50px; }
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+/*# sourceMappingURL=project.css.map */

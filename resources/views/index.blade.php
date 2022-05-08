@@ -8,34 +8,35 @@
 <div class="container margen">
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            @for ($i = 0; $i < count($noticias); $i++)
+                @if ($i==0)
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                @else
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="{{$i}}" aria-label="Slide {{$i+1}}"></button>
+                @endif 
+            @endfor
             </div>
 
             <div class="carousel-inner">
-
-                <div class="carousel-item active">
-                    <img src="{{$noticias[0]->image}}" class="d-block w-100" alt="...">
-                    <div class="info carousel-caption d-none d-md-block">
-                        <h5>{{$noticias[0]->title}}</h5>
-                        <a href="#"><p>{{$noticias[0]->text}}</p></a>
+            @for ($i = 0; $i < count($noticias); $i++)
+                @if ($i==0)
+                    <div class="carousel-item active">
+                        <img src="{{$noticias[$i]->image}}" class="d-block w-100" alt="...">
+                        <a href="{{$noticias[$i]->link}}" class="info carousel-caption d-none d-md-block no-link">
+                            <h5>{{$noticias[$i]->title}}</h5>
+                            <div><p>{{$noticias[$i]->text}}</p></div>
+                        </a>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="{{$noticias[1]->image}}" class="d-block w-100" alt="...">
-                    <div class="info carousel-caption d-none d-md-block">
-                        <h5>{{$noticias[1]->title}}</h5>
-                        <p>{{$noticias[1]->text}}</p>
+                @else
+                    <div class="carousel-item">
+                        <img src="{{$noticias[$i]->image}}" class="d-block w-100" alt="...">
+                        <a href="{{$noticias[$i]->link}}" class="info carousel-caption d-none d-md-block no-link">
+                            <h5>{{$noticias[$i]->title}}</h5>
+                            <div><p>{{$noticias[$i]->text}}</p></div>
+                        </a>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="{{$noticias[2]->image}}" class="d-block w-100" alt="...">
-                    <div class="info carousel-caption d-none d-md-block">
-                        <h5>{{$noticias[2]->title}}</h5>
-                        <p>{{$noticias[2]->text}}</p>
-                    </div>
-                </div>
+                @endif 
+            @endfor
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -51,7 +52,7 @@
             @foreach($juegos as $item)
             <div class="juego">
                 <div class="interno">
-                <a href="#" class="btn-card"><img class="rounded mx-auto d-block imagen-juego" src="{{$item->cover}}"  alt="Card image cap">
+                <a href="/game/{{ $item->id }}" class="btn-card"><img class="rounded mx-auto d-block imagen-juego" src="{{$item->cover}}"  alt="Card image cap">
                     <div class="nombre-juego">{{ $item->name }}</div>
                     <div class="precio-juego">{{ $item->price }}€</div>
                 </a> 
@@ -64,7 +65,7 @@
         @foreach($proyectos as $item)
             <div class="juego">
                 <div class="interno">
-                <a href="#" class="btn-card"><img class="rounded mx-auto d-block imagen-juego" src="{{$item->cover}}"  alt="Card image cap">
+                <a href="/project/{{ $item->id }}" class="btn-card"><img class="rounded mx-auto d-block imagen-juego" src="{{$item->cover}}"  alt="Card image cap">
                     <div class="nombre-juego">{{ $item->name }}</div>
                 </a> 
                 </div>

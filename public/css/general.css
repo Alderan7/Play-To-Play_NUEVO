@@ -1,6 +1,13 @@
 * {
   font-family: 'Open Sans', sans-serif; }
 
+.no-link {
+  text-decoration: none;
+  transition: color .5s; }
+
+.no-link:hover {
+  color: #769EC4; }
+
 body {
   background: #06021d;
   background-repeat: no-repeat;
@@ -92,12 +99,12 @@ aside {
 .blanco {
   color: #FFF; }
 
-#menuUsuario {
+#menu_usuario {
   margin-bottom: 20px;
   min-width: 300px;
   background-color: transparent;
   border: none; }
-  #menuUsuario a {
+  #menu_usuario a {
     display: flex;
     align-items: center;
     background-color: #06021d;
@@ -106,9 +113,9 @@ aside {
     font-weight: 500;
     min-height: 50px;
     font-size: 1.5em; }
-    #menuUsuario a::first-letter {
+    #menu_usuario a::first-letter {
       text-transform: uppercase; }
-    #menuUsuario a:hover {
+    #menu_usuario a:hover {
       color: #769EC4;
       background-color: #06021d; }
 

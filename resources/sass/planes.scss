@@ -1,0 +1,133 @@
+@import "styles";
+
+button{
+    width: 200px;
+    height: 50px;
+    margin-bottom: 17px;
+}
+
+
+div{
+    text-align: center;
+}
+
+.reaccion-raton>*{
+    background-color: rgb(188, 221, 252);
+}
+
+.reaccion-raton:hover>*{
+    background-color: #d6edff;
+}
+
+
+h5{
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.row{
+    margin: 20px;
+}
+
+h4{
+    margin: 5px auto;
+    font-weight: 900;
+}
+
+.usuario, .creador{
+    min-height: 200px;    
+}
+
+
+.linea{
+    width: 100%;
+    height: 1px;
+    background-color: #769EC4;
+}
+
+.selector{
+    color: $white;
+    margin-top: 20px;
+}
+
+div{
+    label{
+        color: $black;
+    }
+}
+
+.login-completo{
+    border: 1px solid #769EC4;
+    box-shadow: 0 0 40px $sombreado;
+}
+
+
+.titulo{
+    background-color: $fondo;
+    color: $white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #769EC4;
+    text-align: center;
+}
+
+form{
+    color: $white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-top: 1px solid #769EC4;
+    width: 100%;
+    margin: 0;
+}
+
+.contenedor-formulario{
+    background-color: $fondo;
+}
+
+.boton{
+    background-color: #769EC4;
+    border: 1px solid #769EC4;
+    width: 210px;
+    height: 60px;
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    &:hover{
+        background-color: #91afca;
+        border: 1px solid #91afca;
+    }
+}
+
+
+
+.enlace{
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding-bottom: 10px;
+    &:hover{
+        color: #769EC4;
+    }
+}
+
+.div-boton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.card-title{
+    border-bottom: 1px solid grey;
+    font-size: 1.5rem;
+}
+
+input{
+    margin: 5px;
+    width: 15px;
+    height: 15px;
+}
+
+.opaco{
+    opacity: 0.5;
+}

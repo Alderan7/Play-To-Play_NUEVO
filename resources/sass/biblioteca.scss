@@ -1,0 +1,154 @@
+@import "styles";
+
+.perfil{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.usuario{
+    display: flex;
+    flex-direction: row;
+}
+
+.datos{
+    margin-left:20px;
+    line-height: 5px;
+}
+
+.suscripcion{
+    display: flex;
+    margin-bottom:50px;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.avatar{
+    width:200px;
+    height: 200px;
+    border: 1px solid $sombreado;
+    box-shadow: 0 0 20px $sombreado;
+    border-radius: 20px;
+}
+
+.imagen-juego{
+    width:200px; 
+    height:280px;
+    transition: width .6s, height .6s;
+    box-shadow: 0 0 30px #5f80b3;
+}
+
+.interno{
+    width:220px; 
+    height:360px;
+    position: relative;
+}
+
+.galeria, .juego{
+    background-color: #06021d;
+}
+
+.galeria{
+    display: flex;
+    flex-direction: row;
+    align-items:flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.nombre-juego{
+    opacity: 0;
+    top: 30px;
+    left: 10px;
+    position: absolute;
+    width:200px; 
+    height:220px;
+    font-size:2rem;
+    background-color:black;
+    color: $white;
+    transition: opacity .5s;
+    text-shadow: 3px 3px 5px #5f80b3;
+    background: radial-gradient(circle, rgba(95, 128, 179, 1) 20%, rgba(0,0,0,0) 70%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.interno:hover>a>img{
+    width:210px; 
+    height:300px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.interno:hover>a>.nombre-juego{
+    opacity: 1;
+}
+
+h1{
+    font-weight: 900;
+    font-size:2.3rem;
+}
+
+h2{
+    font-weight: 800;
+    font-size:1.8rem;
+}
+
+.gratuito{
+    text-transform: uppercase; 
+}
+
+a{
+    text-decoration: none;
+}
+
+h3{
+    margin-left:25px;
+    color:$white; 
+        text-align: center;
+        margin: auto auto;
+        font-weight: 900;
+        font-size:2.3rem;
+        border-bottom: 2px solid #769EC4;
+        margin-bottom: 50px;
+        box-shadow: 0 4px 5px -2px #769EC4;
+    &::first-letter{
+        text-transform: uppercase; 
+    }
+}
+
+h4{
+    margin: 0;
+    padding: 0;
+}
+
+.vacio{
+    @include flex-column-center-center;
+    font-size: 11rem;
+}
+
+.nombre-juego-vacio{
+    opacity: 0;
+    top: 30px;
+    left: 10px;
+    position: absolute;
+    width:200px; 
+    height:220px;
+    font-size:2rem;
+    background-color:black;
+    color: $white;
+    transition: opacity .5s;
+    text-shadow: 3px 3px 5px black;
+    background: radial-gradient(circle, rgba(2,0,36,1) 9%, rgba(0,0,0,0) 70%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.interno:hover>a>.nombre-juego-vacio{
+    opacity: 1;
+}
+

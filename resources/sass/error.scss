@@ -1,0 +1,95 @@
+@import "styles";
+  
+  body{
+    width: 100%;
+    height: 100%;     
+    margin-top:200px;   
+  }
+   
+body .texto::after{
+    animation: borde1 2s;  
+  }
+
+  h1{
+    font-weight: 900;
+    font-size: 3rem;
+    text-shadow: 2px 2px 2px $sombreado;
+  }
+  
+  body .texto::before{
+    animation: borde2 2s;
+  }
+  
+  .container{
+    position:relative;
+  }
+  
+  .texto{
+    font-weight: 500;
+    font-size: 1.5rem;
+    text-shadow:  2px 2px 2px $sombreado;
+    margin-left: 40px;
+    margin: auto auto;
+  }
+  
+  .texto::after{
+    box-shadow: 0 0 10px $sombreado;
+    border-radius: 50%;
+    position:absolute;
+    content: "";
+    height: 5px;
+    width: 115%;
+    background-color:$sombreado;
+    top:110%;
+    left:0px;
+  }
+  
+  
+  .texto::before{
+    box-shadow: 0 0 10px $sombreado;
+    border-radius: 50%;
+    position:absolute;
+    content: "";
+    height: 150%;
+    width: 5px;
+    background-color:$sombreado;
+    top:0px;
+    left: 90%;
+    
+  }
+  
+  @keyframes borde1 {
+  
+    from {
+        opacity:0;
+        left:-500px;
+    }
+    90%{
+        left: -20px;
+        opacity:.75;
+    }  
+    to {
+        opacity:1;
+        left:0px;
+    }
+  
+  }
+  
+  @keyframes borde2 {
+  
+    from {
+        opacity:0;
+        top:700px;
+    }
+    90%{
+        top: -20px;
+        opacity:.75;
+    }  
+    to {
+        opacity:1;
+        top:0px;
+    }
+  
+  }
+  
+  

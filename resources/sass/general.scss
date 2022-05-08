@@ -3,6 +3,14 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+.no-link{
+    text-decoration: none;
+    transition: color .5s;
+}
+
+.no-link:hover{
+    color:#769EC4;
+}
 
 body{
     background: #06021d;
@@ -85,7 +93,6 @@ div>a{
 }
 
 #navbarDropdown, #navbarDropdownJ, #navbarDropdownP{
-    //color:#06021d;
     color:$white;
     transition: color .5s, border-bottom .5s;
     box-sizing: border-box;
@@ -105,10 +112,6 @@ div>a{
      padding: 10px;
  }
 
- ul, aside{
-
- }
-
  aside{
      width: 325px;
  }
@@ -122,9 +125,8 @@ div>a{
      color: $white;
  }
 
- #menuUsuario{
+ #menu_usuario{
     margin-bottom: 20px;
-    //box-shadow: 0 0 20px $sombreado;
     min-width: 300px;
     background-color: transparent;
     border: none;
@@ -181,7 +183,8 @@ footer{
 
 .contenedor{
     background-color: transparent;
-    border: none;
+    border: none;     
+
 
     ul{
         margin-bottom: 20px;
