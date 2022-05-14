@@ -42,7 +42,7 @@ h4{
 .linea{
     width: 100%;
     height: 1px;
-    background-color: #769EC4;
+    background-color: $back-light;
 }
 
 .selector{
@@ -57,17 +57,17 @@ div{
 }
 
 .login-completo{
-    border: 1px solid #769EC4;
-    box-shadow: 0 0 40px $sombreado;
+    border: 1px solid $back-light;
+    box-shadow: 0 0 40px $shadow;
 }
 
 
 .titulo{
-    background-color: $fondo;
+    background-color: $back;
     color: $white;
     font-weight: 700;
     font-size: 1.2rem;
-    border-bottom: 1px solid #769EC4;
+    border-bottom: 1px solid $back-light;
     text-align: center;
 }
 
@@ -75,18 +75,18 @@ form{
     color: $white;
     font-weight: 700;
     font-size: 1.1rem;
-    border-top: 1px solid #769EC4;
+    border-top: 1px solid $back-light;
     width: 100%;
     margin: 0;
 }
 
 .contenedor-formulario{
-    background-color: $fondo;
+    background-color: $back;
 }
 
 .boton{
-    background-color: #769EC4;
-    border: 1px solid #769EC4;
+    background-color: $back-light;
+    border: 1px solid $back-light;
     width: 210px;
     height: 60px;
     color: white;
@@ -106,7 +106,7 @@ form{
     font-size: 1.1rem;
     padding-bottom: 10px;
     &:hover{
-        color: #769EC4;
+        color: $back-light;
     }
 }
 

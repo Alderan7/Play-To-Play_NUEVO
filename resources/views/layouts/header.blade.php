@@ -28,7 +28,7 @@
                             <div class="dropdown-menu dropdown-menu-end contenedor" aria-labelledby="navbarDropdown">
                                 <ul class="list-group">
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <a class="dropdown-item" href="/games">Todos los juegos</a></li>
+                                        <a class="dropdown-item" href="/games_all">Todos los juegos</a></li>
                                     @foreach($generos_juegos as $item)
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <a class="dropdown-item" href="/genre_games/{{$item->name_of_genre}}"><span>{{$item->name_of_genre}}</span></a>
@@ -45,7 +45,7 @@
                             <div class="dropdown-menu dropdown-menu-end contenedor" aria-labelledby="navbarDropdown">
                                 <ul class="list-group">
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <a class="dropdown-item" href="/projects">Todos los proyectos</a></li>
+                                        <a class="dropdown-item" href="/projects_all">Todos los proyectos</a></li>
                                     @foreach($generos_proyectos as $item)
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         <a class="dropdown-item" href="/genre_projects/{{$item->name_of_genre}}"><span>{{$item->name_of_genre}}</span></a>
@@ -56,12 +56,12 @@
                             </div> 
                         </li>
                         <li class="nav-item" id="menuJuegos">
-                            <a id="navbarDropdownJ" class="nav-link" href="/contacto" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a id="navbarDropdownJ" class="nav-link" href="/contact" role="button" aria-haspopup="true" aria-expanded="false">
                                 CONTACTO
                             </a>                                 
                         </li>
                         <li class="nav-item" id="menuProyectos">
-                            <a id="navbarDropdownP" class="nav-link" href="/ayuda" role="button" aria-haspopup="true" aria-expanded="false">
+                            <a id="navbarDropdownP" class="nav-link" href="/help" role="button" aria-haspopup="true" aria-expanded="false">
                                 AYUDA
                             </a>                           
                         </li>                
@@ -95,13 +95,13 @@
                                         @endif
                                         @if (Auth::user()->hasRole(['creator']))  
                                             <a class="dropdown-item" href="/profile_edit">Editar mi Perfil</a>                
-                                            <a class="dropdown-item" href="#">Gestionar Proyectos</a>
+                                            <a class="dropdown-item" href="/">Gestionar Proyectos</a>
                                             <a class="dropdown-item" href="/plans">Cambiar Suscripción</a>
                                         @endif
                                         @if (Auth::user()->hasRole(['administrator']))   
                                             <a class="dropdown-item" href="/profile_edit">Editar mi Perfil</a>                           
-                                            <a class="dropdown-item" href="/juegos">Administrar Juegos</a>
-                                            <a class="dropdown-item" href="/proyectos">Administrar Proyectos</a>
+                                            <a class="dropdown-item" href="/games">Administrar Juegos</a>
+                                            <a class="dropdown-item" href="/projects">Administrar Proyectos</a>
                                         @endif
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();

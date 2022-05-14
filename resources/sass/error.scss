@@ -13,7 +13,7 @@ body .texto::after{
   h1{
     font-weight: 900;
     font-size: 3rem;
-    text-shadow: 2px 2px 2px $sombreado;
+    text-shadow: 2px 2px 2px $shadow;
   }
   
   body .texto::before{
@@ -27,32 +27,32 @@ body .texto::after{
   .texto{
     font-weight: 500;
     font-size: 1.5rem;
-    text-shadow:  2px 2px 2px $sombreado;
+    text-shadow:  2px 2px 2px $shadow;
     margin-left: 40px;
     margin: auto auto;
   }
   
   .texto::after{
-    box-shadow: 0 0 10px $sombreado;
+    box-shadow: 0 0 10px $shadow;
     border-radius: 50%;
     position:absolute;
     content: "";
     height: 5px;
     width: 115%;
-    background-color:$sombreado;
+    background-color:$shadow;
     top:110%;
     left:0px;
   }
   
   
   .texto::before{
-    box-shadow: 0 0 10px $sombreado;
+    box-shadow: 0 0 10px $shadow;
     border-radius: 50%;
     position:absolute;
     content: "";
     height: 150%;
     width: 5px;
-    background-color:$sombreado;
+    background-color:$shadow;
     top:0px;
     left: 90%;
     

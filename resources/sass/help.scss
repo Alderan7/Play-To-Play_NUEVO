@@ -1,10 +1,10 @@
 @import "styles";
 
 .accordion, .accordion-item, .accordion-header, .accordion-button{
-    background-color: $fondo;
+    background-color: $back;
     color: $white;
-    border: 1px solid $sombreado;
-        box-shadow: 0 0 20px $sombreado;
+    border: 1px solid $shadow;
+        box-shadow: 0 0 20px $shadow;
         border-radius: 20px;
 }
 

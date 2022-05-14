@@ -42,6 +42,63 @@
             </form>
         </div>  
         @endif
+        <div class="comentarios">
+        <h1>Comentarios</h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-5 col-md-6 col-12 pb-4 contenedor-comentarios">
+                    @forelse ($comentarios as $comentario)  
+                            <div class="comment mt-4 text-justify float-left">
+                                <div>
+                                <img src="http://127.0.0.1/public/images/default.svg" alt="" class="rounded-circle" width="40" height="40">
+                                    <h4>{{$comentario->name}}</h4>                                                               
+                                    <span>{{$comentario->created_at}}</span>
+                                    @guest
+                                    @else
+                                        @if (Auth::user()->id == $comentario -> id_user)  
+                                        <form class="boton-eliminar" action="{{ url("game/{$comentario->id}") }}" method="post">
+                                            @method("delete")
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger">
+                                                <i class="fa fa-trash">Borrar</i>
+                                            </button>
+                                        </form>    
+                                        @endif
+                                    @endguest
+                                </div>
+                                <br>
+                                <p>{{$comentario->commentary}}</p>                                
+                            </div>
+                    @empty        
+                            <div class="comment mt-4 text-justify float-left">
+                                <h2>Todavía no hay comentarios. ¡Dí lo que piensas de este juego!</h2>
+                            </div>
+                    @endforelse   
+                    </div>
+                    <div class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+                        <form class="formulario-comentario" id="algin-form" action="/game/{{$juego[0]->id}}" method="POST">
+                        @csrf
+                            <div class="form-group formulario-comentario">
+                                <h4>Deja un comentario</h4>
+                                <h5 for="message">Mensaje</h5>                               
+                                <textarea id="msg" name="commentary" cols="30" rows="5" class="form-control" style="background-color: black;" required></textarea>
+                            </div> 
+                            @guest
+                            <div class="form-group">
+                                <p class="no-login">Para poder dejar un comentario, <a href="{{ route('register') }}">{{ __('regístrate') }}</a> o <a href="{{ route('login') }}">{{ __('inicia sesión') }}</a>.</p>
+                            </div>
+                            @else     
+                                <input type="hidden" name="id_game" value="{{$juego[0]->id}}">
+                                <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">                  
+                            <div class="form-group">
+                                <button type="submit" id="post" class="boton">Comentar</button>
+                            </div>
+                            @endguest
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -3,9 +3,6 @@
     'js_files' => ['app']])
     
 @section('content')
-@php
-$projects = json_decode(json_encode($proyectos));
-@endphp
 <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
 <div id="projects" class="container">  

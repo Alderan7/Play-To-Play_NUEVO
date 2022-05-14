@@ -1,11 +1,11 @@
 @extends('layouts.header',
-    ['title' => '', 'css_files' => ['ayuda'], 
+    ['title' => '', 'css_files' => ['help'], 
     'js_files' => ['app']])
     
 @section('content')
 
 <link href="{{ asset('css/margin.css') }}" rel="stylesheet">
-<link href="{{ asset('css/ayuda.css') }}" rel="stylesheet">
+<link href="{{ asset('css/help.css') }}" rel="stylesheet">
 <div class="margen container">
 
 <div class="accordion" id="accordionPanelsStayOpenExample">

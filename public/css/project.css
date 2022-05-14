@@ -4,12 +4,15 @@ select {
 
 .contenedor-juego {
   display: grid;
-  grid-template: "vt cp";
+  grid-template: "vt cp" "c c";
   grid-column: 3fr 1fr;
   grid-gap: 30px; }
 
 .video-texto {
   grid-area: vt; }
+
+.comentarios {
+  grid-area: c; }
 
 .caratula-pago {
   margin-top: 100px;
@@ -55,5 +58,120 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center; }
+
+@media (min-width: 568px) {
+  .end {
+    margin-left: auto; } }
+@media (max-width: 768px) {
+  #post {
+    width: 100%; } }
+#clicked {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  text-align: center;
+  width: 100%;
+  background-color: #769EC4;
+  border-color: #6088ad #4a6f92 #40668a;
+  color: #000;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 13px; }
+
+#profile {
+  background-color: unset; }
+
+body {
+  background-color: #000; }
+
+#nav-items li a, #profile {
+  text-decoration: none;
+  color: #e0dbdb;
+  background-color: #000; }
+
+.boton-eliminar {
+  float: right; }
+
+.comments {
+  margin-top: 5%;
+  margin-left: 20px; }
+
+.comment:nth-child(odd) {
+  border: 1px solid #133e66;
+  background-color: rgba(19, 62, 102, 0.973);
+  width: 100%;
+  border-radius: 5px;
+  padding-left: 40px;
+  padding-right: 30px;
+  padding-top: 10px; }
+
+.comment:nth-child(even) {
+  border: 1px solid #769EC4;
+  background-color: #000;
+  width: 100%;
+  border-radius: 5px;
+  padding-left: 40px;
+  padding-right: 30px;
+  padding-top: 10px; }
+
+.comment h4, .comment span, .darker h4, .darker span {
+  display: inline; }
+
+.comment p, .comment span, .darker p, .darker span {
+  color: #b8b7b7; }
+
+h1, h4 {
+  color: white;
+  font-weight: bold; }
+
+label {
+  color: #d4d0d0; }
+
+#align-form {
+  margin-top: 20px; }
+
+.form-group p a {
+  color: white; }
+
+#checkbx {
+  background-color: #000; }
+
+#darker img {
+  margin-right: 15px;
+  position: static; }
+
+.form-group input, .form-group textarea {
+  background-color: #000;
+  border: 1px solid #102e2e;
+  border-radius: 12px; }
+
+.formulario-comentario {
+  border: 1px solid #133e66;
+  background-color: rgba(19, 62, 102, 0.973);
+  border-radius: 5px;
+  padding: 20px; }
+
+#msg, h5 {
+  color: #b8b7b7;
+  font-weight: 500;
+  font-size: 1.1rem; }
+
+.boton {
+  background-color: #769EC4;
+  border: 1px solid #769EC4;
+  width: 210px;
+  height: 60px;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 20px; }
+  .boton:hover {
+    background-color: #91afca;
+    border: 1px solid #91afca; }
+
+.no-login {
+  padding: 20px;
+  color: #b8b7b7;
+  font-weight: 500;
+  font-size: 1.1rem; }
 
 /*# sourceMappingURL=project.css.map */

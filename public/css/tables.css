@@ -1,0 +1,19 @@
+table, thead, tr {
+  background-color: #133e66;
+  border-radius: 20px;
+  border: 1px solid #FFF; }
+  table th, table td, thead th, thead td, tr th, tr td {
+    padding: 10px;
+    border: 1px solid #FFF;
+    text-align: center; }
+
+.imagen-tabla {
+  max-width: 100px;
+  max-height: 100px; }
+
+.boton {
+  width: 70%;
+  height: 100%;
+  margin: 5px; }
+
+/*# sourceMappingURL=tables.css.map */

@@ -29,7 +29,7 @@
             </div>
         @empty        
             <div class="interno">
-            <a href="/games" class="btn-card"><div class="rounded mx-auto d-block imagen-juego vacio">+</div><div class="nombre-juego-vacio">Buscar Juegos</div></a> 
+            <a href="/games_all" class="btn-card"><div class="rounded mx-auto d-block imagen-juego vacio">+</div><div class="nombre-juego-vacio">Buscar Juegos</div></a> 
             </div>
         @endforelse
         </div>

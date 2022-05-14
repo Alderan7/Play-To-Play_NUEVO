@@ -35,7 +35,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/contacto', function () {
+Route::get('/contact', function () {
     $generos_juegos =  DB::table('games')
                 ->join('genres', 'games.genre', '=', 'genres.id')
                 ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -44,11 +44,11 @@ Route::get('/contacto', function () {
                 ->join('genres', 'projects.genre', '=', 'genres.id')
                 ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
                 ->groupBy('genres.name')->get();
-return view('contacto',['generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+return view('contact',['generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
 
 
-Route::get('/ayuda', function () {
+Route::get('/help', function () {
     $generos_juegos =  DB::table('games')
                 ->join('genres', 'games.genre', '=', 'genres.id')
                 ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -57,10 +57,10 @@ Route::get('/ayuda', function () {
                 ->join('genres', 'projects.genre', '=', 'genres.id')
                 ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
                 ->groupBy('genres.name')->get();
-return view('ayuda',['generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+return view('help',['generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
 
-Route::get('/games', function () {
+Route::get('/games_all', function () {
     $juegos = DB::table('games')->get();
     $generos_juegos =  DB::table('games')
                 ->join('genres', 'games.genre', '=', 'genres.id')
@@ -70,11 +70,11 @@ Route::get('/games', function () {
                 ->join('genres', 'projects.genre', '=', 'genres.id')
                 ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
                 ->groupBy('genres.name')->get();
-    return view('games',['juegos'=>$juegos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+    return view('games_all',['juegos'=>$juegos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
 
 
-Route::get('/projects', function () {
+Route::get('/projects_all', function () {
     $proyectos = DB::table('projects')->get();
     $generos_juegos =  DB::table('games')
                 ->join('genres', 'games.genre', '=', 'genres.id')
@@ -84,7 +84,7 @@ Route::get('/projects', function () {
                 ->join('genres', 'projects.genre', '=', 'genres.id')
                 ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
                 ->groupBy('genres.name')->get();
-    return view('projects',['proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+    return view('projects_all',['proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
 
 Route::get('/genre_games/{genre}', function ($genre) {
@@ -119,7 +119,8 @@ Route::get('/genre_projects/{genre}', function ($genre) {
     return view('genre_projects',['proyectos'=>$proyectos, 'genreGame' => $genre, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
 
-
+Route::post('/game/{id}', 'App\Http\Controllers\GameCommentaryController@store');
+Route::delete('game/{id}', 'App\Http\Controllers\GameCommentaryController@destroy');
 Route::get('/game/{id}', function ($id) {
     $pertenece=False;
     if(Auth::user()){
@@ -135,7 +136,12 @@ Route::get('/game/{id}', function ($id) {
         }
     }
     $juego = DB::table('games')->where('id', '=', $id)->get();
-    $comentarios = DB::table('game_commentaries')->where('id_game', '=', $id)->get();
+    $comentarios = DB::table('game_commentaries')
+            ->join('users', 'users.id', '=', 'game_commentaries.id_user')
+            ->select('game_commentaries.*', 'users.name', 'users.avatar')
+            ->where('game_commentaries.id_game', '=', $id)
+            ->orderBy('game_commentaries.id', 'asc')
+            ->get();
     $generos_juegos =  DB::table('games')
                 ->join('genres', 'games.genre', '=', 'genres.id')
                 ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -147,9 +153,16 @@ Route::get('/game/{id}', function ($id) {
     return view('game',['pertenece'=>$pertenece,'juego'=>$juego, 'comentarios'=>$comentarios, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
 
+Route::post('/project/{id}', 'App\Http\Controllers\ProjectCommentaryController@store');
+Route::delete('project/{id}', 'App\Http\Controllers\ProjectCommentaryController@destroy');
 Route::get('/project/{id}', function ($id) {
     $proyecto = DB::table('projects')->where('id', '=', $id)->get();
-    $comentarios = DB::table('project_commentaries')->where('id_project', '=', $id)->get();
+    $comentarios = DB::table('project_commentaries')
+            ->join('users', 'users.id', '=', 'project_commentaries.id_user')
+            ->select('project_commentaries.*', 'users.name', 'users.avatar')
+            ->where('project_commentaries.id_project', '=', $id)
+            ->orderBy('project_commentaries.id', 'asc')
+            ->get();
     $generos_juegos =  DB::table('games')
                 ->join('genres', 'games.genre', '=', 'genres.id')
                 ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -192,3 +205,28 @@ Route::get('/plans', function () {
                 ->groupBy('genres.name')->get();
     return view('plans',['userPlans'=>$userPlans,'creatorPlans'=>$creatorPlans,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
+
+Route::get('/plans/update', function (Request $request) {
+
+    $tipoPlan = $request->input('plan');
+    $tipoPlanUsuario = $request->input('plans-user');
+    $tipoPlanCreador = $request->input('plans-creator');
+    $rol = DB::table('role_user')->select('role_id')->where('user_id', '=', Auth::user()->id)->get();
+    $rol_name = DB::table('roles')->select('name')->where('id', '=', 2)->get();
+    $generos_juegos =  DB::table('games')
+                ->join('genres', 'games.genre', '=', 'genres.id')
+                ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
+                ->groupBy('genres.name')->get();
+    $generos_proyectos =  DB::table('projects')
+                ->join('genres', 'projects.genre', '=', 'genres.id')
+                ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
+                ->groupBy('genres.name')->get();
+    return view('plansPay',['rol'=>$rol,'tipoPlan'=>$tipoPlan,'tipoPlanUsuario'=>$tipoPlanUsuario,'tipoPlanCreador'=>$tipoPlanCreador, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+});
+
+Route::resource("games", "App\Http\Controllers\GamesController")->parameters(["juegos"=>"juego"])->middleware('auth');
+Route::resource("projects", "App\Http\Controllers\ProjectsController")->parameters(["proyectos"=>"proyecto"])->middleware('auth');
+
+Route::resource("profile_edit", "App\Http\Controllers\ProfileController")->middleware('auth');
+Route::post('/store_profile', 'App\Http\Controllers\ProfileController@show');
+
