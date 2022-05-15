@@ -6,14 +6,24 @@
 <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
 <link href="{{ asset('css/margin.css') }}" rel="stylesheet">
-<div class="row margen">
+<link href="{{ asset('css/login.css') }}" rel="stylesheet">
+<link href="{{ asset('css/edit_game.css') }}" rel="stylesheet">
+<div class="margen container">
+<h1>Crear nuevo Proyecto</h1>
         <div class="col-12">
             <form method="POST" action="{{route("projects.store")}}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label class="label">Genero</label>
-                    <input required autocomplete="off" name="Genero" class="form-control"
-                           type="text" placeholder="Genero">
+                    <label class="label">Genero</label><br>
+                    <!--<input required autocomplete="off" name="Genero" class="form-control"
+                           type="text" placeholder="Genero">-->
+                    <select name="genero">
+                        <option value="0" selected disabled>Seleccione un género...</option>
+                    @foreach($generos as $genero)
+                        <option value="{{$genero->id}}">{{$genero->name}}</option>
+                    @endforeach
+                    </select>
+                    <br>
                     <label class="label">Creador</label>
                     <input required autocomplete="off" name="Creador" class="form-control"
                            type="text" placeholder="Creador">

@@ -24,7 +24,7 @@ class GamesController extends Controller
             ->join('genres', 'projects.genre', '=', 'genres.id')
             ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
             ->groupBy('genres.name')->get();
-        return view("games_index", ["juegos"=>Game::paginate(5),'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+        return view("games_index", ["games"=>Game::paginate(4),'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
     }
 
 
@@ -35,6 +35,7 @@ class GamesController extends Controller
      */
     public function create()
     {
+        $generos = DB::table('genres')->get();
         $generos_juegos =  DB::table('games')
             ->join('genres', 'games.genre', '=', 'genres.id')
             ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -43,7 +44,7 @@ class GamesController extends Controller
             ->join('genres', 'projects.genre', '=', 'genres.id')
             ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
             ->groupBy('genres.name')->get();
-        return view("games_create", ['generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+        return view("games_create", ['generos'=>$generos,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
     }
 
     /**
@@ -100,8 +101,9 @@ class GamesController extends Controller
      * @param  \App\Models\Game  $juego
      * @return \Illuminate\Http\Response
      */
-    public function edit(Game $juego)
+    public function edit(Game $game)
     {
+        $generos = DB::table('genres')->get();
         $generos_juegos =  DB::table('games')
             ->join('genres', 'games.genre', '=', 'genres.id')
             ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -110,7 +112,7 @@ class GamesController extends Controller
             ->join('genres', 'projects.genre', '=', 'genres.id')
             ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
             ->groupBy('genres.name')->get();
-        return view("games_edit", ['juego'=>$juego,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+        return view("games_edit", ['game'=>$game,'generos'=>$generos,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
     }
 
     /**
@@ -120,13 +122,52 @@ class GamesController extends Controller
      * @param  \App\Models\Game  $juego
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Game $juego)
+    /*public function update(Request $request, Game $game)
     {
-        $storage_url= config('global.storage');
+
         $variable=$request->input();
-        $variable['Banner']=$storage_url.$variable['Banner'];
-        $juego->fill($variable)->saveOrFail();
+        $variable['cover']=$variable['cover'];
+        $game->fill($variable)->saveOrFail();
         return redirect()->route("games.index")->with(["mensaje" => "Juego actualizado"]);
+    }*/
+
+
+    public function update(Request $request, Game $game)
+    {
+
+        if($request->hasFile('cover-game')) {
+                
+            //get filename with extension
+            $filenamewithextension = $request->file('cover-game')->getClientOriginalName();
+
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+            //get file extension
+            $extension = $request->file('cover-game')->getClientOriginalExtension();
+
+            //filename to store
+            $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+            //Upload File to external server
+            Storage::disk('ftp')->put($filenametostore, fopen($request->file('cover-game'), 'r+'));
+
+            //Store $filenametostore in the database
+            $variable=$request->input();
+            $storage_url= config('global.storage');
+            $completeurlname=$storage_url.$filenametostore; 
+            $variable['cover']=$completeurlname;
+            $game->fill($variable)->saveOrFail();
+            return redirect()->route("games.index")->with(["mensaje" => "Juego actualizado"]);
+        }else{
+            $variable=$request->input();
+            $variable['cover']=$variable['cover'];
+            $game->fill($variable)->saveOrFail();
+            return redirect()->route("games.index")->with(["mensaje" => "Juego actualizado"]);
+        }
+        
+     
+        
     }
 
     /**
@@ -135,9 +176,9 @@ class GamesController extends Controller
      * @param  \App\Models\Game  $juego
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Game $juego)
+    public function destroy(Game $game)
     {
-        $juego->delete();
+        $game->delete();
         return redirect()->route("games.index")->with(["mensaje" => "Juego eliminado",]);
     }
 }

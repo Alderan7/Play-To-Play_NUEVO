@@ -15,10 +15,24 @@
                     <br><a href="/profile_edit">Editar mi perfil</a>
                 </div>
             </div>
-            <div class="suscripcion">
-                <h2>Plan de suscripción: <span class="gratuito">Gratuito</span></h2>
-                <a href="/plans">Cambiar mi suscripción</a>
-            </div>
+            @if (Auth::user()->hasRole(['creator']))        
+                <div class="suscripcion">
+                    <h2>Plan de suscripción: <span class="gratuito">Gratuito</span></h2>
+                    <a href="/plans">Cambiar mi suscripción</a>
+                </div> 
+            @elseif (Auth::user()->hasRole(['user']))        
+                <div class="suscripcion">
+                    <h2>Plan de suscripción: <span class="gratuito">Gratuito</span></h2>
+                    <a href="/plans">Cambiar mi suscripción</a>
+                </div>           
+            @elseif (Auth::user()->hasRole(['administrator']))        
+                <div class="suscripcion">
+                    <h2>Administración de la página Play To Play</h2>
+                    <a  href="/projects">Administrar Proyectos</a>
+                    <a  href="/games">Administrar Juegos</a>                    
+                </div>
+            @endif
+            
         </div>
         <h3>Tu Biblioteca</h3>
         
@@ -37,9 +51,9 @@
         @if (Auth::user()->hasRole(['creator']))        
         <h3>Tus Proyectos</h3>
         <div class="galeria">
-        @foreach ($juegos as $juego)  
+        @foreach ($proyectos as $proyecto)  
             <div class="interno">
-            <a href="#" class="btn-card"><img class="rounded mx-auto d-block imagen-juego" src="{{$juego->Caratula}}"  alt="Card image cap"><div class="nombre-juego">{{$juego->Nombre}}</div></a> 
+            <a href="#" class="btn-card"><img class="rounded mx-auto d-block imagen-juego" src="{{$proyecto->cover}}"  alt="Card image cap"><div class="nombre-juego">{{$proyecto->name}}</div></a> 
             </div>
             @endforeach
         </div>

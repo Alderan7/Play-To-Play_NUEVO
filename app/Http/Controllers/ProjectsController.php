@@ -24,7 +24,7 @@ class ProjectsController extends Controller
             ->join('genres', 'projects.genre', '=', 'genres.id')
             ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
             ->groupBy('genres.name')->get();
-        return view("projects_index", ["proyectos"=>Project::paginate(5),'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+        return view("projects_index", ["projects"=>Project::paginate(4),'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
     }
 
 
@@ -35,6 +35,7 @@ class ProjectsController extends Controller
      */
     public function create()
     {
+        $generos = DB::table('genres')->get();
         $generos_juegos =  DB::table('games')
             ->join('genres', 'games.genre', '=', 'genres.id')
             ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -43,7 +44,7 @@ class ProjectsController extends Controller
             ->join('genres', 'projects.genre', '=', 'genres.id')
             ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
             ->groupBy('genres.name')->get();
-        return view("projects_create", ['generos'=>$generos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+        return view("projects_create", ['generos'=>$generos,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
     }
 
     /**
@@ -89,7 +90,7 @@ class ProjectsController extends Controller
      * @param  \App\Models\project  $proyecto
      * @return \Illuminate\Http\Response
      */
-    public function show(project $proyecto)
+    public function show(project $project)
     {
         //
     }
@@ -100,7 +101,7 @@ class ProjectsController extends Controller
      * @param  \App\Models\project  $proyecto
      * @return \Illuminate\Http\Response
      */
-    public function edit(project $proyecto)
+    public function edit(project $project)
     {
         $generos_juegos =  DB::table('games')
             ->join('genres', 'games.genre', '=', 'genres.id')
@@ -110,7 +111,7 @@ class ProjectsController extends Controller
             ->join('genres', 'projects.genre', '=', 'genres.id')
             ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
             ->groupBy('genres.name')->get();
-        return view("projects_edit", ['generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+        return view("projects_edit", ['project'=>$project,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
     }
 
     /**
@@ -120,24 +121,24 @@ class ProjectsController extends Controller
      * @param  \App\Models\project  $proyecto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, project $proyecto)
+    public function update(Request $request, project $project)
     {
         $storage_url= config('global.storage');
         $variable=$request->input();
         $variable['Banner']=$storage_url.$variable['Banner'];
-        $proyecto->fill($variable)->saveOrFail();
+        $proyect->fill($variable)->saveOrFail();
         return redirect()->route("projects.index")->with(["mensaje" => "proyecto actualizado"]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\project  $proyecto
+     * @param  \App\Models\project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(project $proyecto)
+    public function destroy(project $project)
     {
-        $proyecto->delete();
+        $project->delete();
         return redirect()->route("projects.index")->with(["mensaje" => "proyecto eliminado",]);
     }
 }

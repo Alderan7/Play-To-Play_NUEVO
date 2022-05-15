@@ -72,14 +72,19 @@ h2 {
   background-color: #769EC4;
   border: 1px solid #1b417a;
   box-shadow: 0 0 20px #1b417a;
+  width: 210px;
   width: 90%;
-  height: 70px;
-  color: white;
+  height: 60px;
+  color: #FFF;
   font-weight: 900;
-  font-size: 2.3rem; }
+  font-size: 2.3rem;
+  padding: 15px; }
   .boton:hover {
     background-color: #91afca;
     border: 1px solid #91afca; }
+
+a {
+  text-decoration: none; }
 
 @media (min-width: 568px) {
   .end {

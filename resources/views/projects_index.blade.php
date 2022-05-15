@@ -9,34 +9,32 @@
 <link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <link href="{{ asset('css/tables.css') }}" rel="stylesheet">
 <div class="margen container">
+<h1>Panel de administración de Proyectos</h1>
         <div class="col-12">
-            <a href="{{route("projects.create")}}" class="btn btn-success mb-2">Agregar</a>
-            <table class="table table-bordered">
+            <a href="{{route("projects.create")}}" class="btn btn-success mb-2">Agregar nuevo Proyecto</a>
+            <table class="container">
                 <thead>
                 <tr>
                     <th>Nombre</th>
                     <th>Carátula</th>
-                    <th>Editar</th>
-                    <th>Eliminar</th>
+                    <th>Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($proyectos as $proyecto)
+                @foreach($projects as $project)
                     <tr>
-                        <td>{{$proyecto->name}}</td>
-                        <td><img class="imagen-tabla" src="{{$proyecto->cover}}"></td>           
+                        <td class="nombre">{{$project->name}}</td>
+                        <td><img class="imagen-tabla" src="{{$project->cover}}"></td>           
                        
                         <td>
-                            <a class="btn btn-warning" href="{{route("projects.edit",[$proyecto])}}">
-                                <i class="fa fa-edit"></i>
+                            <a class="btn btn-warning boton" href="{{route("projects.edit",[$project])}}">
+                                <i class="fa fa-edit">Editar</i>
                             </a>
-                        </td>
-                        <td>
-                            <form action="{{route("projects.destroy", [$proyecto])}}" method="post">
+                            <form action="{{route("projects.destroy", [$project])}}" method="post">
                                 @method("delete")
                                 @csrf
-                                <button type="submit" class="btn btn-danger">
-                                    <i class="fa fa-trash"></i>
+                                <button type="submit" class="btn btn-danger boton">
+                                    <i class="fa fa-trash">Eliminar</i>
                                 </button>
                             </form>
                         </td>
@@ -44,18 +42,18 @@
                 @endforeach
                 </tbody>
             </table>
-            <!--{{$proyectos->links()}}-->
+            <!--{{$projects->links()}}-->
             <div class="container navegador pagination-wrapper">
                 <!-- a Tag for previous page -->
-                <a href="{{$proyectos->previousPageUrl()}}">
+                <a href="{{$projects->previousPageUrl()}}">
                     Atrás<!-- You can insert logo or text here -->
                 </a>
-                @for($i=0;$i<=$proyectos->lastPage();$i++)
+                @for($i=0;$i<=$projects->lastPage();$i++)
                     <!-- a Tag for another page -->
-                    <a href="{{$proyectos->url($i)}}">{{$i}}</a>
+                    <a href="{{$projects->url($i)}}">{{$i}}</a>
                 @endfor
                 <!-- a Tag for next page -->
-                <a href="{{$proyectos->nextPageUrl()}}">
+                <a href="{{$projects->nextPageUrl()}}">
                     <!-- You can insert logo or text here -->
                     Adelante
                 </a>

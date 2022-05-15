@@ -17,31 +17,45 @@
                 <p>{{$juego[0]->text1}}</p>
             </div>
         </div>
-        @if ($juego[0]->price==0.00)
-        <div class="caratula-pago gratis">
-            <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
-            <h2>Gratis</h2>
-            <button class="boton">Play</button>
-        </div>
-        @elseif ($pertenece==true)
-        <div class="caratula-pago en-biblioteca">
-            <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
-            <button class="boton">Play</button>
-        </div>
+        @guest
+                <div class="caratula-pago en-biblioteca">
+                    <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
+                    <p class="no-login">Para poder jugar a este juego, <a href="{{ route('register') }}">{{ __('regístrate') }}</a> o <a href="{{ route('login') }}">{{ __('inicia sesión') }}</a>.</p>
+
+                </div>  
         @else
-        <div v-else class="caratula-pago">
-            <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
-            <h2>{{$juego[0]->price}}€</h2>
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                <input type="hidden" name="cmd" value="_s-xclick">
-                <input  width="100" height="100" type="hidden" name="hosted_button_id" value="3H98AMZM399UQ">
+                @if ($pertenece==true)
+                <div class="caratula-pago en-biblioteca">
+                    <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
+                    <a href="/user" class="boton">Play</a>
+                </div>        
+                @elseif ($juego[0]->price==0.00)
+                <div class="caratula-pago gratis">
+                    <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
+                    <h2>Gratis</h2>
+                    <form action="{{ url("user") }}" method="post">
+                        @csrf
+                    <input type="hidden" name="id_game" value="{{$juego[0]->id}}">
+                    <input type="hidden" name="id_player" value="{{ Auth::user()->id }}">  
+                    <button type="submit" class="boton">Play</button>
+                    </form>
+                </div>
+                @else
+                <div v-else class="caratula-pago">
+                    <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
+                    <h2>{{$juego[0]->price}}€</h2>
+                    
+                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                        <input type="hidden" name="cmd" value="_s-xclick">
+                        <input  width="100" height="100" type="hidden" name="hosted_button_id" value="3H98AMZM399UQ">
 
-                <input type="hidden" name="currency_code" value="EUR">
-                <input  width="260" height="60" type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/buy-logo-large.png" alt="Buy now with PayPal" border="0" name="submit">
+                        <input type="hidden" name="currency_code" value="EUR">
+                        <input  width="260" height="60" type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/buy-logo-large.png" alt="Buy now with PayPal" border="0" name="submit">
 
-            </form>
-        </div>  
-        @endif
+                    </form>
+                </div>  
+                @endif
+        @endguest        
         <div class="comentarios">
         <h1>Comentarios</h1>
             <div class="container">

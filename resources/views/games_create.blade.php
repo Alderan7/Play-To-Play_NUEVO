@@ -6,45 +6,40 @@
 <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
 <link href="{{ asset('css/margin.css') }}" rel="stylesheet">
-<div class="row margen">
+<link href="{{ asset('css/login.css') }}" rel="stylesheet">
+<link href="{{ asset('css/edit_game.css') }}" rel="stylesheet">
+<div class="margen container">
+<h1>Crear nuevo Juego</h1>
         <div class="col-12">
             <form method="POST" action="{{route("games.store")}}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                    <label class="label">Genero</label>
-                    <input required autocomplete="off" name="Genero" class="form-control"
-                           type="text" placeholder="Genero">
-                    <label class="label">IdProyecto</label>
-                    <input required autocomplete="off" name="IdProyecto" class="form-control"
-                           type="text" placeholder="IdProyecto">
                     <label class="label">Nombre</label>       
-                    <input required autocomplete="off" name="Nombre" class="form-control"
-                            type="text" placeholder="Nombre">
-                    <label class="label">Estado</label>
-                    <input required autocomplete="off" name="Estado" class="form-control"
-                            type="text" placeholder="Estado">
-                    <label class="label">Banner</label>
-                    <!--<input required autocomplete="off" name="Banner" class="form-control"
-                            type="text" placeholder="Banner">-->
-                    <input required autocomplete="off" name="Banner" class="form-control"
-                            type="file" placeholder="Banner">
+                    <input required autocomplete="off" name="name" class="form-control"
+                            type="text" placeholder="Nombre del juego" required>
+                    <label class="label">Genero</label>
+                    
+                    <select class="form-control" name="genre" required>
+                        <option value="" selected disabled>Seleccione un género...</option>
+                    @foreach($generos as $genero)
+                        <option value="{{$genero->id}}">{{$genero->name}}</option>
+                    @endforeach
+                    </select>
+                    <label class="label">Carátula</label>
+                    <input required autocomplete="off" name="cover" class="form-control"
+                            type="file" placeholder="Carátula del juego" required>
                     <label class="label">Video</label>
-                    <input required autocomplete="off" name="Video" class="form-control"
-                            type="text" placeholder="Video">
-                    <label class="label">Texto</label>
-                    <input required autocomplete="off" name="Texto" class="form-control"
-                            type="text" placeholder="Texto">
-                    <label class="label">Caratula</label>
-                    <!--<input required autocomplete="off" name="Caratula" class="form-control"
-                            type="text" placeholder="Caratula">-->
-                    <input required autocomplete="off" name="Caratula" class="form-control"
-                            type="file" placeholder="Caratula"> 
-                    <label class="label">TextoCorto</label>
-                    <input required autocomplete="off" name="TextoCorto" class="form-control"
-                            type="text" placeholder="TextoCorto">
+                    <input required autocomplete="off" name="video" class="form-control"
+                            type="text" placeholder="Video del juego en youtube." required>
+                    <label class="label">Texto de Introducción</label>
+                    <textarea rows="4" cols="50" class="form-control" name="text1" placeholder="Texto de introducción del juego." required></textarea>
+                    <label class="label">Texto de ampliación 1</label>
+                    <textarea rows="4" cols="50" class="form-control" name="text2" placeholder="Texto opcional de ampliación de la información." ></textarea>
+                    <label class="label">Texto de ampliación 2</label>
+                    <textarea rows="4" cols="50" class="form-control" name="text3" placeholder="Texto opcional de ampliación de la información." ></textarea>
                     <label class="label">Precio</label>
-                    <input required autocomplete="off" name="Precio" class="form-control"
-                            type="text" placeholder="Precio">
+                    <input required autocomplete="off" name="price" class="form-control"
+                            type="text" placeholder="Precio del juego" required>
                 </div>
                 <button class="btn btn-success">Guardar</button>
                 <a class="btn btn-primary" href="{{route("games.index")}}">Volver al listado</a>
