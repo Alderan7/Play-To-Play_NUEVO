@@ -7,25 +7,37 @@
 <link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <link href="{{ asset('css/planes.css') }}" rel="stylesheet">
 <link href="{{ asset('css/planesPay.css') }}" rel="stylesheet">
-    
-<form method="POST" action="{{ url('update_plan') }}">
+
+
+<form method="POST" action="{{ url("update_plan/{$Role_User[0]->id}")}}">
+    @csrf
     <div class="card text-center contenedor-formulario container margen">
         <div class="card-header">
-            Featured
+            <h2>CONFIRMA TU COMPRA</h2>
         </div>
         <div class="card-body">
-            <!--<h5 class="card-title">Confirma tu plan</h5>
-            <p class="card-text">Tipo de Plan: {{$tipoPlan}} </p>
-           
-            <p class="card-text">Tipo de Plan Único: {{$tipoPlanCreador}}{{$tipoPlanUsuario}}</p>
-            <p class="card-text">Id De Usuario: {{ Auth::user()->id }}</p>
-            <p class="card-text">Rol actual de usuario: {{$rol[0]->role_id}}</p>-->
-            <label class="label">role_id</label>
-            <input required value="" autocomplete="off" name="role_id" class="form-control"
-                type="text" placeholder="role_id">
-            <label class="label">user_id</label>
-            <input required value="" autocomplete="off" name="user_id" class="form-control"
-                type="text" placeholder="user_id">
+            <form>
+
+            <p class="card-text">Tipo de Plan: {{$tipoPlan}} </p>           
+            <p class="card-text">Tipo de Plan que quieres contratar: {{$tipoPlanCreador}}{{$tipoPlanUsuario}}</p>
+            <!--<p class="card-text">Id De Usuario: {{ Auth::user()->id }}</p>-->
+            <p class="card-text">Rol actual de usuario: {{$Role_User[0]->role_id}}</p>
+            <p class="card-text">ID del Rol Actual: {{$Role_User[0]->id}}</p>
+
+            @if($tipoPlanUsuario==1)
+            <input type="hidden" name="role_id" value="1">
+            @elseif($tipoPlanUsuario==4)
+            <input type="hidden" name="role_id" value="4">
+            @elseif($tipoPlanUsuario==5)
+            <input type="hidden" name="role_id" value="5">
+            @elseif($tipoPlanCreador==2)
+            <input type="hidden" name="role_id" value="2">
+            @elseif($tipoPlanCreador==6)
+            <input type="hidden" name="role_id" value="6">
+            @elseif($tipoPlanCreador==7)
+            <input type="hidden" name="role_id" value="7">
+            @endif
+            <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"> 
             <button class="btn btn-primary">Pagar</button><a href="/plans" class="btn btn-primary">Cancelar</a>
         </div>
     </div>

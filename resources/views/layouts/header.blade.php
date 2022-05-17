@@ -10,6 +10,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+        @toastr_css
     </head>    
     <body>
             <nav class="fixed-top position-fixed navbar navbar-expand-lg navbar-light navegador">
@@ -84,16 +85,16 @@
                                 <div class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         {{ Auth::user()->name }}
-                                    </a>
+                                    </a>    
 
                                     <div id="menu_usuario" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="/user">Mi Biblioteca                                      
                                         </a>
-                                        @if (Auth::user()->hasRole(['user']))     
+                                        @if (Auth::user()->hasRole(['user']) ||  Auth::user()->hasRole(['user-mid']) ||  Auth::user()->hasRole(['user-all']))        
                                             <a class="dropdown-item" href="/profile_edit">Editar mi Perfil</a>           
                                             <a class="dropdown-item" href="/plans">Cambiar Suscripción</a>
                                         @endif
-                                        @if (Auth::user()->hasRole(['creator']))  
+                                        @if (Auth::user()->hasRole(['creator']) ||  Auth::user()->hasRole(['creator-mid']) ||  Auth::user()->hasRole(['creator-all']))      
                                             <a class="dropdown-item" href="/profile_edit">Editar mi Perfil</a>                
                                             <a class="dropdown-item" href="/">Gestionar Proyectos</a>
                                             <a class="dropdown-item" href="/plans">Cambiar Suscripción</a>
@@ -130,4 +131,7 @@
             </footer>
             <script src="{{asset('js/app.js')}}"></script>
     </body>
+    @jquery
+    @toastr_js
+    @toastr_render
 </html>

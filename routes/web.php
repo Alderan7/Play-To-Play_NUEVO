@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Usuario;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,16 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/**
+ * TOASTS
+ * toastr()->success('Success Message');
+ * toastr()->error('Error Message');
+ * toastr()->info('Info Message');
+ * toastr()->warning('Warning Message');
+ */
+
+
 
 Route::get('/', function () {
     $noticias = DB::table('news')->get();
@@ -33,6 +45,7 @@ Route::get('/', function () {
                 ->groupBy('genres.name')->get();
     return view('index',['noticias'=>$noticias, 'juegos'=>$juegos, 'proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
+
 
 
 Route::get('/contact', function () {
@@ -174,35 +187,22 @@ Route::get('/project/{id}', function ($id) {
     return view('project',['proyecto'=>$proyecto, 'comentarios'=>$comentarios, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
 
-/*Route::get('/user', function () {
-    $user = Auth::user();
-    $id=Auth::user()->id;
-    $juegos = DB::table('games')
-            ->join('library', 'library.id_game', '=','games.id')
-            ->where('library.id_player','=', $id)
-            ->get();
-    $generos_juegos =  DB::table('games')
-                ->join('genres', 'games.genre', '=', 'genres.id')
-                ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
-                ->groupBy('genres.name')->get();
-    $generos_proyectos =  DB::table('projects')
-                ->join('genres', 'projects.genre', '=', 'genres.id')
-                ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
-                ->groupBy('genres.name')->get();
-    return view('user',['usuario'=>$user,'juegos'=>$juegos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
-})->middleware('auth');*/
-
 Route::get('/user', function () {
         $user = Auth::user();
-        $id=Auth::user()->id;
+        $id = Auth::user()->id;
+        $suscripcion = DB::table('roles')
+                ->selectRaw('roles.id ,roles.name , roles.description')
+                ->join('role_user','role_user.role_id','=', 'roles.id')
+                ->where('role_user.user_id','=',$id)
+                ->get();
         $juegos = DB::table('games')
                 ->join('library', 'library.id_game', '=','games.id')
                 ->where('library.id_player','=', $id)
                 ->get();
         $proyectos = DB::table('projects')
-            ->join('portfolio', 'portfolio.id_project', '=','projects.id')
-            ->where('portfolio.id_creator','=', $id)
-            ->get();
+                ->join('portfolio', 'portfolio.id_project', '=','projects.id')
+                ->where('portfolio.id_creator','=', $id)
+                ->get();
         $generos_juegos =  DB::table('games')
                     ->join('genres', 'games.genre', '=', 'genres.id')
                     ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -211,12 +211,19 @@ Route::get('/user', function () {
                     ->join('genres', 'projects.genre', '=', 'genres.id')
                     ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
                     ->groupBy('genres.name')->get();
-        return view('user',['usuario'=>$user,'juegos'=>$juegos,'proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+        return view('user',['suscripcion'=>$suscripcion,'usuario'=>$user,'juegos'=>$juegos,'proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 })->middleware('auth');
 
 
 
 Route::get('/plans', function () {
+    $user = Auth::user();
+    $id = Auth::user()->id;
+    $suscripcion = DB::table('roles')
+                ->selectRaw('roles.id as id,roles.name as name, roles.description as description')
+                ->join('role_user','role_user.role_id','=', 'roles.id')
+                ->where('role_user.user_id','=',$id)
+                ->get();
     $userPlans = DB::table('plans')->where('type', '=', 1)->get();
     $creatorPlans = DB::table('plans')->where('type', '=', 2)->get();
     $generos_juegos =  DB::table('games')
@@ -227,15 +234,15 @@ Route::get('/plans', function () {
                 ->join('genres', 'projects.genre', '=', 'genres.id')
                 ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
                 ->groupBy('genres.name')->get();
-    return view('plans',['userPlans'=>$userPlans,'creatorPlans'=>$creatorPlans,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
-});
+    return view('plans',['userPlans'=>$userPlans,'suscripcion'=>$suscripcion,'creatorPlans'=>$creatorPlans,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+})->middleware('auth');
+
 
 Route::get('/plans/update', function (Request $request) {
-
     $tipoPlan = $request->input('plan');
     $tipoPlanUsuario = $request->input('plans-user');
     $tipoPlanCreador = $request->input('plans-creator');
-    $rol = DB::table('role_user')->select('role_id')->where('user_id', '=', Auth::user()->id)->get();
+    $Role_User = DB::table('role_user')->where('user_id', '=', Auth::user()->id)->get();
     $rol_name = DB::table('roles')->select('name')->where('id', '=', 2)->get();
     $generos_juegos =  DB::table('games')
                 ->join('genres', 'games.genre', '=', 'genres.id')
@@ -245,8 +252,9 @@ Route::get('/plans/update', function (Request $request) {
                 ->join('genres', 'projects.genre', '=', 'genres.id')
                 ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
                 ->groupBy('genres.name')->get();
-    return view('plansPay',['rol'=>$rol,'tipoPlan'=>$tipoPlan,'tipoPlanUsuario'=>$tipoPlanUsuario,'tipoPlanCreador'=>$tipoPlanCreador, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+    return view('plansPay',['Role_User'=>$Role_User,'tipoPlan'=>$tipoPlan,'tipoPlanUsuario'=>$tipoPlanUsuario,'tipoPlanCreador'=>$tipoPlanCreador, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
+
 
 Route::resource("games", "App\Http\Controllers\GamesController")->parameters(["games"=>"game"])->middleware('auth');
 Route::resource("projects", "App\Http\Controllers\ProjectsController")->parameters(["projects"=>"project"])->middleware('auth');
@@ -254,5 +262,10 @@ Route::resource("projects", "App\Http\Controllers\ProjectsController")->paramete
 Route::resource("profile_edit", "App\Http\Controllers\ProfileController")->middleware('auth');
 Route::post('/store_profile', 'App\Http\Controllers\ProfileController@show');
 
+Route::post('/update_plan/{id}', 'App\Http\Controllers\Role_UserController@update');
+
 Route::post('user', 'App\Http\Controllers\LibraryController@store');
 
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+Route::post('/user/update', ['as' => 'user.update', 'uses' => 'App\Http\Controllers\UserController@update']);

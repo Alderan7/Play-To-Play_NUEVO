@@ -103,6 +103,7 @@ class ProjectsController extends Controller
      */
     public function edit(project $project)
     {
+        $generos = DB::table('genres')->get();
         $generos_juegos =  DB::table('games')
             ->join('genres', 'games.genre', '=', 'genres.id')
             ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -111,7 +112,7 @@ class ProjectsController extends Controller
             ->join('genres', 'projects.genre', '=', 'genres.id')
             ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
             ->groupBy('genres.name')->get();
-        return view("projects_edit", ['project'=>$project,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+        return view("projects_edit", ['project'=>$project, 'generos'=>$generos,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
     }
 
     /**

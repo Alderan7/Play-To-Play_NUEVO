@@ -1,12 +1,12 @@
 @extends('layouts.header',
     ['title' => '', 'css_files' => ['app'], 
     'js_files' => ['app']])
-
 @section('content')
 <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 <link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <div class="container margen">
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+
             <div class="carousel-indicators">
             @for ($i = 0; $i < count($noticias); $i++)
                 @if ($i==0)

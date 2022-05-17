@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
+
 class GamesController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +25,7 @@ class GamesController extends Controller
         $generos_proyectos =  DB::table('projects')
             ->join('genres', 'projects.genre', '=', 'genres.id')
             ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
-            ->groupBy('genres.name')->get();
+            ->groupBy('genres.name')->get();            
         return view("games_index", ["games"=>Game::paginate(4),'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
     }
 
@@ -43,7 +45,7 @@ class GamesController extends Controller
         $generos_proyectos =  DB::table('projects')
             ->join('genres', 'projects.genre', '=', 'genres.id')
             ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
-            ->groupBy('genres.name')->get();
+            ->groupBy('genres.name')->get();            
         return view("games_create", ['generos'=>$generos,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
     }
 
@@ -81,6 +83,7 @@ class GamesController extends Controller
         $completeurlname=$storage_url.$filenametostore;        
         $juego['cover']=$completeurlname;
         $juego->saveOrFail();
+        toastr()->success('Juego creado Correctamente');
         return redirect()->route("games.index")->with(["mensaje" => "Juego creado",
         ]);
     }
@@ -158,11 +161,13 @@ class GamesController extends Controller
             $completeurlname=$storage_url.$filenametostore; 
             $variable['cover']=$completeurlname;
             $game->fill($variable)->saveOrFail();
+            toastr()->success('Juego editado Correctamente');
             return redirect()->route("games.index")->with(["mensaje" => "Juego actualizado"]);
         }else{
             $variable=$request->input();
             $variable['cover']=$variable['cover'];
             $game->fill($variable)->saveOrFail();
+            toastr()->success('Juego editado Correctamente');
             return redirect()->route("games.index")->with(["mensaje" => "Juego actualizado"]);
         }
         
@@ -179,6 +184,7 @@ class GamesController extends Controller
     public function destroy(Game $game)
     {
         $game->delete();
+        toastr()->error('Atención, juego eliminado');
         return redirect()->route("games.index")->with(["mensaje" => "Juego eliminado",]);
     }
 }

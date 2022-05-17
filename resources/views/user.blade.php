@@ -9,20 +9,24 @@
 
         <div class="perfil">
             <div class="usuario">
+            @if (is_null($usuario->avatar))
                 <img class="avatar" src="http://127.0.0.1/public/images/default.svg">
+            @else
+                <img class="avatar" src="http://127.0.0.1/public/images/{{ $usuario->avatar }}">
+            @endif
                 <div class="datos">
-                    <h1>{{$usuario->name}}</h1>
+                    <h1>{{$usuario->name}}</h1>                    
                     <br><a href="/profile_edit">Editar mi perfil</a>
                 </div>
             </div>
-            @if (Auth::user()->hasRole(['creator']))        
+            @if (Auth::user()->hasRole(['creator']) ||  Auth::user()->hasRole(['creator-mid']) ||  Auth::user()->hasRole(['creator-all']))      
                 <div class="suscripcion">
-                    <h2>Plan de suscripción: <span class="gratuito">Gratuito</span></h2>
+                    <h2>Plan de suscripción: <span class="gratuito">{{$suscripcion[0]->description}}</span></h2>
                     <a href="/plans">Cambiar mi suscripción</a>
                 </div> 
-            @elseif (Auth::user()->hasRole(['user']))        
+            @elseif (Auth::user()->hasRole(['user']) ||  Auth::user()->hasRole(['user-mid']) ||  Auth::user()->hasRole(['user-all']))        
                 <div class="suscripcion">
-                    <h2>Plan de suscripción: <span class="gratuito">Gratuito</span></h2>
+                    <h2>Plan de suscripción: <span class="gratuito">{{$suscripcion[0]->description}}</span></h2>
                     <a href="/plans">Cambiar mi suscripción</a>
                 </div>           
             @elseif (Auth::user()->hasRole(['administrator']))        
@@ -48,14 +52,18 @@
         @endforelse
         </div>
 
-        @if (Auth::user()->hasRole(['creator']))        
+        @if (Auth::user()->hasRole(['creator']) ||  Auth::user()->hasRole(['creator-mid']) ||  Auth::user()->hasRole(['creator-all']))        
         <h3>Tus Proyectos</h3>
         <div class="galeria">
-        @foreach ($proyectos as $proyecto)  
+        @forelse ($proyectos as $proyecto)  
             <div class="interno">
             <a href="#" class="btn-card"><img class="rounded mx-auto d-block imagen-juego" src="{{$proyecto->cover}}"  alt="Card image cap"><div class="nombre-juego">{{$proyecto->name}}</div></a> 
             </div>
-            @endforeach
+        @empty        
+            <div class="interno">
+            <a href="#" class="btn-card"><div class="rounded mx-auto d-block imagen-juego vacio">+</div><div class="nombre-juego-vacio">Crea un Nuevo Proyecto</div></a> 
+            </div>
+        @endforelse
         </div>
         @endif
 </div>

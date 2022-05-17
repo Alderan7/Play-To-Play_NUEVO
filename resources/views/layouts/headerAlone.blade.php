@@ -48,17 +48,20 @@
                             <div id="menu_usuario" class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/user">Biblioteca                                      
                                 </a>
-                                @if (Auth::user()->hasRole(['user']))                            
-                                    <a class="dropdown-item" href="/plans">Gestionar planes</a>
-                                @endif
-                                @if (Auth::user()->hasRole(['creator']))                            
-                                    <a class="dropdown-item" href="#">Añadir juego/Proyecto</a>
-                                    <a class="dropdown-item" href="/plans">Gestionar planes</a>
-                                @endif
-                                @if (Auth::user()->hasRole(['administrator']))                            
-                                    <a class="dropdown-item" href="/juegos">Administrar Juegos</a>
-                                    <a class="dropdown-item" href="/proyectos">Administrar Proyectos</a>
-                                @endif
+                                @if (Auth::user()->hasRole(['user']) ||  Auth::user()->hasRole(['user-mid']) ||  Auth::user()->hasRole(['user-all']))        
+                                            <a class="dropdown-item" href="/profile_edit">Editar mi Perfil</a>           
+                                            <a class="dropdown-item" href="/plans">Cambiar Suscripción</a>
+                                        @endif
+                                        @if (Auth::user()->hasRole(['creator']) ||  Auth::user()->hasRole(['creator-mid']) ||  Auth::user()->hasRole(['creator-all']))      
+                                            <a class="dropdown-item" href="/profile_edit">Editar mi Perfil</a>                
+                                            <a class="dropdown-item" href="/">Gestionar Proyectos</a>
+                                            <a class="dropdown-item" href="/plans">Cambiar Suscripción</a>
+                                        @endif
+                                        @if (Auth::user()->hasRole(['administrator']))   
+                                            <a class="dropdown-item" href="/profile_edit">Editar mi Perfil</a>                           
+                                            <a class="dropdown-item" href="/games">Administrar Juegos</a>
+                                            <a class="dropdown-item" href="/projects">Administrar Proyectos</a>
+                                        @endif
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">

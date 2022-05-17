@@ -15,7 +15,7 @@
                 <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th>Caratula</th>                    
+                    <th>Carátula</th>                    
                     <th>Opciones</th>
                 </tr>
                 </thead>

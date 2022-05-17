@@ -15,7 +15,7 @@ for(let i=0;i<tiposDePlanesUsuario.length;i++){
     tiposDePlanesUsuario[i].addEventListener('change', onChange2);    
     tiposDePlanesCreador[i].addEventListener('change', onChange2);
 }
-tiposDePlanesUsuario[0].setAttribute("checked",""); 
+
 function onChange(event){
     if(event.target.value==="creador"){
         planesUsuario.classList.add("opaco");
@@ -31,7 +31,7 @@ function onChange(event){
         for(let i=0;i<tiposDePlanesCreador.length;i++){
             tiposDePlanesCreador[i].removeAttribute("disabled");
         }
-        tiposDePlanesCreador[0].setAttribute("checked",""); 
+        //tiposDePlanesCreador[0].setAttribute("checked",""); 
         console.log(event.target.value)
     }else{
         planesCreador.classList.add("opaco");
@@ -48,7 +48,7 @@ function onChange(event){
             tiposDePlanesCreador[i].setAttribute("disabled","");
         }
 
-        tiposDePlanesUsuario[0].setAttribute("checked",""); 
+        //tiposDePlanesUsuario[0].setAttribute("checked",""); 
 
         console.log(event.target.value)
     }

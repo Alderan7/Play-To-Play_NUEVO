@@ -14,39 +14,7 @@
             <form method="POST" action="{{route("games.update", [$game])}}" enctype="multipart/form-data">
                 @method("PUT")
                 @csrf
-                <div class="form-group editar-juego">
-                     <!--<div class="textos">     
-                            <label class="label">Nombre del juego</label>       
-                            <input required value="{{$game->Nombre}}" autocomplete="off" name="Nombre" class="form-control"
-                            type="text" placeholder="Nombre">
-                            <label class="label">Género</label>
-                            <input required value="{{$game->Genero}}" autocomplete="off" name="Genero" class="form-control"
-                            type="text" placeholder="Genero">                     
-                            <label class="label">Descripción Breve</label>
-                            <textarea required value="{{$game->TextoCorto}}" autocomplete="off" name="TextoCorto" class="form-control"
-                            type="text" placeholder="TextoCorto">{{$game->TextoCorto}}</textarea>
-                            <label class="label">Descripción Ampliada</label>
-                            <textarea required value="{{$game->Texto}}" autocomplete="off" name="Texto" class="form-control" rows="5";
-                            type="text" placeholder="Texto">{{$game->Texto}}</textarea>
-                            <label class="label">Desarrollador</label>
-                            <input required value="{{$game->Estado}}" autocomplete="off" name="Estado" class="form-control"
-                            type="text" placeholder="Estado">
-                            <label class="label">Precio</label>
-                            <input required value="{{$game->Precio}}" autocomplete="off" name="Precio" class="form-control"
-                            type="text" placeholder="Precio">                            
-                     </div>
-                     <div class="separador"></div>
-                     <div class="media">
-                            <label class="label">Link Video</label>
-                            <iframe src="https://www.youtube.com/embed/{{$game->Video}}" title="YouTube video player" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                            <input required value="{{$game->Video}}" autocomplete="off" name="Video" class="form-control"
-                            type="text" placeholder="Video">      
-                            <label class="label">Caratula</label>
-                            <img src="{{$game->Caratula}}" class="img-fluid borde-luminoso caratula" alt="...">
-                            <input required value="{{$game->Caratula}}" autocomplete="off" name="Caratula" class="form-control"
-                            type="text" placeholder="Caratula">  
-                     </div>-->
-                     
+                <div class="form-group editar-juego">                     
                     <div class="textos">  
                      <label class="label">Nombre</label>       
                     <input required autocomplete="off" value="{{$game->name}}"  name="name" class="form-control"
@@ -60,14 +28,7 @@
                         <option value="{{$genero->id}}">{{$genero->name}}</option>
                         @endif
                     @endforeach
-                    </select>
-                    <!--<label class="label">Carátula</label>
-                    <input name="cover" class="form-control"
-                            type="file" placeholder="Carátula del juego" value="{{$game->cover}}">
-                    <label class="label">Video</label><br>
-                    <iframe src="https://www.youtube.com/embed/{{$game->video}}" title="YouTube video player" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <input required autocomplete="off" name="video" value="{{$game->video}}" class="form-control"
-                            type="text" placeholder="Video del juego en youtube." required>-->
+                    </select>                    
                     <label class="label">Texto de Introducción</label>
                     <textarea rows="4" cols="50" class="form-control" name="text1" placeholder="Texto de introducción del juego." required>{{$game->text1}}</textarea>
                     <label class="label">Texto de ampliación 1</label>

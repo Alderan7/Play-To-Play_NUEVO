@@ -12,32 +12,24 @@
                 <div class="card-header titulo">{{ __('MODIFICA LOS DATOS DE TU PERFIL') }}</div>
 
                 <div class="card-body contenedor-formulario">
-                    <form method="POST" action="{{ url('store_profile') }}">
-                        @csrf                           
-
+                <form method="POST" action="/user/update" enctype="multipart/form-data">
+                        @csrf                        
                         <div class="row mb-3">                            
                             <label for="name" class="col-md-4 col-form-label text-md-start">{{ __('Avatar Actual') }}</label>                            
                             <div class="col-md-6">
-                            @if (is_null($usuario->Avatar))
+                            @if (is_null($usuario->avatar))
                                 <img class="avatar" src="http://127.0.0.1/public/images/default.svg">
                             @else
-                                <img class="avatar" src="'http://127.0.0.1/public/images/' + {{ $usuario->Avatar }}">
+                                <img class="avatar" src="http://127.0.0.1/public/images/{{ $usuario->avatar }}">
                             @endif
                         </div>
-
                         <div class="row mb-3">                            
                             <label for="name" class="col-md-4 col-form-label text-md-start">{{ __('Elige tu Avatar') }}</label>                                                        
                             <div class="col-md-6">
-                            <input required autocomplete="off" name="Avatar" class="form-control"
-                            type="file" placeholder="Avatar">
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                            <input autocomplete="off" id="avatar" name="avatar" class="form-control"
+                            type="file">  
+                            </div>                            
                         </div>
-
                         <div class="row mb-3">                            
                             <label for="name" class="col-md-4 col-form-label text-md-start">{{ __('Nombre') }}</label>
                             <div class="col-md-6">
@@ -50,48 +42,17 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-start">{{ __('Correo Electrónico') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $usuario->email }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <!--<div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Contraseña') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Repetir Contraseña') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>-->
-
+                        <a class="nav-link" href="password/reset">{{ __('Resetear Contraseña') }}</a>
                         <div class="row mb-0 div-boton">
                             <div class="col-md-6 offset-md-4 div-boton">
                                 <button type="submit" class="btn btn-primary boton-actualizar">
                                     {{ __('ACTUALIZAR PERFIL') }}
                                 </button>
+                            </div>
+                            <div class="col-md-6 offset-md-4 div-boton">
+                                <a href="/home" class="btn cancelar boton-actualizar">
+                                    {{ __('CANCELAR') }}
+                                </a>
                             </div>
                         </div>
                     </form>
