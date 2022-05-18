@@ -46,7 +46,6 @@
                             type="text" placeholder="Aportación básica al proyecto" required>
                      </div>
                      <div class="separador"></div>
-                    <label class="label">Estado</label>
                     <div class="media">
                             <label class="label">Imagen del Proyecto</label>
                             <img src="{{$project->image}}">

@@ -25,10 +25,10 @@
 
                 <div class="input-group mb-3 selector-pagos">
                 <select class="form-select" id="inputGroupSelect02">
-                    <option selected>Choose...</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option selected>Aportaciones:</option>
+                    <option value="1">{{$proyecto[0]->pledge1}}</option>
+                    <option value="2">{{$proyecto[0]->pledge2}}</option>
+                    <option value="3">{{$proyecto[0]->pledge3}}</option>
                 </select>
                 <label class="input-group-text" for="inputGroupSelect02">Options</label>
                 </div>
@@ -44,10 +44,14 @@
                     @forelse ($comentarios as $comentario)  
                             <div class="comment mt-4 text-justify float-left">
                                 <div>
+                                @if($comentario->avatar!=null)
+                                <img src="http://127.0.0.1/public/images/{{$comentario->avatar}}" alt="" class="rounded-circle" width="40" height="40">
+                                @else
                                 <img src="http://127.0.0.1/public/images/default.svg" alt="" class="rounded-circle" width="40" height="40">
+                                @endif
                                     <h4>{{$comentario->name}}</h4>                                                               
                                     <span>{{$comentario->created_at}}</span>
-                                    @if (Auth::user()->id == $comentario -> id_user)  
+                                    @if (Auth::user()->id == $comentario -> id_user || Auth::user()->hasRole(['administrator']))  
                                     <form class="boton-eliminar" action="{{ url("project/{$comentario->id}") }}" method="post">
                                         @method("delete")
                                         @csrf

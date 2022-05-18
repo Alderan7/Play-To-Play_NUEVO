@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Portfolio;
 
 class ProjectsController extends Controller
 {
@@ -14,8 +16,15 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(Request $request)
+    {   
+        $user = Auth::user();
+        $id = Auth::user()->id;
+        $request->user()->authorizeRoles(['administrator','creator', 'creator-mid','creator-all' ]);
+        $projects_creator = Project::select('projects.*')
+        ->join('portfolio', 'portfolio.id_project', '=','projects.id')
+        ->where('portfolio.id_creator','=', $id)
+        ->get();
         $generos_juegos =  DB::table('games')
             ->join('genres', 'games.genre', '=', 'genres.id')
             ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -24,7 +33,7 @@ class ProjectsController extends Controller
             ->join('genres', 'projects.genre', '=', 'genres.id')
             ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
             ->groupBy('genres.name')->get();
-        return view("projects_index", ["projects"=>Project::paginate(4),'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+        return view("projects_index", ["projects"=>Project::paginate(4),"projects_creator"=>$projects_creator,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
     }
 
 
@@ -33,8 +42,9 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $request->user()->authorizeRoles(['administrator','creator', 'creator-mid','creator-all' ]);
         $generos = DB::table('genres')->get();
         $generos_juegos =  DB::table('games')
             ->join('genres', 'games.genre', '=', 'genres.id')
@@ -56,7 +66,7 @@ class ProjectsController extends Controller
 
     public function store(Request $request)
     {
-        if($request->hasFile('cover')) {
+        if($request->hasFile('cover') && $request->hasFile('image')) {
             
             //get filename with extension
             $filenamewithextension = $request->file('cover')->getClientOriginalName();
@@ -73,16 +83,48 @@ class ProjectsController extends Controller
             //Upload File to external server
             Storage::disk('ftp')->put($filenametostore, fopen($request->file('cover'), 'r+'));
     
+            //get filename with extension
+            $filenamewithextension2 = $request->file('image')->getClientOriginalName();
+                
+            //get filename without extension
+            $filename2 = pathinfo($filenamewithextension2, PATHINFO_FILENAME);
+
+            //get file extension
+            $extension2 = $request->file('image')->getClientOriginalExtension();
+
+            //filename to store
+            $filenametostore2 = $filename2.'_'.uniqid().'.'.$extension2;
+
+            //Upload File to external server
+            Storage::disk('ftp')->put($filenametostore2, fopen($request->file('image'), 'r+'));
+
+
             //Store $filenametostore in the database
+            $proyecto = new Project($request->input());
+            $storage_url= config('global.storage');
+            $completeurlname=$storage_url.$filenametostore; 
+            $completeurlname2=$storage_url.$filenametostore2; 
+            $proyecto['image']=$completeurlname2;
+            $proyecto['cover']=$completeurlname;
+            $proyecto->saveOrFail();
+
+            $user = Auth::user();
+            $id = Auth::user()->id;
+
+            $project = DB::table('projects')
+                ->latest('id')
+                ->first();
+            $nuevoProyecto = new Portfolio();
+            $nuevoProyecto->fill([
+                'id_project' => $project->id,
+                'id_creator' => $id]
+            );           
+            $nuevoProyecto->saveOrFail();
+            return redirect()->route("projects.index")->with(["mensaje" => "proyecto creado",
+        ]);
         }
 
-        $proyecto = new Project($request->input());
-        $storage_url= config('global.storage');
-        $completeurlname=$storage_url.$filenametostore;        
-        $proyecto['cover']=$completeurlname;
-        $proyecto->saveOrFail();
-        return redirect()->route("projects.index")->with(["mensaje" => "proyecto creado",
-        ]);
+        
     }
     /**
      * Display the specified resource.
@@ -101,8 +143,9 @@ class ProjectsController extends Controller
      * @param  \App\Models\project  $proyecto
      * @return \Illuminate\Http\Response
      */
-    public function edit(project $project)
+    public function edit(project $project, Request $request)
     {
+        $request->user()->authorizeRoles(['administrator','creator', 'creator-mid','creator-all' ]);
         $generos = DB::table('genres')->get();
         $generos_juegos =  DB::table('games')
             ->join('genres', 'games.genre', '=', 'genres.id')

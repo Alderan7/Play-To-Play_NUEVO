@@ -21,25 +21,48 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($projects as $project)
-                    <tr>
-                        <td class="nombre">{{$project->name}}</td>
-                        <td><img class="imagen-tabla" src="{{$project->cover}}"></td>           
-                       
-                        <td>
-                            <a class="btn btn-warning boton" href="{{route("projects.edit",[$project])}}">
-                                <i class="fa fa-edit">Editar</i>
-                            </a>
-                            <form action="{{route("projects.destroy", [$project])}}" method="post">
-                                @method("delete")
-                                @csrf
-                                <button type="submit" class="btn btn-danger boton">
-                                    <i class="fa fa-trash">Eliminar</i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
+                @if (Auth::user()->hasRole(['creator']) ||  Auth::user()->hasRole(['creator-mid']) ||  Auth::user()->hasRole(['creator-all']))      
+                    @foreach($projects_creator as $project)
+                        <tr>
+                            <td class="nombre">{{$project->name}}</td>
+                            <td><img class="imagen-tabla" src="{{$project->cover}}"></td>           
+                        
+                            <td>
+                                <a class="btn btn-warning boton" href="{{route("projects.edit",[$project])}}">
+                                    <i class="fa fa-edit">Editar</i>
+                                </a>
+                                <form action="{{route("projects.destroy", [$project])}}" method="post">
+                                    @method("delete")
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger boton">
+                                        <i class="fa fa-trash">Eliminar</i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+                @if (Auth::user()->hasRole(['administrator']))  
+                    @foreach($projects as $project)
+                        <tr>
+                            <td class="nombre">{{$project->name}}</td>
+                            <td><img class="imagen-tabla" src="{{$project->cover}}"></td>           
+                        
+                            <td>
+                                <a class="btn btn-warning boton" href="{{route("projects.edit",[$project])}}">
+                                    <i class="fa fa-edit">Editar</i>
+                                </a>
+                                <form action="{{route("projects.destroy", [$project])}}" method="post">
+                                    @method("delete")
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger boton">
+                                        <i class="fa fa-trash">Eliminar</i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
                 </tbody>
             </table>
             <!--{{$projects->links()}}-->
