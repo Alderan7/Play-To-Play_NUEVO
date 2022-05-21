@@ -7,7 +7,13 @@
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
 <link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <div id="genre" class="margen container">  
-    <h1>{{$genreGame}}</h1>
+    <div class="encabezado-juegos"><h1>{{$genreGame}}</h1></div>
+    <form action="/genre_games/{{$genreGame}}" tipe="post">
+        <input type="text" id="busqueda-juegos" name="busqueda" placeholder="Buscar juego"> | 
+        <input type="radio" name="price" value="price-min"> Precio Min | 
+        <input type="radio" name="price" value="price-max"> Precio Max
+        <button id="busqueda-boton" type="submit">Buscar</button>
+    </form>
     <div class="galeria">
         @foreach($juegos as $item)
         <div class="juego">

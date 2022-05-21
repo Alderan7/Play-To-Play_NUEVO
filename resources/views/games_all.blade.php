@@ -3,14 +3,20 @@
     'js_files' => ['app']])
     
 @section('content')
-@php
-$game = json_decode(json_encode($juegos));
-@endphp
+
 <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
 <div id="games" class="container">  
-    <h1>juegos</h1>
-    <div class="galeria">
+    <div class="encabezado-juegos">
+        <h1>juegos</h1>        
+    </div>
+    <form action="/games_all" tipe="post">
+        <input type="text" id="busqueda-juegos" name="busqueda" placeholder="Buscar juego"> | 
+        <input type="radio" name="price" value="price-min"> Precio Min | 
+        <input type="radio" name="price" value="price-max"> Precio Max
+        <button id="busqueda-boton" type="submit">Buscar</button>
+    </form>
+    <div class="galeria">        
         @foreach($juegos as $item)
         <div class="juego">
             <div class="interno">
@@ -19,8 +25,9 @@ $game = json_decode(json_encode($juegos));
                 <div class="precio-juego">{{ $item->price }}€</div>
             </a> 
             </div>
-        </div>
+        </div>        
         @endforeach
+
     </div>
 </div>
 @endsection

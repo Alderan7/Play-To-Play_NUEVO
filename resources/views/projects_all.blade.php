@@ -6,7 +6,11 @@
 <link href="{{ asset('css/index.css') }}" rel="stylesheet">
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
 <div id="projects" class="container">  
-    <h1>proyectos</h1>
+<div class="encabezado-juegos"><h1>proyectos</h1></div>
+<form action="/projects_all" tipe="post">
+        <input type="text" id="busqueda-juegos" name="busqueda" placeholder="Buscar proyecto">
+        <button id="busqueda-boton" type="submit">Buscar</button>
+    </form>
     <div class="galeria">
     @foreach($proyectos as $item)
         <div class="juego">

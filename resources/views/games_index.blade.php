@@ -8,7 +8,10 @@
 <link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <link href="{{ asset('css/tables.css') }}" rel="stylesheet">
 <div class="container margen">
+<div class="encabezado-juegos">
     <h1>Panel de administración de Juegos</h1>
+    </div>
+
         <div class="col-12">
             <a href="{{route("games.create")}}" class="btn btn-success mb-2">Agregar nuevo Juego</a>
             <table class=" container">

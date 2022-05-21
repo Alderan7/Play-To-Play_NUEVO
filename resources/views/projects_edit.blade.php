@@ -9,7 +9,9 @@
 <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 <link href="{{ asset('css/edit_game.css') }}" rel="stylesheet">
 <div class="margen container">
+<div class="encabezado-juegos">
 <h1>Editar datos del Proyecto</h1>
+    </div>
         <div class="col-12">
             <form method="POST" action="{{route("projects.update", [$project])}}">
                 @method("PUT")

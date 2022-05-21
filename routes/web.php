@@ -73,8 +73,30 @@ Route::get('/help', function () {
 return view('help',['generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
 
-Route::get('/games_all', function () {
-    $juegos = DB::table('games')->get();
+Route::get('/games_all', function (Request $request) {
+    if($request->busqueda!=""){
+        if($request->price=='price-min'){
+            $busqueda= '%'.$request->busqueda.'%';
+            $juegos = DB::table('games')->where('name','LIKE',$busqueda)->orderBy('price', 'asc')->get();
+        }else if($request->price=='price-max'){
+            $busqueda= '%'.$request->busqueda.'%';
+            $juegos = DB::table('games')->where('name','LIKE',$busqueda)->orderBy('price', 'desc')->get();
+        }else{
+            $busqueda= '%'.$request->busqueda.'%';
+            $juegos = DB::table('games')->where('name','LIKE',$busqueda)->get();
+        }
+    }else{
+        if($request->price=='price-min'){
+            $busqueda= '%'.$request->busqueda.'%';
+            $juegos = DB::table('games')->orderBy('price', 'asc')->get();
+        }else if($request->price=='price-max'){
+            $busqueda= '%'.$request->busqueda.'%';
+            $juegos = DB::table('games')->orderBy('price', 'desc')->get();
+        }else{
+            $busqueda= '%'.$request->busqueda.'%';
+            $juegos = DB::table('games')->get();
+        }
+    }
     $generos_juegos =  DB::table('games')
                 ->join('genres', 'games.genre', '=', 'genres.id')
                 ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -87,8 +109,13 @@ Route::get('/games_all', function () {
 });
 
 
-Route::get('/projects_all', function () {
-    $proyectos = DB::table('projects')->get();
+Route::get('/projects_all', function (Request $request) {
+    if($request->busqueda!=""){
+        $busqueda= '%'.$request->busqueda.'%';
+        $proyectos = DB::table('projects')->where('name','LIKE',$busqueda)->get();
+    }else{
+        $proyectos = DB::table('projects')->get();
+    }
     $generos_juegos =  DB::table('games')
                 ->join('genres', 'games.genre', '=', 'genres.id')
                 ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -100,11 +127,58 @@ Route::get('/projects_all', function () {
     return view('projects_all',['proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
 
-Route::get('/genre_games/{genre}', function ($genre) {
-    $juegos = DB::table('games')
+Route::get('/genre_games/{genre}', function (Request $request, $genre) {
+    if($request->busqueda!=""){
+        if($request->price=='price-min'){
+            $busqueda= '%'.$request->busqueda.'%';
+            $juegos = DB::table('games')
+            ->join('genres', 'games.genre', '=', 'genres.id')
+            ->selectRaw('games.*, genres.name as genre')
+            ->where([['games.name','LIKE',$busqueda], ['genres.name', '=', $genre]])
+            ->orderBy('price', 'asc')->get();
+        }else if($request->price=='price-max'){
+            $busqueda= '%'.$request->busqueda.'%';
+            $juegos = DB::table('games')
+            ->join('genres', 'games.genre', '=', 'genres.id')
+            ->selectRaw('games.*, genres.name as genre')
+            ->where([['games.name','LIKE',$busqueda], ['genres.name', '=', $genre]])
+            ->orderBy('price', 'desc')->get();
+        }else{
+            $busqueda= '%'.$request->busqueda.'%';
+            $juegos = DB::table('games')
+            ->join('genres', 'games.genre', '=', 'genres.id')
+            ->selectRaw('games.*, genres.name as genre')
+            ->where([['games.name','LIKE',$busqueda], ['genres.name', '=', $genre]])
+            ->get();
+        }
+    }else{
+        if($request->price=='price-min'){
+            $busqueda= '%'.$request->busqueda.'%';
+            $juegos = DB::table('games')
+            ->join('genres', 'games.genre', '=', 'genres.id')
+            ->selectRaw('games.*, genres.name as genre')
+            ->where('genres.name', '=', $genre)
+            ->orderBy('price', 'asc')->get();
+        }else if($request->price=='price-max'){
+            $busqueda= '%'.$request->busqueda.'%';
+            $juegos = DB::table('games')
+            ->join('genres', 'games.genre', '=', 'genres.id')
+            ->selectRaw('games.*, genres.name as genre')
+            ->where('genres.name', '=', $genre)
+            ->orderBy('price', 'desc')->get();
+        }else{
+            $busqueda= '%'.$request->busqueda.'%';
+            $juegos = DB::table('games')
+            ->join('genres', 'games.genre', '=', 'genres.id')
+            ->selectRaw('games.*, genres.name as genre')
+            ->where('genres.name', '=', $genre)
+            ->get();
+        }
+    }
+    /*$juegos = DB::table('games')
                 ->join('genres', 'games.genre', '=', 'genres.id')
                 ->selectRaw('games.*, genres.name as genre')
-                ->where('genres.name', '=', $genre)->get();
+                ->where('genres.name', '=', $genre)->get();*/
     $generos_juegos =  DB::table('games')
                 ->join('genres', 'games.genre', '=', 'genres.id')
                 ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -116,11 +190,23 @@ Route::get('/genre_games/{genre}', function ($genre) {
     return view('genre_games',['juegos'=>$juegos, 'genreGame' => $genre, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
 
-Route::get('/genre_projects/{genre}', function ($genre) {
-    $proyectos = DB::table('projects')
+Route::get('/genre_projects/{genre}', function (Request $request, $genre) {
+    if($request->busqueda!=""){
+        $busqueda= '%'.$request->busqueda.'%';
+        $proyectos = DB::table('projects')
                 ->join('genres', 'projects.genre', '=', 'genres.id')
                 ->selectRaw('projects.*, genres.name as genre')
-                ->where('genres.name', '=', $genre)->get();
+                ->where([['genres.name', '=', $genre],['projects.name','LIKE',$busqueda]])
+                ->get();
+    }else{
+        $proyectos = DB::table('projects')
+            ->join('genres', 'projects.genre', '=', 'genres.id')
+            ->selectRaw('projects.*, genres.name as genre')
+            ->where('genres.name', '=', $genre)->get();    }
+    /*$proyectos = DB::table('projects')
+                ->join('genres', 'projects.genre', '=', 'genres.id')
+                ->selectRaw('projects.*, genres.name as genre')
+                ->where('genres.name', '=', $genre)->get();*/
     $generos_juegos =  DB::table('games')
                 ->join('genres', 'games.genre', '=', 'genres.id')
                 ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -134,6 +220,7 @@ Route::get('/genre_projects/{genre}', function ($genre) {
 
 Route::post('/game/{id}', 'App\Http\Controllers\GameCommentaryController@store');
 Route::delete('game/{id}', 'App\Http\Controllers\GameCommentaryController@destroy');
+
 Route::get('/game/{id}', function ($id) {
     $pertenece=False;
     if(Auth::user()){
@@ -255,6 +342,7 @@ Route::get('/plans/update', function (Request $request) {
     return view('plansPay',['Role_User'=>$Role_User,'tipoPlan'=>$tipoPlan,'tipoPlanUsuario'=>$tipoPlanUsuario,'tipoPlanCreador'=>$tipoPlanCreador, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
 
+Route::get("/games/download/{archives}", "App\Http\Controllers\GamesController@download");
 
 Route::resource("games", "App\Http\Controllers\GamesController")->parameters(["games"=>"game"])->middleware('auth');
 Route::resource("projects", "App\Http\Controllers\ProjectsController")->parameters(["projects"=>"project"])->middleware('auth');
@@ -269,3 +357,4 @@ Route::post('user', 'App\Http\Controllers\LibraryController@store');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::post('/user/update', ['as' => 'user.update', 'uses' => 'App\Http\Controllers\UserController@update']);
+

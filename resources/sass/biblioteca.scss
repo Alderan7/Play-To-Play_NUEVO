@@ -75,6 +75,25 @@
     align-items: center;
 }
 
+.nombre-juego-error{
+    opacity: 0;
+    top: 30px;
+    left: 10px;
+    position: absolute;
+    width:200px; 
+    height:220px;
+    font-size:2rem;
+    background-color:black;
+    color: $white;
+    transition: opacity .5s;
+    text-shadow: 3px 3px 5px #ce3d38;
+    background: radial-gradient(circle, rgb(241, 111, 111) 20%, rgba(252, 41, 41, 0) 70%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .interno:hover>a>img{
     width:210px; 
     height:300px;
@@ -83,6 +102,10 @@
 }
 
 .interno:hover>a>.nombre-juego{
+    opacity: 1;
+}
+
+.interno:hover>a>.nombre-juego-error{
     opacity: 1;
 }
 

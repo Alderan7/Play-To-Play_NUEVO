@@ -29,6 +29,7 @@ class UserController extends Controller
         return view('user', ['user' => Auth::user()]);
     }
 
+
     /**
      * @param Request $request
      * @return

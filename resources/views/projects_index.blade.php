@@ -9,7 +9,10 @@
 <link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <link href="{{ asset('css/tables.css') }}" rel="stylesheet">
 <div class="margen container">
+<div class="encabezado-juegos">
 <h1>Panel de administración de Proyectos</h1>
+    </div>
+
         <div class="col-12">
             <a href="{{route("projects.create")}}" class="btn btn-success mb-2">Agregar nuevo Proyecto</a>
             <table class="container">

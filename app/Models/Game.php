@@ -9,5 +9,5 @@ class Game extends Model
 {
     public $timestamps = false;
     protected $table = "games";
-    protected $fillable = ["name", "genre", "cover", "video", "text1", "text2", "text3", "price"];
+    protected $fillable = ["name", "genre", "cover", "video", "text1", "text2", "text3", "price", "archives"];
 }

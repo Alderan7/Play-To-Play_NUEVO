@@ -7,7 +7,11 @@
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
 <link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <div id="genreProjects" class="margen container">  
-    <h1>{{$genreGame}}</h1>
+<div class="encabezado-juegos"><h1>{{$genreGame}}</h1></div>
+<form action="/genre_projects/{{$genreGame}}" tipe="post">
+        <input type="text" id="busqueda-juegos" name="busqueda" placeholder="Buscar proyecto">
+        <button id="busqueda-boton" type="submit">Buscar</button>
+    </form>
     <div class="galeria">
     @foreach($proyectos as $item)
         <div class="juego">

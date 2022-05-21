@@ -6,6 +6,7 @@ use App\Models\Game;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use \Illuminate\Http\Response;
 
 
 class GamesController extends Controller
@@ -78,10 +79,34 @@ class GamesController extends Controller
             //Store $filenametostore in the database
         }
 
+
+        if($request->hasFile('archives')) {
+            
+            //get filename with extension
+            $filenamewithextension = $request->file('archives')->getClientOriginalName();
+    
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+    
+            //get file extension
+            $extension = $request->file('archives')->getClientOriginalExtension();
+    
+            //filename to store
+            $filenametostore2 = $filename.'_'.uniqid().'.'.$extension;
+    
+            //Upload File to external server
+            Storage::disk('ftp')->put($filenametostore2, fopen($request->file('archives'), 'r+'));
+            //Store $filenametostore in the database
+        }
+
+        
+
         $juego = new Game($request->input());
         $storage_url= config('global.storage');
-        $completeurlname=$storage_url.$filenametostore;        
+        $completeurlname=$storage_url.$filenametostore; 
+        $completeurlname2=$storage_url.$filenametostore2;     
         $juego['cover']=$completeurlname;
+        $juego['archives']=$completeurlname2;
         $juego->saveOrFail();
         toastr()->success('Juego creado Correctamente');
         return redirect()->route("games.index")->with(["mensaje" => "Juego creado",
@@ -138,8 +163,9 @@ class GamesController extends Controller
     public function update(Request $request, Game $game)
     {
 
-        if($request->hasFile('cover-game')) {
-                
+        if($request->hasFile('cover-game') || $request->hasFile('archives')) {
+
+            if($request->hasFile('cover-game')) {
             //get filename with extension
             $filenamewithextension = $request->file('cover-game')->getClientOriginalName();
 
@@ -156,10 +182,40 @@ class GamesController extends Controller
             Storage::disk('ftp')->put($filenametostore, fopen($request->file('cover-game'), 'r+'));
 
             //Store $filenametostore in the database
+            }
+            
+            if($request->hasFile('archives')) {
+            //get filename with extension
+            $filenamewithextension = $request->file('archives')->getClientOriginalName();
+    
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+    
+            //get file extension
+            $extension = $request->file('archives')->getClientOriginalExtension();
+    
+            //filename to store
+            $filenametostore2 = $filename.'_'.uniqid().'.'.$extension;
+    
+            //Upload File to external server
+            Storage::disk('ftp')->put($filenametostore2, fopen($request->file('archives'), 'r+'));
+            //Store $filenametostore in the database
+
+            }
             $variable=$request->input();
             $storage_url= config('global.storage');
-            $completeurlname=$storage_url.$filenametostore; 
-            $variable['cover']=$completeurlname;
+
+
+            if($request->hasFile('cover-game')) {
+                $completeurlname=$storage_url.$filenametostore; 
+                $variable['cover']=$completeurlname;
+                }
+                
+            if($request->hasFile('archives')) {
+                $completeurlname2=$storage_url.$filenametostore2;             
+                $variable['archives']=$completeurlname2;
+            }          
+
             $game->fill($variable)->saveOrFail();
             toastr()->success('Juego editado Correctamente');
             return redirect()->route("games.index")->with(["mensaje" => "Juego actualizado"]);
@@ -186,5 +242,12 @@ class GamesController extends Controller
         $game->delete();
         toastr()->error('Atención, juego eliminado');
         return redirect()->route("games.index")->with(["mensaje" => "Juego eliminado",]);
+    }
+
+    public function download($archives){
+
+        //$storage_url= config('global.storage');
+        //$path = $storage_url.$archives;
+        return redirect()->route($archives);
     }
 }
