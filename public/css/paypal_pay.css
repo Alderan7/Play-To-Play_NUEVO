@@ -44,17 +44,24 @@
   animation: rotarload 1.1s ease-out infinite;
   transform: rotate(0deg); }
 
-* {
-  color: #FFF; }
-
-.btn {
-  width: 100px;
-  margin: 10px; }
-
-.separador {
-  width: 100%;
+body {
   background-color: #06021d;
-  height: 0.5px;
-  margin-bottom: 20px; }
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
 
-/*# sourceMappingURL=planesPay.css.map */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200px; }
+
+img {
+  width: 500px;
+  height: 80px;
+  margin: 0 25%; }
+
+/*# sourceMappingURL=paypal_pay.css.map */

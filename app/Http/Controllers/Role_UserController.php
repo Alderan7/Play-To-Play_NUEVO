@@ -13,6 +13,6 @@ class Role_UserController extends Controller
         $roleUser = Role_User::find($id);        
         $roleUser->delete();
         $Role_User->fill($request->input())->saveOrFail();
-        return redirect()->route("home");
+        return view("paypal_pay");
     }    
 }

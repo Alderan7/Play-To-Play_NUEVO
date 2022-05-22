@@ -1,0 +1,19 @@
+@import "styles";
+
+body{
+    background-color: $back-body;
+    color: $white;
+    @include flex-column-center-center;
+
+}
+
+.container{
+    @include flex-column-center-center;
+    margin-top: 200px;
+}
+
+img{
+    width: 500px;
+    height: 80px;
+    margin: 0 25%;
+}

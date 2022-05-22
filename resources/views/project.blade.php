@@ -19,18 +19,20 @@
         </div>
         <div class="caratula-pago">
             <img src="{{$proyecto[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
-            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">-->
+            <form action="/paypal" method="post">     
+                @csrf   
+                <input type="hidden" name="tipo_compra" value="Proyecto">
+                <input type="hidden" name="nombre" value="{{$proyecto[0]->name}}">
                 <input type="hidden" name="cmd" value="_s-xclick">
                 <input  width="100" height="100" type="hidden" name="hosted_button_id" value="3H98AMZM399UQ">
-
                 <div class="input-group mb-3 selector-pagos">
-                <select class="form-select" id="inputGroupSelect02">
-                    <option selected>Aportaciones:</option>
-                    <option value="1">{{$proyecto[0]->pledge1}}</option>
-                    <option value="2">{{$proyecto[0]->pledge2}}</option>
-                    <option value="3">{{$proyecto[0]->pledge3}}</option>
+                <select class="form-select" id="inputGroupSelect02" name="precio" required>
+                    <option value="{{$proyecto[0]->pledge1}}" selected>Aportación mínima: {{$proyecto[0]->pledge1}} €</option>
+                    <option value="{{$proyecto[0]->pledge2}}">Aportación media: {{$proyecto[0]->pledge2}} €</option>
+                    <option value="{{$proyecto[0]->pledge3}}">Aportación máxima: {{$proyecto[0]->pledge3}} €</option>
                 </select>
-                <label class="input-group-text" for="inputGroupSelect02">Options</label>
+                <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
                 </div>
                 <input type="hidden" name="currency_code" value="EUR">
                 <input  width="260" height="60" type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/buy-logo-large.png" alt="Buy now with PayPal" border="0" name="submit">

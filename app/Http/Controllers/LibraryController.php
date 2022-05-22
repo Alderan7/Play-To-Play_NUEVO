@@ -22,7 +22,7 @@ class LibraryController extends Controller
     {
         $nuevoJuego = new Library($request->input());
         $nuevoJuego->saveOrFail();
-        $user = Auth::user();
+        /*$user = Auth::user();
         $id = Auth::user()->id;
         $suscripcion = DB::table('roles')
                 ->selectRaw('roles.id ,roles.name , roles.description')
@@ -45,6 +45,7 @@ class LibraryController extends Controller
                     ->join('genres', 'projects.genre', '=', 'genres.id')
                     ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
                     ->groupBy('genres.name')->get();
-        return view('user',['suscripcion'=>$suscripcion,'usuario'=>$user,'juegos'=>$juegos,'proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+        return view('user',['suscripcion'=>$suscripcion,'usuario'=>$user,'juegos'=>$juegos,'proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);*/
+        return view('paypal_pay');
     }
 }

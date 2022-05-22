@@ -45,13 +45,19 @@
                     <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
                     <h2>{{$juego[0]->price}}€</h2>
                     
-                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+
+                    <!--Este es el código original de Paypal para poder pagar-->
+                        <!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">-->
+                    <form action="/paypal" method="post">     
+                        @csrf   
+                        <input type="hidden" name="tipo_compra" value="Juego">
+                        <input type="hidden" name="codigo" value="{{$juego[0]->id}}">
+                        <input type="hidden" name="precio" value="{{$juego[0]->price}}">
+                        <input type="hidden" name="nombre" value="{{$juego[0]->name}}">
                         <input type="hidden" name="cmd" value="_s-xclick">
                         <input  width="100" height="100" type="hidden" name="hosted_button_id" value="3H98AMZM399UQ">
-
                         <input type="hidden" name="currency_code" value="EUR">
                         <input  width="260" height="60" type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/buy-logo-large.png" alt="Buy now with PayPal" border="0" name="submit">
-
                     </form>
                 </div>  
                 @endif

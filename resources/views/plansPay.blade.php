@@ -20,9 +20,7 @@
 
             <p class="card-text">Tipo de Plan: {{$tipoPlan}} </p>           
             <p class="card-text">Tipo de Plan que quieres contratar: {{$tipoPlanCreador}}{{$tipoPlanUsuario}}</p>
-            <!--<p class="card-text">Id De Usuario: {{ Auth::user()->id }}</p>-->
             <p class="card-text">Rol actual de usuario: {{$Role_User[0]->role_id}}</p>
-            <p class="card-text">ID del Rol Actual: {{$Role_User[0]->id}}</p>
 
             @if($tipoPlanUsuario==1)
             <input type="hidden" name="role_id" value="1">
@@ -44,4 +42,3 @@
 </form>
 <script src="{{asset('js/plans.js')}}"></script>
 @endsection
-

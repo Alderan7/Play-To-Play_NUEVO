@@ -27,7 +27,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
  * toastr()->warning('Warning Message');
  */
 
+Route::post('/paypal', function (Request $request) {
+    $tipo = $request->input('tipo_compra');
+    $codigo = $request->input('codigo');
+    $precio = $request->input('precio');
+    $nombre = $request->input('nombre');
+    return view('paypal_fake',['codigo'=>$codigo, 'precio'=>$precio, 'nombre'=>$nombre, 'tipo'=>$tipo]);
+})->middleware('auth');
 
+Route::post('/paypal_pay', function () {
+    return view('paypal_pay');
+})->middleware('auth');
 
 Route::get('/', function () {
     $noticias = DB::table('news')->get();
@@ -323,7 +333,6 @@ Route::get('/plans', function () {
                 ->groupBy('genres.name')->get();
     return view('plans',['userPlans'=>$userPlans,'suscripcion'=>$suscripcion,'creatorPlans'=>$creatorPlans,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 })->middleware('auth');
-
 
 Route::get('/plans/update', function (Request $request) {
     $tipoPlan = $request->input('plan');
