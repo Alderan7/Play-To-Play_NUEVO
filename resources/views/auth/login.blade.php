@@ -4,7 +4,7 @@
 <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 <div class="container margen">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card login-completo">
                 <div class="card-header titulo">{{ __('INICIA SESIÓN CON UNA CUENTA DE PLAY TO PLAY') }}</div>
 
@@ -41,20 +41,22 @@
                         </div>
 
                         <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-6 offset-md-5">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                     <label class="form-check-label recuerdame" for="remember">
                                         {{ __('Recuérdame') }}
                                     </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
                                     @if (Route::has('password.request'))
                                     <a class="btn btn-link enlace" href="{{ route('password.request') }}">
                                         {{ __('¿Has olvidado tu contraseña?') }}
                                     </a>
                                     @endif
-                                </div>
-                            </div>
-                        </div>
+                            </div>                    
 
                         <div class="row mb-0 div-boton">
                             <div class="col-md-8 offset-md-4 div-boton">

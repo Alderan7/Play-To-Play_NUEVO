@@ -11,10 +11,13 @@
             <h1>{{$proyecto[0]->name}}</h1>
             <img src="{{$proyecto[0]->image}}" class="img-fluid borde-luminoso imagen" alt="...">
             <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+                <p>{{$proyecto[0]->text1}}</p>
+            </div>
+            <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
                 <p>{{$proyecto[0]->text2}}</p>
             </div>
             <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
-                <p>{{$proyecto[0]->text1}}</p>
+                <p>{{$proyecto[0]->text3}}</p>
             </div>
         </div>
         <div class="caratula-pago">

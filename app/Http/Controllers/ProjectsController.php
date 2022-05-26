@@ -167,11 +167,75 @@ class ProjectsController extends Controller
      */
     public function update(Request $request, project $project)
     {
-        $storage_url= config('global.storage');
+
+        if($request->hasFile('cover-game') || $request->hasFile('image-game')) {
+
+            if($request->hasFile('cover-game')) {
+            //get filename with extension
+            $filenamewithextension = $request->file('cover-game')->getClientOriginalName();
+
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+            //get file extension
+            $extension = $request->file('cover-game')->getClientOriginalExtension();
+
+            //filename to store
+            $filenametostore = $filename.'_'.uniqid().'.'.$extension;
+
+            //Upload File to external server
+            Storage::disk('ftp')->put($filenametostore, fopen($request->file('cover-game'), 'r+'));
+
+            //Store $filenametostore in the database
+            }
+            
+            if($request->hasFile('image-game')) {
+            //get filename with extension
+            $filenamewithextension = $request->file('image-game')->getClientOriginalName();
+    
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+    
+            //get file extension
+            $extension = $request->file('image-game')->getClientOriginalExtension();
+    
+            //filename to store
+            $filenametostore2 = $filename.'_'.uniqid().'.'.$extension;
+    
+            //Upload File to external server
+            Storage::disk('ftp')->put($filenametostore2, fopen($request->file('image-game'), 'r+'));
+            //Store $filenametostore in the database
+
+            }
+            $variable=$request->input();
+            $storage_url= config('global.storage');
+
+
+            if($request->hasFile('cover-game')) {
+                $completeurlname=$storage_url.$filenametostore; 
+                $variable['cover']=$completeurlname;
+                }
+                
+            if($request->hasFile('image-game')) {
+                $completeurlname2=$storage_url.$filenametostore2;             
+                $variable['image-game']=$completeurlname2;
+            }          
+
+            $project->fill($variable)->saveOrFail();
+            toastr()->success('Proyecto editado Correctamente');
+            return redirect()->route("projects.index")->with(["mensaje" => "proyecto actualizado"]);
+        }else{
+            $variable=$request->input();
+            $project->fill($variable)->saveOrFail();
+            toastr()->success('Proyecto editado Correctamente');
+            return redirect()->route("projects.index")->with(["mensaje" => "proyecto actualizado"]);
+        }
+
+        /*$storage_url= config('global.storage');
         $variable=$request->input();
         $variable['Banner']=$storage_url.$variable['Banner'];
         $proyect->fill($variable)->saveOrFail();
-        return redirect()->route("projects.index")->with(["mensaje" => "proyecto actualizado"]);
+        return redirect()->route("projects.index")->with(["mensaje" => "proyecto actualizado"]);*/
     }
 
     /**

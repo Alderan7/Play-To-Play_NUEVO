@@ -11,10 +11,13 @@
             <h1>{{$juego[0]->name}}</h1>
             <iframe src="https://www.youtube.com/embed/{{$juego[0]->video}}" title="YouTube video player" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
+                <p>{{$juego[0]->text1}}</p>
+            </div>
+            <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
                 <p>{{$juego[0]->text2}}</p>
             </div>
             <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
-                <p>{{$juego[0]->text1}}</p>
+                <p>{{$juego[0]->text3}}</p>
             </div>
         </div>
         @guest

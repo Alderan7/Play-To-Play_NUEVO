@@ -1,13 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.headerAlone')
 
 @section('content')
-<div class="container">
+<link href="{{ asset('css/margin.css') }}" rel="stylesheet">
+<link href="{{ asset('css/login.css') }}" rel="stylesheet">
+<div class="container margen">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Confirm Password') }}</div>
+                <div class="card-header titulo">{{ __('Confirm Password') }}</div>
 
-                <div class="card-body">
+                <div class="card-body contenedor-formulario">
                     {{ __('Please confirm your password before continuing.') }}
 
                     <form method="POST" action="{{ route('password.confirm') }}">

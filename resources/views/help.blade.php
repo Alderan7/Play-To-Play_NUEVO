@@ -77,7 +77,7 @@
       <p>De igual forma, los creadores y creadoras tendrán una biblioteca de juegos a su disposición, pero no podrán modificar su plan de usuario, disponiendo
         tan solo del tipo de usuario básico. Por supuesto, donde más opciones tendrán será a la hora de crear un proyecto, ya que tendrán a su disposición
         el panel de creación y modificación de los mismos, donde podrán acceder para editarlos a su antojo. Al igual que los usuarios, los creadores tendrán 
-        la posibilidad de acceder en cualquier momento a la ventana de selección de planes para cambiar entre ellos en cualquier momento.
+        la posibilidad de acceder en cualquier momento a la ventana de selección de planes para cambiar entre ellos cuando lo deseen.
       </p>
       </div>
     </div>
@@ -105,9 +105,10 @@
     </h2>
     <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
       <div class="accordion-body">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo dapibus elit nec posuere. Nullam tempus dui eget lobortis ullamcorper. Morbi vel dolor sit amet lectus sodales ultricies at ac nulla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In vehicula libero lorem, quis porttitor eros lobortis quis. Vivamus dapibus semper nibh, in placerat mi venenatis et. In vel velit ex.
-
-        Ut porta condimentum bibendum. Maecenas ex mi, accumsan eu felis in, rhoncus feugiat nisi. Sed luctus tristique aliquet. Sed commodo dolor vitae ipsum ultrices pellentesque. Ut magna dolor, dictum sed dui eu, finibus faucibus est. Nulla tincidunt lectus et neque cursus accumsan. Donec arcu magna, sollicitudin non ultrices quis, lacinia quis mauris. Ut lacus orci, luctus sit amet nisi at, finibus sagittis sem. Suspendisse at pellentesque sapien. Mauris euismod ac elit eget ullamcorper. Duis vehicula metus et risus pharetra dictum. Morbi molestie neque et aliquam varius. Quisque malesuada lorem mauris, non tempor nisi iaculis vel. Praesent feugiat commodo cursus.
+      <p>Un proyecto no financiado, o que se ha financiado pero no se ha completado su desarrollo, no se convertirá en un juego, y por tanto no se podrá descargar en el apartado
+        correspondiente. A partir del momento en el que un proyecto no ha podido realizarse por un motivo u otro, queda totalmente a disposición de sus desarroladoras y desarrolladores
+        cual va a ser el futuro del mismo, aunque no podrán volver a iniciar la campaña de fundación y tendrán que reembolsar las aportaciones realizadas a sus respectivos contribuyentes.
+      </p>
       </div>
     </div>
   </div>
@@ -119,9 +120,8 @@
     </h2>
     <div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSeven">
       <div class="accordion-body">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo dapibus elit nec posuere. Nullam tempus dui eget lobortis ullamcorper. Morbi vel dolor sit amet lectus sodales ultricies at ac nulla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In vehicula libero lorem, quis porttitor eros lobortis quis. Vivamus dapibus semper nibh, in placerat mi venenatis et. In vel velit ex.
-
-        Ut porta condimentum bibendum. Maecenas ex mi, accumsan eu felis in, rhoncus feugiat nisi. Sed luctus tristique aliquet. Sed commodo dolor vitae ipsum ultrices pellentesque. Ut magna dolor, dictum sed dui eu, finibus faucibus est. Nulla tincidunt lectus et neque cursus accumsan. Donec arcu magna, sollicitudin non ultrices quis, lacinia quis mauris. Ut lacus orci, luctus sit amet nisi at, finibus sagittis sem. Suspendisse at pellentesque sapien. Mauris euismod ac elit eget ullamcorper. Duis vehicula metus et risus pharetra dictum. Morbi molestie neque et aliquam varius. Quisque malesuada lorem mauris, non tempor nisi iaculis vel. Praesent feugiat commodo cursus.
+      <p>Si deseas reclamar una aportación realizada puedes hacerlo a través de nuestro <a href="/contact">formulario de contacto</a>. Deberás indicar los datos que te solicitamos y, 
+    en el cuerpo del mensaje, aportar todos los datos posibles para poder concretar tu pago. Recibirás el reembolso en un plazo de entre diez y quince días, dependiendo de tu entidad bancaria.</p>
       </div>
     </div>
   </div>
@@ -133,9 +133,9 @@
     </h2>
     <div id="panelsStayOpen-collapseEight" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingEight">
       <div class="accordion-body">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo dapibus elit nec posuere. Nullam tempus dui eget lobortis ullamcorper. Morbi vel dolor sit amet lectus sodales ultricies at ac nulla. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In vehicula libero lorem, quis porttitor eros lobortis quis. Vivamus dapibus semper nibh, in placerat mi venenatis et. In vel velit ex.
-
-        Ut porta condimentum bibendum. Maecenas ex mi, accumsan eu felis in, rhoncus feugiat nisi. Sed luctus tristique aliquet. Sed commodo dolor vitae ipsum ultrices pellentesque. Ut magna dolor, dictum sed dui eu, finibus faucibus est. Nulla tincidunt lectus et neque cursus accumsan. Donec arcu magna, sollicitudin non ultrices quis, lacinia quis mauris. Ut lacus orci, luctus sit amet nisi at, finibus sagittis sem. Suspendisse at pellentesque sapien. Mauris euismod ac elit eget ullamcorper. Duis vehicula metus et risus pharetra dictum. Morbi molestie neque et aliquam varius. Quisque malesuada lorem mauris, non tempor nisi iaculis vel. Praesent feugiat commodo cursus.
+      <p>Si has detectado algún error en la página o has tenido algún problema con nuestra aplicación, podrás explicar tu problema mediante nuestro <a href="/contact">formulario de contacto</a>. Para poder 
+    atenderte lo mejor posible, aporta todos los datos que puedas en el cuerpo del mensaje, eso nos ayudará a revisar el problema detectado lo antes posible y a ponerle solución antes de ponernos
+  en contacto contigo.</p>
       </div>
     </div>
   </div>

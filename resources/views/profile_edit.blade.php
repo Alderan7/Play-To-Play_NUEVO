@@ -7,7 +7,7 @@
 
 <div class="container margen">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card">
                 <div class="card-header titulo">{{ __('MODIFICA LOS DATOS DE TU PERFIL') }}</div>
 
@@ -42,7 +42,12 @@
                                 @enderror
                             </div>
                         </div>
-                        <a class="nav-link" href="password/reset">{{ __('Resetear Contraseña') }}</a>
+                        <div class="row mb-3">                            
+                            <label for="name" class="col-md-4 col-form-label text-md-start">{{ __('Contraseña') }}</label>
+                            <div class="col-md-6">
+                                <a class="form-control resetear-contraseña" href="/user-password-reset">{{ __('Cambiar Contraseña') }}</a>
+                            </div>
+                        </div>                        
                         <div class="row mb-0 div-boton">
                             <div class="col-md-6 offset-md-4 div-boton">
                                 <button type="submit" class="btn btn-primary boton-actualizar">

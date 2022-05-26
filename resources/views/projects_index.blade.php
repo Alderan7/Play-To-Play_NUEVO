@@ -14,7 +14,9 @@
     </div>
 
         <div class="col-12">
-            <a href="{{route("projects.create")}}" class="btn btn-success mb-2">Agregar nuevo Proyecto</a>
+            <div class="boton-centrado">
+                <a href="{{route("projects.create")}}" class="btn btn-success mb-2 boton-nuevo">AÑADIR NUEVO PROYECTO</a>
+            </div>
             <table class="container">
                 <thead>
                 <tr>
@@ -68,23 +70,27 @@
                 @endif
                 </tbody>
             </table>
-            <!--{{$projects->links()}}-->
-            <div class="container navegador pagination-wrapper">
-                <!-- a Tag for previous page -->
-                <a href="{{$projects->previousPageUrl()}}">
-                    Atrás<!-- You can insert logo or text here -->
-                </a>
-                @for($i=0;$i<=$projects->lastPage();$i++)
-                    <!-- a Tag for another page -->
-                    <a href="{{$projects->url($i)}}">{{$i}}</a>
-                @endfor
-                <!-- a Tag for next page -->
-                <a href="{{$projects->nextPageUrl()}}">
-                    <!-- You can insert logo or text here -->
-                    Adelante
-                </a>
 
-            </div>
+
+            @if($projects->lastPage()!=1)
+                @if (Auth::user()->hasRole(['administrator']))
+                <div class="container navegador pagination-wrapper">
+                    <a class="enlace-flecha" href="{{$projects->previousPageUrl()}}">
+                        <img class="flechas" src="../images/playInverso.svg">
+                    </a>
+                    @for($i=1;$i<=$projects->lastPage();$i++)
+                        @if($projects->currentPage()==$i)
+                            <a class="pagina-actual" href="{{$projects->url($i)}}">{{$i}}</a>
+                        @else
+                            <a class="paginas-navegador" href="{{$projects->url($i)}}">{{$i}}</a>
+                        @endif                    
+                    @endfor
+                    <a class="enlace-flecha" href="{{$projects->nextPageUrl()}}">
+                        <img class="flechas" src="../images/play.svg">
+                    </a>
+                </div>
+                @endif
+            @endif
         </div>
     </div>
 @endsection

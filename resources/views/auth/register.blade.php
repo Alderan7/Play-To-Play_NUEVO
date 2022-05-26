@@ -6,7 +6,7 @@
 
 <div class="container margen">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card">
                 <div class="card-header titulo">{{ __('REGÍSTRATE EN PLAY TO PLAY') }}</div>
 

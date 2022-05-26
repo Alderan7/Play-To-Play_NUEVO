@@ -81,10 +81,7 @@
             @yield('content')
         </main>
         <footer class="footer">
-            <p>© 2022 Andrés Gallardo Simón. Todos los derechos reservados. PLAY TO PLAY y
-                el logotipo de PLAY TO PLAY son marcas comerciales o marcas registradas de Andrés Gallardo Simón, 
-                tanto en España como en el resto del mundo. Otras marcas o nombres de productos son marcas comerciales
-                de sus respectivos propietarios. Todos los precios incluyen IVA (donde sea aplicable). </p>
+            <p>© 2022 Andrés Gallardo Simón - PLAY TO PLAY - Todos los derechos reservados.</p>
         </footer>
         <script src="{{asset('js/app.js')}}"></script>
     </body>

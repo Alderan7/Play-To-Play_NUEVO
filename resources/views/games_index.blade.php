@@ -13,7 +13,9 @@
     </div>
 
         <div class="col-12">
-            <a href="{{route("games.create")}}" class="btn btn-success mb-2">Agregar nuevo Juego</a>
+            <div class="boton-centrado">
+                <a href="{{route("games.create")}}" class="btn btn-success mb-2 boton-nuevo">AÑADIR NUEVO JUEGO</a>
+            </div>
             <table class=" container">
                 <thead>
                 <tr>
@@ -44,24 +46,24 @@
                 </tbody>
             </table>
 
-            <!--{{$games->links()}}-->
+            @if($games->lastPage()!=1)
             <div class="container navegador pagination-wrapper">
-                <!--{!! $games->links() !!}-->
-                <!-- a Tag for previous page -->
-                <a href="{{$games->previousPageUrl()}}">
-                    Atrás<!-- You can insert logo or text here -->
+                <a class="enlace-flecha" href="{{$games->previousPageUrl()}}">
+                    <img class="flechas" src="../images/playInverso.svg">
                 </a>
-                @for($i=0;$i<=$games->lastPage();$i++)
-                    <!-- a Tag for another page -->
-                    <a href="{{$games->url($i)}}">{{$i}}</a>
+                @for($i=1;$i<=$games->lastPage();$i++)
+                    @if($games->currentPage()==$i)
+                        <a class="pagina-actual" href="{{$games->url($i)}}">{{$i}}</a>
+                    @else
+                        <a class="paginas-navegador" href="{{$games->url($i)}}">{{$i}}</a>
+                    @endif                    
                 @endfor
-                <!-- a Tag for next page -->
-                <a href="{{$games->nextPageUrl()}}">
-                    <!-- You can insert logo or text here -->
-                    Adelante
+                <a class="enlace-flecha" href="{{$games->nextPageUrl()}}">
+                    <img class="flechas" src="../images/play.svg">
                 </a>
-
             </div>
+            @endif
+
         </div>
     </div>
 @endsection

@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Mailable;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +18,129 @@ use Illuminate\Http\Request;
 |
 */
 
+
+
+// CHANGE PASSWORD
+//************************************************************ */
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
+ 
+Route::post('/reset-password', function (Request $request) {
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'contraseña' => 'required|same:confirmar_contraseña',
+        'confirmar_contraseña' => 'required',
+    ]);
+
+
+    $user = Auth::user();
+    $user->password = bcrypt($request->get('contraseña'));
+
+
+    $user->save();
+    $user = Auth::user();
+        $id = Auth::user()->id;
+        $suscripcion = DB::table('roles')
+                ->selectRaw('roles.id ,roles.name , roles.description')
+                ->join('role_user','role_user.role_id','=', 'roles.id')
+                ->where('role_user.user_id','=',$id)
+                ->get();
+        $juegos = DB::table('games')
+                ->join('library', 'library.id_game', '=','games.id')
+                ->where('library.id_player','=', $id)
+                ->get();
+        $proyectos = DB::table('projects')
+                ->join('portfolio', 'portfolio.id_project', '=','projects.id')
+                ->where('portfolio.id_creator','=', $id)
+                ->get();
+        $generos_juegos =  DB::table('games')
+                    ->join('genres', 'games.genre', '=', 'genres.id')
+                    ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
+                    ->groupBy('genres.name')->get();
+        $generos_proyectos =  DB::table('projects')
+                    ->join('genres', 'projects.genre', '=', 'genres.id')
+                    ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
+                    ->groupBy('genres.name')->get();
+        toastr()->success('Contraseña Actualizada Correctamente');
+        return view('user',['suscripcion'=>$suscripcion,'usuario'=>$user,'juegos'=>$juegos,'proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+})->middleware('auth');
+
+ 
+Route::get('/user-password-reset', function(Request $request){
+    $email = Auth::user()->email;
+    $token = Auth::user()->password;
+    return view('auth.passwords.reset', ['token'=>$token,'email'=>$email]);
+})->middleware('auth');
+
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
+ 
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
+    return $status === Password::RESET_LINK_SENT
+                ? back()->with(['status' => __($status)])
+                : back()->withErrors(['email' => __($status)]);
+});
+
+
+Route::post('/forget-password-reset', function(Request $request){
+    $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'contraseña' => 'required|same:confirmar_contraseña',
+            'confirmar_contraseña' => 'required',
+    ]);
+    //$user = Auth::user();
+    $user= User::where('email','like',$request->input('email')) -> first();
+    $user->password = bcrypt($request->get('contraseña'));
+    $user->save();
+    toastr()->success('Se ha cambiado la contraseña. Por favor, vuelve a Iniciar Sesión.');
+
+    $noticias = DB::table('news')->get();
+    $juegos = DB::table('games')->orderBy('id', 'desc')->limit(6)->get();
+    $proyectos = DB::table('projects')->orderBy('id', 'desc')->limit(6)->get();
+    //SELECT COUNT(games.id), genres.name FROM `games` INNER JOIN `genres` WHERE games.genre=genres.id GROUP BY `genre`;
+    $generos_juegos =  DB::table('games')
+                ->join('genres', 'games.genre', '=', 'genres.id')
+                ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
+                ->groupBy('genres.name')->get();
+    //SELECT COUNT(projects.id), genres.name FROM `projects` INNER JOIN `genres` WHERE projects.genre=genres.id GROUP BY `genre`;
+                $generos_proyectos =  DB::table('projects')
+                ->join('genres', 'projects.genre', '=', 'genres.id')
+                ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
+                ->groupBy('genres.name')->get();
+    return view('index',['noticias'=>$noticias, 'juegos'=>$juegos, 'proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+});
+
 Auth::routes();
+
+
+//ENVIAR MAIL USUARIO
+
+Route::post('/send-mail', function(Request $request){
+    $email = $request->get('email');
+    Mail::send('mail', [
+        'name' => $request->get('name'),
+        'email' => $request->get('email'),
+        'msg' => $request->get('message'),
+        'type'=> $request->get('type'),
+        'tel'=>$request->get('tel')],
+        function ($message) {
+                $message->from('playtoplayapp@gmail.com');
+                $message->to('playtoplayapp@gmail.com', 'Alderan')
+                ->subject('Mensaje de Usuario - Play To Play');
+    });  
+    toastr()->success('Mensaje Enviado Correctamente');  
+    return redirect("/home");
+});
+
+
+
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -366,4 +491,3 @@ Route::post('user', 'App\Http\Controllers\LibraryController@store');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::post('/user/update', ['as' => 'user.update', 'uses' => 'App\Http\Controllers\UserController@update']);
-
