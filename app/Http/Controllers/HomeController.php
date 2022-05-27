@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Project;
 
 class HomeController extends Controller
 {
@@ -40,6 +41,10 @@ class HomeController extends Controller
                 ->join('portfolio', 'portfolio.id_project', '=','projects.id')
                 ->where('portfolio.id_creator','=', $id)
                 ->get();
+        $total_projects = Project::select('projects.*')
+                ->join('portfolio', 'portfolio.id_project', '=','projects.id')
+                ->where('portfolio.id_creator','=', $id)
+                ->count();  
         $generos_juegos =  DB::table('games')
                     ->join('genres', 'games.genre', '=', 'genres.id')
                     ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -48,6 +53,6 @@ class HomeController extends Controller
                     ->join('genres', 'projects.genre', '=', 'genres.id')
                     ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
                     ->groupBy('genres.name')->get();
-        return view('user',['suscripcion'=>$suscripcion,'usuario'=>$user,'juegos'=>$juegos,'proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+        return view('user',["total_projects"=>$total_projects,'suscripcion'=>$suscripcion,'usuario'=>$user,'juegos'=>$juegos,'proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
     }
 }

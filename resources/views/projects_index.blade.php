@@ -15,7 +15,9 @@
 
         <div class="col-12">
             <div class="boton-centrado">
+            @if (Auth::user()->hasRole(['administrator']) || Auth::user()->hasRole(['creator-all']) || (Auth::user()->hasRole(['creator']) && $total_projects<5) || (Auth::user()->hasRole(['creator-mid']) && $total_projects<10)) 
                 <a href="{{route("projects.create")}}" class="btn btn-success mb-2 boton-nuevo">AÑADIR NUEVO PROYECTO</a>
+            @endif
             </div>
             <table class="container">
                 <thead>

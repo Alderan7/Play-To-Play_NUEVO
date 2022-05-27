@@ -25,6 +25,10 @@ class ProjectsController extends Controller
         ->join('portfolio', 'portfolio.id_project', '=','projects.id')
         ->where('portfolio.id_creator','=', $id)
         ->get();
+        $total_projects = Project::select('projects.*')
+        ->join('portfolio', 'portfolio.id_project', '=','projects.id')
+        ->where('portfolio.id_creator','=', $id)
+        ->count();
         $generos_juegos =  DB::table('games')
             ->join('genres', 'games.genre', '=', 'genres.id')
             ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -33,7 +37,7 @@ class ProjectsController extends Controller
             ->join('genres', 'projects.genre', '=', 'genres.id')
             ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
             ->groupBy('genres.name')->get();
-        return view("projects_index", ["projects"=>Project::paginate(4),"projects_creator"=>$projects_creator,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+        return view("projects_index", ["projects"=>Project::paginate(4),"total_projects"=>$total_projects,"projects_creator"=>$projects_creator,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
     }
 
 

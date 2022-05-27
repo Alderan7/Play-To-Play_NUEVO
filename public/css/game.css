@@ -57,7 +57,6 @@
   grid-area: c; }
 
 .caratula-pago {
-  margin-top: 100px;
   grid-area: cp;
   display: flex;
   flex-direction: column;
@@ -132,6 +131,19 @@ h2 {
 a {
   text-decoration: none; }
 
+@media (max-width: 768px) {
+  .contenedor-juego {
+    display: grid;
+    grid-template: "cp" "vt" "c";
+    grid-gap: 20px; }
+
+  iframe {
+    border: 1px solid #1b417a;
+    box-shadow: 0 0 20px #1b417a;
+    border-radius: 20px;
+    height: 60vh;
+    width: 85vw;
+    margin-bottom: 50px; } }
 @media (min-width: 568px) {
   .end {
     margin-left: auto; } }

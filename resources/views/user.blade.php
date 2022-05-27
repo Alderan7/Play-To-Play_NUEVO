@@ -77,10 +77,12 @@
             <a href="#" class="btn-card"><img class="rounded mx-auto d-block imagen-juego" src="{{$proyecto->cover}}"  alt="Card image cap"><div class="nombre-juego">{{$proyecto->name}}</div></a> 
             </div>
         @endforeach
-        <div class="interno">
-            <a href="/projects" class="btn-card"><div class="rounded mx-auto d-block imagen-juego vacio">+</div><div class="nombre-juego-vacio">Crea un Nuevo Proyecto</div></a> 
+            @if (Auth::user()->hasRole(['creator-all']) || (Auth::user()->hasRole(['creator']) && $total_projects<5) || (Auth::user()->hasRole(['creator-mid']) && $total_projects<10)) 
+            <div class="interno">
+                <a href="/projects" class="btn-card"><div class="rounded mx-auto d-block imagen-juego vacio">+</div><div class="nombre-juego-vacio">Crea un Nuevo Proyecto</div></a> 
+                </div>
             </div>
-        </div>
+            @endif
         @endif
 </div>
 @endsection

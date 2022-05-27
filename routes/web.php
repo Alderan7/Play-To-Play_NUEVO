@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Mailable;
+use App\Models\Project;
 
 /*
 |--------------------------------------------------------------------------
@@ -337,11 +338,8 @@ Route::get('/genre_projects/{genre}', function (Request $request, $genre) {
         $proyectos = DB::table('projects')
             ->join('genres', 'projects.genre', '=', 'genres.id')
             ->selectRaw('projects.*, genres.name as genre')
-            ->where('genres.name', '=', $genre)->get();    }
-    /*$proyectos = DB::table('projects')
-                ->join('genres', 'projects.genre', '=', 'genres.id')
-                ->selectRaw('projects.*, genres.name as genre')
-                ->where('genres.name', '=', $genre)->get();*/
+            ->where('genres.name', '=', $genre)->get();    
+    }
     $generos_juegos =  DB::table('games')
                 ->join('genres', 'games.genre', '=', 'genres.id')
                 ->selectRaw('count(games.id) as number_of_games, genres.name as name_of_genre')
@@ -352,6 +350,10 @@ Route::get('/genre_projects/{genre}', function (Request $request, $genre) {
                 ->groupBy('genres.name')->get();  
     return view('genre_projects',['proyectos'=>$proyectos, 'genreGame' => $genre, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
+
+
+
+//Todas las funciones relacionadas con la página de un juego concreto
 
 Route::post('/game/{id}', 'App\Http\Controllers\GameCommentaryController@store');
 Route::delete('game/{id}', 'App\Http\Controllers\GameCommentaryController@destroy');
@@ -370,6 +372,20 @@ Route::get('/game/{id}', function ($id) {
             $pertenece=True;
         }
     }
+
+    $novedad = False;
+    $novedades= DB::table('games')
+        ->selectRaw('games.id')
+        ->orderBy('id', 'desc')
+        ->where('price','<>',0)
+        ->limit(6)
+        ->get();
+
+    foreach($novedades as $item){
+        if($item->id == $id){
+            $novedad = True;
+        }
+    }    
     $juego = DB::table('games')->where('id', '=', $id)->get();
     $comentarios = DB::table('game_commentaries')
             ->join('users', 'users.id', '=', 'game_commentaries.id_user')
@@ -385,8 +401,11 @@ Route::get('/game/{id}', function ($id) {
                 ->join('genres', 'projects.genre', '=', 'genres.id')
                 ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
                 ->groupBy('genres.name')->get();
-    return view('game',['pertenece'=>$pertenece,'juego'=>$juego, 'comentarios'=>$comentarios, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+    return view('game',['novedad'=>$novedad,'pertenece'=>$pertenece,'juego'=>$juego, 'comentarios'=>$comentarios, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
+
+
+
 
 Route::post('/project/{id}', 'App\Http\Controllers\ProjectCommentaryController@store');
 Route::delete('project/{id}', 'App\Http\Controllers\ProjectCommentaryController@destroy');
@@ -421,6 +440,10 @@ Route::get('/user', function () {
                 ->join('library', 'library.id_game', '=','games.id')
                 ->where('library.id_player','=', $id)
                 ->get();
+        $total_projects = Project::select('projects.*')
+                ->join('portfolio', 'portfolio.id_project', '=','projects.id')
+                ->where('portfolio.id_creator','=', $id)
+                ->count();        
         $proyectos = DB::table('projects')
                 ->join('portfolio', 'portfolio.id_project', '=','projects.id')
                 ->where('portfolio.id_creator','=', $id)
@@ -433,7 +456,7 @@ Route::get('/user', function () {
                     ->join('genres', 'projects.genre', '=', 'genres.id')
                     ->selectRaw('count(projects.id) as number_of_games, genres.name as name_of_genre')
                     ->groupBy('genres.name')->get();
-        return view('user',['suscripcion'=>$suscripcion,'usuario'=>$user,'juegos'=>$juegos,'proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
+        return view('user',["total_projects"=>$total_projects,'suscripcion'=>$suscripcion,'usuario'=>$user,'juegos'=>$juegos,'proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 })->middleware('auth');
 
 

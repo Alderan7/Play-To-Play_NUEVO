@@ -6,9 +6,9 @@
 <link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <link href="{{ asset('css/game.css') }}" rel="stylesheet">
 <div id="game" class="margen container">  
+<h1>{{$juego[0]->name}}</h1>
     <div class="container contenedor-juego">
         <div class="video-texto">
-            <h1>{{$juego[0]->name}}</h1>
             <iframe src="https://www.youtube.com/embed/{{$juego[0]->video}}" title="YouTube video player" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
                 <p>{{$juego[0]->text1}}</p>
@@ -32,7 +32,7 @@
                     <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
                     <a href="/user" class="boton">Play</a>
                 </div>        
-                @elseif ($juego[0]->price==0.00)
+                @elseif ($juego[0]->price==0.00 || Auth::user()->hasRole(['user-all']) || (Auth::user()->hasRole(['user-mid']) && $novedad==True))
                 <div class="caratula-pago gratis">
                     <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
                     <h2>Gratis</h2>
