@@ -30,7 +30,7 @@ form{
     border: 1px solid $back-light;
     width: 210px;
     height: 60px;
-    color: white;
+    color: $white;
     font-weight: 700;
     font-size: 1.1rem;
     margin: 20px;
@@ -75,7 +75,7 @@ form{
 }
 
 .enlace{
-    color: white;
+    color: $white;
     font-weight: 700;
     font-size: 1.1rem;
     padding-bottom: 10px;

@@ -3,11 +3,8 @@
     'js_files' => ['app']])
     
 @section('content')
-
-<link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <link href="{{ asset('css/help.css') }}" rel="stylesheet">
 <div class="margen container">
-
 <div class="accordion" id="accordionPanelsStayOpenExample">
   <div class="accordion-item">
     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -149,7 +146,8 @@
       <div class="accordion-body">
       <p>En estos momentos no existe una manera de transformar un proyecto financiado en un juego directamente, puesto que los creadores y creadoras no tienen acceso
         al apartado de los juegos para poder editarlos. Actualmente el método de transformación se basa en el contacto con los administradores de la página para que estos
-        eliminen el proyecto de la sección correspondiente y añadan el juego en nuestra amplia biblioteca para que esté disponible para comprar.
+        eliminen el proyecto de la sección correspondiente y añadan el juego en nuestra amplia biblioteca para que esté disponible para comprar. Puedes contactar con nosotr@s
+        mediante el <a href="/contact">formulario de contacto</a>.
       </p>
     </div>
   </div>

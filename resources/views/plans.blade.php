@@ -4,8 +4,6 @@
     
     
 @section('content')
-
-<link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <link href="{{ asset('css/planes.css') }}" rel="stylesheet">
 <div class="login-completo contenedor-formulario container margen">
         <h4>SELECCIONA UN TIPO DE PLAN DE USUARIO</h4>
@@ -41,9 +39,9 @@
             @endforeach                 
             </div>
             @if($suscripcion[0]->id == 1 || $suscripcion[0]->id == 4 || $suscripcion[0]->id == 5 )
-                <button id="buttonUser">Seleccionar Plan</button>
-            @elseif($suscripcion[0]->id == 2 || $suscripcion[0]->id == 6 || $suscripcion[0]->id == 7 )
-                <button id="buttonUser" disabled>Seleccionar Plan</button>
+                <button id="buttonUser" class="boton btn">Seleccionar Plan</button>
+            @elseif($suscripcion[0]->id == 2 || $suscripcion[0]->id == 6 || $suscripcion[0]->id == 7)
+                <button id="buttonUser" class="boton btn" disabled>Seleccionar Plan</button>
             @endif  
                 <div class="linea"></div>
             @if($suscripcion[0]->id == 1 || $suscripcion[0]->id == 4 || $suscripcion[0]->id == 5 )
@@ -76,10 +74,10 @@
                 </div>
             @endforeach
             </div>  
-            @if($suscripcion[0]->id == 1 || $suscripcion[0]->id == 4 || $suscripcion[0]->id == 5 )
-                <button id="buttonCreator" disabled>Seleccionar Plan</button>
+            @if($suscripcion[0]->id == 1 || $suscripcion[0]->id == 4 || $suscripcion[0]->id == 5)
+                <button id="buttonCreator" class="boton btn" disabled>Seleccionar Plan</button>
             @elseif($suscripcion[0]->id == 2 || $suscripcion[0]->id == 6 || $suscripcion[0]->id == 7 )
-                <button id="buttonCreator">Seleccionar Plan</button> 
+                <button id="buttonCreator" class="boton btn">Seleccionar Plan</button> 
             @endif            
             
         </form>   

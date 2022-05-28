@@ -3,12 +3,11 @@
     'js_files' => ['app']])
     
 @section('content')
-<link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <link href="{{ asset('css/project.css') }}" rel="stylesheet">
 <div id="project" class="margen container">  
+<h1>{{$proyecto[0]->name}}</h1>
     <div class="container contenedor-juego">
         <div class="video-texto">
-            <h1>{{$proyecto[0]->name}}</h1>
             <img src="{{$proyecto[0]->image}}" class="img-fluid borde-luminoso imagen" alt="...">
             <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
                 <p>{{$proyecto[0]->text1}}</p>
@@ -35,7 +34,6 @@
                     <option value="{{$proyecto[0]->pledge2}}">Aportación media: {{$proyecto[0]->pledge2}} €</option>
                     <option value="{{$proyecto[0]->pledge3}}">Aportación máxima: {{$proyecto[0]->pledge3}} €</option>
                 </select>
-                <label class="input-group-text" for="inputGroupSelect02">Opciones</label>
                 </div>
                 <input type="hidden" name="currency_code" value="EUR">
                 <input  width="260" height="60" type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/buy-logo-large.png" alt="Buy now with PayPal" border="0" name="submit">

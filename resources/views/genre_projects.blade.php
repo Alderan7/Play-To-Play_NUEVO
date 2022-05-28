@@ -3,9 +3,7 @@
     'js_files' => ['app']])
     
 @section('content')
-<link href="{{ asset('css/index.css') }}" rel="stylesheet">
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
-<link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <div id="genreProjects" class="margen container">  
 <div class="encabezado-juegos"><h1>{{$genreGame}}</h1></div>
 <form action="/genre_projects/{{$genreGame}}" tipe="post">

@@ -3,9 +3,7 @@
     'js_files' => ['app']])
     
 @section('content')
-<link href="{{ asset('css/index.css') }}" rel="stylesheet">
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
-<link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 <link href="{{ asset('css/edit_game.css') }}" rel="stylesheet">
 <div class="margen container">
@@ -51,8 +49,10 @@
                         type="file" placeholder="Caratula del juego">  
 
                 </div>
-                <button class="btn btn-success">Guardar</button>
-                <a class="btn btn-primary" href="{{route("projects.index")}}">Volver al listado</a>
+                <div class="botones-juego">
+                    <button class="btn btn-success">Guardar</button>
+                    <a class="btn btn-primary" href="{{route("projects.index")}}">Volver al listado</a>
+                </div>
             </form>
         </div>
     </div>

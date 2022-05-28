@@ -3,9 +3,7 @@
     'js_files' => ['app']])
     
 @section('content')
-<link href="{{ asset('css/index.css') }}" rel="stylesheet">
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
-<link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 <link href="{{ asset('css/edit_game.css') }}" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -48,8 +46,10 @@
                     <input required autocomplete="off" name="archives" class="form-control"
                             type="file" placeholder="Archivos necesarios para ejecutar el juego." required>
                 </div>
-                <button class="btn btn-success">Guardar</button>
-                <a class="btn btn-primary" href="{{route("games.index")}}">Volver al listado</a>
+                <div class="botones-juego">
+                    <button class="btn btn-success">Guardar</button>
+                    <a class="btn btn-primary" href="{{route("games.index")}}">Volver al listado</a>
+                </div>
             </form>
         </div>
     </div>

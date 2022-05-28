@@ -4,7 +4,6 @@
 
 @section('content')
 <link href="{{ asset('css/biblioteca.css') }}" rel="stylesheet">
-<link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <div class="margen container">
 
         <div class="perfil">
@@ -21,17 +20,19 @@
             </div>
             @if (Auth::user()->hasRole(['creator']) ||  Auth::user()->hasRole(['creator-mid']) ||  Auth::user()->hasRole(['creator-all']))      
                 <div class="suscripcion">
-                    <h2>Plan de suscripción: <span class="gratuito">{{$suscripcion[0]->description}}</span></h2>
+                    <h2>Plan de suscripción:</h2>
+                    <h2 class="gratuito">{{$suscripcion[0]->description}}</h2>
                     <a href="/plans">Cambiar mi suscripción</a>
                 </div> 
             @elseif (Auth::user()->hasRole(['user']) ||  Auth::user()->hasRole(['user-mid']) ||  Auth::user()->hasRole(['user-all']))        
                 <div class="suscripcion">
-                    <h2>Plan de suscripción: <span class="gratuito">{{$suscripcion[0]->description}}</span></h2>
+                    <h2>Plan de suscripción:</h2>
+                    <h2 class="gratuito">{{$suscripcion[0]->description}}</h2>
                     <a href="/plans">Cambiar mi suscripción</a>
                 </div>           
             @elseif (Auth::user()->hasRole(['administrator']))        
                 <div class="suscripcion">
-                    <h2>Administración de la página Play To Play</h2>
+                    <h2>Administración:</h2>
                     <a  href="/projects">Administrar Proyectos</a>
                     <a  href="/games">Administrar Juegos</a>                    
                 </div>

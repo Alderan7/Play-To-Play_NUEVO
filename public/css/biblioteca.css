@@ -44,6 +44,15 @@
   animation: rotarload 1.1s ease-out infinite;
   transform: rotate(0deg); }
 
+.margen {
+  margin-top: 100px; }
+
+form, .card-header, .card-body, .enlace {
+  color: #000; }
+
+form {
+  color: #FFF; }
+
 .perfil {
   display: flex;
   flex-direction: row;
@@ -197,5 +206,13 @@ h4 {
 
 .interno:hover > a > .nombre-juego-vacio {
   opacity: 1; }
+
+@media (max-width: 1000px) {
+  .perfil, .perfil > * {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5px; } }
 
 /*# sourceMappingURL=biblioteca.css.map */

@@ -13,6 +13,7 @@ let tiposDePlanesCreador = document.getElementsByClassName('tipos-de-planes-crea
 
 function onChange(event){
     if(event.target.value==="creador"){
+        tiposDePlanesCreador[0].setAttribute("checked","");
         planesUsuario.classList.add("opaco");
         botonUsuario.setAttribute("disabled","");
         
@@ -27,6 +28,7 @@ function onChange(event){
             tiposDePlanesCreador[i].removeAttribute("disabled");
         }
     }else{
+        tiposDePlanesUsuario[0].setAttribute("checked","");
         planesCreador.classList.add("opaco");
         botonCreador.setAttribute("disabled","");
         

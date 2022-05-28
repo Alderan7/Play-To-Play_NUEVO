@@ -1,7 +1,7 @@
 @extends('layouts.header')
 
 @section('content')
-<link href="{{ asset('css/margin.css') }}" rel="stylesheet">
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 <div class="container margen">
     <div class="row justify-content-center">
         <div class="col-md-8">

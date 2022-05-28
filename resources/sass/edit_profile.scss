@@ -9,6 +9,7 @@ img{
 }
 
 .boton-actualizar{
+    margin: 10px;
     background-color: $back-light;
     border: 1px solid $back-light;
     width: 240px;
@@ -23,5 +24,9 @@ img{
 }
 .cancelar{
     padding-top: 15px;
+}
+
+.titulo{
+    color: $white;
 }
 

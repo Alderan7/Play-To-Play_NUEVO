@@ -3,9 +3,7 @@
     'js_files' => ['app']])
     
 @section('content')
-<link href="{{ asset('css/index.css') }}" rel="stylesheet">
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
-<link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 <link href="{{ asset('css/edit_game.css') }}" rel="stylesheet">
 <div class="margen container">
@@ -50,7 +48,7 @@
                      <div class="separador"></div>
                     <div class="media">
                             <label class="label">Imagen del Proyecto</label>
-                            <img src="{{$project->image}}">
+                            <img id="imagen" src="{{$project->image}}">
                             <input required value="{{$project->image}}" autocomplete="off" name="image" class="form-control"
                             type="text" placeholder="">   
                             <input autocomplete="off" id="image-game" name="image-game" class="form-control"
@@ -63,8 +61,10 @@
                             type="text" placeholder="Caratula del Proyecto" required>  
                      </div>
                 </div>
-                <button class="btn btn-success">Guardar</button>
-                <a class="btn btn-primary" href="{{route("projects.index")}}">Volver</a>
+                <div class="botones-juego">
+                    <button class="btn btn-success">Guardar</button>
+                    <a class="btn btn-primary" href="{{route("projects.index")}}">Volver</a>
+                </div>
             </form>
         </div>
     </div>

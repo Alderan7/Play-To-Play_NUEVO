@@ -13,6 +13,11 @@ select{
     grid-gap: 30px;
 }
 
+.selector-pagos{
+    width: 260px;
+    text-align: center;
+}
+
 .video-texto{
     grid-area: vt;
 }
@@ -22,13 +27,18 @@ select{
 }
 
 .caratula-pago{
-    margin-top: 100px;
     grid-area: cp;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    min-width: 250px;
 }
 
 .caratula{
     width: 300px;
     height: 400px;
+    margin-bottom: 0;
 }
 
 .borde-luminoso{
@@ -72,8 +82,24 @@ form{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 }
+
+
+@media(max-width:768px){
+    .contenedor-juego{
+        display:grid;
+        grid-template:  "cp"
+                        "vt"                         
+                        "c";
+        grid-gap: 20px;                
+    }
+    .imagen{
+        height:60vh;
+        width:85vw;
+        margin-bottom: 50px;
+    }
+}
+
 
 //Commentaries
 

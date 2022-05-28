@@ -3,7 +3,6 @@
     'js_files' => ['app']])
 @section('content')
 <link href="{{ asset('css/index.css') }}" rel="stylesheet">
-<link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <div class="container margen">
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
 
@@ -22,7 +21,7 @@
                 @if ($i==0)
                     <div class="carousel-item active">
                         <img src="{{$noticias[$i]->image}}" class="d-block w-100" alt="...">
-                        <a href="{{$noticias[$i]->link}}" class="info carousel-caption d-none d-md-block no-link">
+                        <a href="{{$noticias[$i]->link}}" class="info carousel-caption no-link">
                             <h5>{{$noticias[$i]->title}}</h5>
                             <div><p>{{$noticias[$i]->text}}</p></div>
                         </a>
@@ -30,7 +29,7 @@
                 @else
                     <div class="carousel-item">
                         <img src="{{$noticias[$i]->image}}" class="d-block w-100" alt="...">
-                        <a href="{{$noticias[$i]->link}}" class="info carousel-caption d-none d-md-block no-link">
+                        <a href="{{$noticias[$i]->link}}" class="info carousel-caption no-link">
                             <h5>{{$noticias[$i]->title}}</h5>
                             <div><p>{{$noticias[$i]->text}}</p></div>
                         </a>
@@ -73,4 +72,5 @@
         @endforeach
         </div>
     </div>
+    <script src="{{asset('js/index.js')}}"></script>
 @endsection

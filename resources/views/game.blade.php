@@ -3,7 +3,6 @@
     'js_files' => ['app']])
     
 @section('content')
-<link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <link href="{{ asset('css/game.css') }}" rel="stylesheet">
 <div id="game" class="margen container">  
 <h1>{{$juego[0]->name}}</h1>
@@ -38,19 +37,15 @@
                     <h2>Gratis</h2>
                     <form action="{{ url("user") }}" method="post">
                         @csrf
-                    <input type="hidden" name="id_game" value="{{$juego[0]->id}}">
-                    <input type="hidden" name="id_player" value="{{ Auth::user()->id }}">  
-                    <button type="submit" class="boton">Play</button>
+                        <input type="hidden" name="id_game" value="{{$juego[0]->id}}">
+                        <input type="hidden" name="id_player" value="{{ Auth::user()->id }}">  
+                        <button type="submit" class="boton">Play</button>
                     </form>
                 </div>
                 @else
                 <div v-else class="caratula-pago">
                     <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
                     <h2>{{$juego[0]->price}}€</h2>
-                    
-
-                    <!--Este es el código original de Paypal para poder pagar-->
-                        <!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">-->
                     <form action="/paypal" method="post">     
                         @csrf   
                         <input type="hidden" name="tipo_compra" value="Juego">

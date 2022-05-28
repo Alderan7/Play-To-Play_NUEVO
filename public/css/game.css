@@ -44,6 +44,15 @@
   animation: rotarload 1.1s ease-out infinite;
   transform: rotate(0deg); }
 
+.margen {
+  margin-top: 100px; }
+
+form, .card-header, .card-body, .enlace {
+  color: #000; }
+
+form {
+  color: #FFF; }
+
 .contenedor-juego {
   display: grid;
   grid-template: "vt cp" "c c";
@@ -130,6 +139,9 @@ h2 {
 
 a {
   text-decoration: none; }
+
+.gratis h2, .gratis button {
+  margin: 0; }
 
 @media (max-width: 768px) {
   .contenedor-juego {

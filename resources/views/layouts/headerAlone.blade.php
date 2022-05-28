@@ -32,8 +32,7 @@
                             <div class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('INICIAR SESIÓN') }}</a>
                             </div>
-                        @endif
-                        |
+                        @endif                        
                         @if (Route::has('register'))
                             <div class="nav-item">
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('REGISTRO') }}</a>
@@ -81,7 +80,7 @@
             @yield('content')
         </main>
         <footer class="footer">
-            <p>© 2022 Andrés Gallardo Simón - PLAY TO PLAY - Todos los derechos reservados.</p>
+            <p>© 2022 Andrés Gallardo Simón - PLAY TO PLAY - Todos los derechos reservados</p>
         </footer>
         <script src="{{asset('js/app.js')}}"></script>
     </body>

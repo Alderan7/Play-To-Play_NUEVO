@@ -3,10 +3,8 @@
     'js_files' => ['app']])
     
 @section('content')
-<link href="{{ asset('css/index.css') }}" rel="stylesheet">
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
 <link href="{{ asset('css/niveles.css') }}" rel="stylesheet">
-<link href="{{ asset('css/margin.css') }}" rel="stylesheet">
 <link href="{{ asset('css/tables.css') }}" rel="stylesheet">
 <div class="margen container">
 <div class="encabezado-juegos">

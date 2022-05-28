@@ -109,6 +109,13 @@ a{
     text-decoration: none;
 }
 
+.gratis{
+    h2, button{
+        margin: 0;
+    }
+    
+}
+
 
 @media(max-width:768px){
     .contenedor-juego{
