@@ -31,8 +31,6 @@ class ProjectCommentaryController extends Controller
      */
     public function destroy($id)
     {
-        //$GameCommentary->delete();
-        //return redirect()->route("games.index")->with(["mensaje" => "Juego eliminado",]);
 
         $commentary = ProjectCommentary::find($id);
         

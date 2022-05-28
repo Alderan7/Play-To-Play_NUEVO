@@ -32,7 +32,7 @@
                             type="file" placeholder="Carátula del juego" required>
                     <label class="label">Video</label>
                     <input required autocomplete="off" name="video" class="form-control"
-                            type="text" placeholder="Video del juego en youtube." required>
+                            type="text" placeholder="https://www.youtube.com/watch?v=***********. Escribe lo que hay en los asteríscos de la dirección de YouTube." required>
                     <label class="label">Texto de Introducción</label>
                     <textarea rows="4" cols="50" class="form-control" name="text1" placeholder="Texto de introducción del juego." required></textarea>
                     <label class="label">Texto de ampliación 1</label>

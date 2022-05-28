@@ -18,8 +18,8 @@ img{
     font-weight: 700;
     font-size: 1.1rem;
     &:hover{
-        background-color: #91afca;
-        border: 1px solid #91afca;
+        background-color: $button;
+        border: 1px solid $button;
     }
 }
 .cancelar{

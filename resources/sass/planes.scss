@@ -94,13 +94,13 @@ form{
     font-weight: 700;
     font-size: 1.1rem;
     &:hover{
-        background-color: #91afca;
-        border: 1px solid #91afca;
+        background-color: $button;
+        border: 1px solid $button;
     }
 }
 
 .enlace{
-    color: white;
+    color: $white;
     font-weight: 700;
     font-size: 1.1rem;
     padding-bottom: 10px;
@@ -117,7 +117,7 @@ form{
 }
 
 .card-title{
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid $grey;
     font-size: 1.5rem;
 }
 

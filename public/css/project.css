@@ -95,7 +95,7 @@ select {
 
 h1 {
   margin-left: 25px;
-  color: white;
+  color: #FFF;
   text-align: center;
   margin: auto auto;
   font-weight: 900;
@@ -194,7 +194,7 @@ body {
   color: #b8b7b7; }
 
 h1, h4 {
-  color: white;
+  color: #FFF;
   font-weight: bold; }
 
 label {
@@ -204,7 +204,7 @@ label {
   margin-top: 20px; }
 
 .form-group p a {
-  color: white; }
+  color: #FFF; }
 
 #checkbx {
   background-color: #000; }
@@ -234,7 +234,7 @@ label {
   border: 1px solid #769EC4;
   width: 210px;
   height: 60px;
-  color: white;
+  color: #FFF;
   font-weight: 700;
   font-size: 1.1rem;
   margin: 20px; }

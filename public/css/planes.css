@@ -129,7 +129,7 @@ form {
     border: 1px solid #91afca; }
 
 .enlace {
-  color: white;
+  color: #FFF;
   font-weight: 700;
   font-size: 1.1rem;
   padding-bottom: 10px; }
@@ -143,7 +143,7 @@ form {
   margin: 0; }
 
 .card-title {
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #d8d8d8;
   font-size: 1.5rem; }
 
 .opaco {

@@ -207,11 +207,11 @@ aside {
     .contenedor ul li {
       background-color: #06021d;
       border: 1px solid #1b417a;
-      color: white; }
+      color: #FFF; }
       .contenedor ul li a {
         display: flex;
         align-items: center;
-        color: white;
+        color: #FFF;
         font-weight: 500;
         font-size: 1.5em;
         max-height: 30px; }
@@ -225,7 +225,7 @@ aside {
         font-weight: 700;
         border-radius: 50%;
         background-color: #133e66;
-        color: white;
+        color: #FFF;
         height: 30px;
         width: 40px;
         text-align: center;

@@ -100,7 +100,7 @@ img{
     margin-top: 30px;
     p{
         font-style: italic;
-        color: grey;
+        color: $grey;
     }
 }
 
@@ -110,7 +110,7 @@ img{
     display: flex;
     flex-direction: row;
     font-size: 0.8rem;
-    color: grey;
+    color: $grey;
     justify-content: space-between;
     .elemento-enlaces{
         display: flex;

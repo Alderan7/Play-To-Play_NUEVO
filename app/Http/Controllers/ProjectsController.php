@@ -235,11 +235,6 @@ class ProjectsController extends Controller
             return redirect()->route("projects.index")->with(["mensaje" => "proyecto actualizado"]);
         }
 
-        /*$storage_url= config('global.storage');
-        $variable=$request->input();
-        $variable['Banner']=$storage_url.$variable['Banner'];
-        $proyect->fill($variable)->saveOrFail();
-        return redirect()->route("projects.index")->with(["mensaje" => "proyecto actualizado"]);*/
     }
 
     /**

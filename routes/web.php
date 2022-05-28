@@ -81,7 +81,6 @@ Route::post('/reset-password', function (Request $request) {
     $user = Auth::user();
     $user->password = bcrypt($request->get('contraseña'));
 
-
     $user->save();
     $user = Auth::user();
         $id = Auth::user()->id;
@@ -162,7 +161,7 @@ Route::post('/send-mail', function(Request $request){
     return redirect("/home");
 });
 
-
+//Funciones de pago mediante PayPal
 
 Route::post('/paypal', function (Request $request) {
     $tipo = $request->input('tipo_compra');
@@ -176,6 +175,7 @@ Route::post('/paypal_pay', function () {
     return view('paypal_pay');
 })->middleware('auth');
 
+//Función de página de contacto
 
 Route::get('/contact', function () {
 $generos_juegos = genre_games();
@@ -183,12 +183,15 @@ $generos_proyectos = genre_projects();
 return view('contact',['generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
 
+//Función de página de ayuda
 
 Route::get('/help', function () {
     $generos_juegos = genre_games();
     $generos_proyectos = genre_projects();  
 return view('help',['generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
+
+//Función que muestra todos los juegos y sus búsquedas
 
 Route::get('/games_all', function (Request $request) {
     if($request->busqueda!=""){
@@ -219,6 +222,7 @@ Route::get('/games_all', function (Request $request) {
     return view('games_all',['juegos'=>$juegos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
 
+//Función que muestra todos los proyectos y sus búsquedas
 
 Route::get('/projects_all', function (Request $request) {
     if($request->busqueda!=""){
@@ -231,6 +235,8 @@ Route::get('/projects_all', function (Request $request) {
     $generos_proyectos = genre_projects();  
     return view('projects_all',['proyectos'=>$proyectos, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
+
+//Función que muestra los juegos por género y permite buscar
 
 Route::get('/genre_games/{genre}', function (Request $request, $genre) {
     if($request->busqueda!=""){
@@ -285,6 +291,8 @@ Route::get('/genre_games/{genre}', function (Request $request, $genre) {
     return view('genre_games',['juegos'=>$juegos, 'genreGame' => $genre, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
 
+//Función que muestra los proyectos por género y permite buscar
+
 Route::get('/genre_projects/{genre}', function (Request $request, $genre) {
     if($request->busqueda!=""){
         $busqueda= '%'.$request->busqueda.'%';
@@ -303,8 +311,6 @@ Route::get('/genre_projects/{genre}', function (Request $request, $genre) {
     $generos_proyectos = genre_projects();   
     return view('genre_projects',['proyectos'=>$proyectos, 'genreGame' => $genre, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
-
-
 
 //Todas las funciones relacionadas con la página de un juego concreto
 
@@ -352,7 +358,7 @@ Route::get('/game/{id}', function ($id) {
 });
 
 
-
+//Todas las funciones relacionadas con la página de un proyecto concreto
 
 Route::post('/project/{id}', 'App\Http\Controllers\ProjectCommentaryController@store');
 Route::delete('project/{id}', 'App\Http\Controllers\ProjectCommentaryController@destroy');
@@ -368,6 +374,10 @@ Route::get('/project/{id}', function ($id) {
     $generos_proyectos = genre_projects();  
     return view('project',['proyecto'=>$proyecto, 'comentarios'=>$comentarios, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
+
+
+
+//Función de la biblioteca/dashboard del usuario
 
 Route::get('/user', function () {
         $user = Auth::user();
@@ -395,6 +405,7 @@ Route::get('/user', function () {
 })->middleware('auth');
 
 
+//Función que muestra la página de planes
 
 Route::get('/plans', function () {
     $user = Auth::user();
@@ -411,9 +422,10 @@ Route::get('/plans', function () {
     return view('plans',['userPlans'=>$userPlans,'suscripcion'=>$suscripcion,'creatorPlans'=>$creatorPlans,'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 })->middleware('auth');
 
-Route::get('/plans/update', function (Request $request) {
-    
 
+//Función que permite actualizar el plan del usuario
+
+Route::get('/plans/update', function (Request $request) { 
     $tipoPlan = $request->input('plan');
     $tipoPlanUsuario = $request->input('plans-user');
     $tipoPlanCreador = $request->input('plans-creator');
@@ -431,6 +443,9 @@ Route::get('/plans/update', function (Request $request) {
     $generos_proyectos = genre_projects();  
     return view('plansPay',["info_actual"=>$info_actual,"info_nuevo"=>$info_nuevo,'Role_User'=>$Role_User,'tipoPlan'=>$tipoPlan,'tipoPlanNuevo'=>$tipoPlanNuevo, 'generos_juegos'=>$generos_juegos, 'generos_proyectos'=>$generos_proyectos]);
 });
+
+
+//Funciones varias que realizan los CRUDS de juegos, proyectos y algunas actualizaciones de varias tablas
 
 Route::get("/games/download/{archives}", "App\Http\Controllers\GamesController@download");
 

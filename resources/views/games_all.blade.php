@@ -20,7 +20,11 @@
             <div class="interno">
             <a href="/game/{{ $item->id }}" class="btn-card"><img class="rounded mx-auto d-block imagen-juego" src="{{$item->cover}}"  alt="Card image cap">
                 <div class="nombre-juego">{{ $item->name }}</div>
-                <div class="precio-juego">{{ $item->price }}€</div>
+                @if($item->price==0)
+                    <div class="precio-juego">Gratis</div>
+                @else
+                    <div class="precio-juego">{{ $item->price }}€</div>
+                @endif
             </a> 
             </div>
         </div>        

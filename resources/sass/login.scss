@@ -35,8 +35,8 @@ form{
     font-size: 1.1rem;
     margin: 20px;
     &:hover{
-        background-color: #91afca;
-        border: 1px solid #91afca;
+        background-color: $button;
+        border: 1px solid $button;
     }
 }
 
@@ -61,8 +61,8 @@ form{
     text-decoration: none;
     text-align: center;
     &:hover{
-        background-color: #91afca;
-        border: 1px solid #91afca;
+        background-color: $button;
+        border: 1px solid $button;
     }
 }
 

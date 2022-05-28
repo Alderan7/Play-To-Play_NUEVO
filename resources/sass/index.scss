@@ -4,7 +4,7 @@
 
 h3{
     margin-left: 25px;
-    color:white; 
+    color:$white; 
     text-align: center;
     margin: auto auto;
     font-weight: 900;
@@ -32,9 +32,9 @@ img{
     background-color: transparent;
     font-weight: 500;
     font-size: 1.5rem;
-    text-shadow: 2px 2px 2px black;
+    text-shadow: 2px 2px 2px $black;
     a{
-        color: white;
+        color: $white;
         text-decoration: none;
     }
 }
@@ -42,7 +42,7 @@ img{
 h5{
     font-weight: 900;
     font-size: 2rem;
-    text-shadow: 3px 3px 5px black;
+    text-shadow: 3px 3px 5px $black;
     text-transform: uppercase;
 }
 
@@ -63,7 +63,7 @@ h5{
     width:320px; 
     height:480px;
     transition: width .6s, height .6s;
-     box-shadow: 0 0 30px #5f80b3;
+     box-shadow: 0 0 30px $game-shadow;
 }
 
 .interno{
@@ -73,7 +73,7 @@ h5{
 }
 
 .galeria, .juego{
-    background-color: #06021d;
+    background-color: $back-body;
 }
 
 
@@ -93,10 +93,10 @@ h5{
     width:320px; 
     height:320px;
     font-size:3rem;
-    background-color:black;
-    color: white;
+    background-color:$black;
+    color: $white;
     transition: opacity .5s;
-    text-shadow: 3px 3px 5px black;
+    text-shadow: 3px 3px 5px $black;
     background: radial-gradient(circle, rgba(2,0,36,1) 9%, rgba(0,0,0,0) 70%);
     border-radius: 50%;
     display: flex;
@@ -123,10 +123,10 @@ h5{
     width:320px; 
     height:320px;
     font-size:3rem;
-    background-color:black;
-    color: white;
+    background-color:$black;
+    color: $white;
     transition: opacity .5s;
-    text-shadow: 3px 3px 5px black;
+    text-shadow: 3px 3px 5px $black;
     background: radial-gradient(circle, rgba(2,0,36,1) 9%, rgba(0,0,0,0) 70%);
     border-radius: 50%;
     display: flex;
@@ -140,7 +140,7 @@ h5{
         width:160px; 
         height:240px;
         transition: width .6s, height .6s;
-         box-shadow: 0 0 30px #5f80b3;
+         box-shadow: 0 0 30px $game-shadow;
     }
     
     .interno{

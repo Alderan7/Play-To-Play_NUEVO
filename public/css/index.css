@@ -55,7 +55,7 @@ form {
 
 h3 {
   margin-left: 25px;
-  color: white;
+  color: #FFF;
   text-align: center;
   margin: auto auto;
   font-weight: 900;
@@ -76,15 +76,15 @@ img {
   background-color: transparent;
   font-weight: 500;
   font-size: 1.5rem;
-  text-shadow: 2px 2px 2px black; }
+  text-shadow: 2px 2px 2px #000; }
   .info a {
-    color: white;
+    color: #FFF;
     text-decoration: none; }
 
 h5 {
   font-weight: 900;
   font-size: 2rem;
-  text-shadow: 3px 3px 5px black;
+  text-shadow: 3px 3px 5px #000;
   text-transform: uppercase; }
 
 .carousel {
@@ -126,10 +126,10 @@ h5 {
   width: 320px;
   height: 320px;
   font-size: 3rem;
-  background-color: black;
-  color: white;
+  background-color: #000;
+  color: #FFF;
   transition: opacity .5s;
-  text-shadow: 3px 3px 5px black;
+  text-shadow: 3px 3px 5px #000;
   background: radial-gradient(circle, #020024 9%, rgba(0, 0, 0, 0) 70%);
   border-radius: 50%;
   display: flex;
@@ -152,10 +152,10 @@ h5 {
   width: 320px;
   height: 320px;
   font-size: 3rem;
-  background-color: black;
-  color: white;
+  background-color: #000;
+  color: #FFF;
   transition: opacity .5s;
-  text-shadow: 3px 3px 5px black;
+  text-shadow: 3px 3px 5px #000;
   background: radial-gradient(circle, #020024 9%, rgba(0, 0, 0, 0) 70%);
   border-radius: 50%;
   display: flex;

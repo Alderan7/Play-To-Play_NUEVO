@@ -13,7 +13,7 @@
 }
 
 body{
-    background: #06021d;
+    background: $back-body;
     background-repeat: no-repeat;
     color:$white;
     justify-content: space-between;
@@ -140,7 +140,7 @@ div>a{
     a{
         display: flex;
         align-items: center;
-        background-color: #06021d;
+        background-color: $back-body;
         border: 0.5px solid $shadow;
         color: $white;
         font-weight: 500;
@@ -151,7 +151,7 @@ div>a{
         }
         &:hover{
             color:$back-light;
-            background-color: #06021d;
+            background-color: $back-body;
         }
     }    
 }   
@@ -189,15 +189,15 @@ div>a{
     ul{
         margin-bottom: 20px;
         min-width: 300px;
-        background-color: #06021d;
+        background-color: $back-body;
         li{
-            background-color: #06021d;
+            background-color: $back-body;
             border: 1px solid $shadow;
-            color: white;
+            color: $white;
             a{
                 display:flex;
                 align-items: center;
-                color: white;
+                color: $white;
                 font-weight: 500;
                 font-size: 1.5em;
                 max-height: 30px;
@@ -208,7 +208,7 @@ div>a{
                 }
                 &:hover{
                     color:$back-light;
-                    background-color: #06021d;
+                    background-color: $back-body;
                 }
             }
     
@@ -216,8 +216,8 @@ div>a{
                 font-size: 1.1rem;
                 font-weight: 700;
                 border-radius: 50%;
-                background-color: #133e66;
-                color:white;
+                background-color: $back;
+                color:$white;
                 height: 30px;
                 width: 40px;
                 text-align: center;

@@ -150,15 +150,6 @@ class GamesController extends Controller
      * @param  \App\Models\Game  $juego
      * @return \Illuminate\Http\Response
      */
-    /*public function update(Request $request, Game $game)
-    {
-
-        $variable=$request->input();
-        $variable['cover']=$variable['cover'];
-        $game->fill($variable)->saveOrFail();
-        return redirect()->route("games.index")->with(["mensaje" => "Juego actualizado"]);
-    }*/
-
 
     public function update(Request $request, Game $game)
     {
