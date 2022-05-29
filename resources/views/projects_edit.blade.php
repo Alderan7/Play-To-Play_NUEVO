@@ -3,6 +3,9 @@
     'js_files' => ['app']])
     
 @section('content')
+@php
+    $url = config('global.storage')
+@endphp
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
 <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 <link href="{{ asset('css/edit_game.css') }}" rel="stylesheet">
@@ -11,7 +14,7 @@
 <h1>Editar datos del Proyecto</h1>
     </div>
         <div class="col-12">
-            <form method="POST" action="{{route("projects.update", [$project])}}">
+            <form method="POST" action="{{route("projects.update", [$project])}}"  enctype="multipart/form-data">
                 @method("PUT")
                 @csrf
                 <div class="form-group editar-juego">
@@ -48,17 +51,17 @@
                      <div class="separador"></div>
                     <div class="media">
                             <label class="label">Imagen del Proyecto</label>
-                            <img id="imagen" src="{{$project->image}}">
-                            <input required value="{{$project->image}}" autocomplete="off" name="image" class="form-control"
-                            type="text" placeholder="">   
-                            <input autocomplete="off" id="image-game" name="image-game" class="form-control"
+                            <img id="imagen" src="{{$url}}{{$project->image}}">
+                            <!--<input required value="{{$project->image}}" autocomplete="off" name="image" class="form-control"
+                            type="text" placeholder="{{$project->image}}"> -->
+                            <input autocomplete="off" id="image-game" name="image" class="form-control"
                             type="file" placeholder="Caratula del juego">     
                             <label class="label">Carátula del Proyecto</label>
-                            <img src="{{$project->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
-                            <input autocomplete="off" id="cover-game" name="cover-game" class="form-control"
+                            <img src="{{$url}}{{$project->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
+                            <input autocomplete="off" id="cover-game" name="cover" class="form-control"
                             type="file" placeholder="Caratula del juego">  
-                            <input required value="{{$project->cover}}" id="url-game" autocomplete="off" name="cover" class="form-control"
-                            type="text" placeholder="Caratula del Proyecto" required>  
+                            <!--<input required value="{{$project->cover}}" id="url-game" autocomplete="off" name="cover" class="form-control"
+                            type="text" placeholder="Caratula del Proyecto" required>-->
                      </div>
                 </div>
                 <div class="botones-juego">

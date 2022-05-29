@@ -3,6 +3,9 @@
     'js_files' => ['app']])
     
 @section('content')
+@php
+    $url = config('global.storage')
+@endphp
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
 <link href="{{ asset('css/niveles.css') }}" rel="stylesheet">
 <link href="{{ asset('css/tables.css') }}" rel="stylesheet">
@@ -30,7 +33,7 @@
                     @foreach($projects_creator as $project)
                         <tr>
                             <td class="nombre">{{$project->name}}</td>
-                            <td><img class="imagen-tabla" src="{{$project->cover}}"></td>           
+                            <td><img class="imagen-tabla" src="{{$url}}{{$project->cover}}"></td>           
                         
                             <td>
                                 <a class="btn btn-warning boton" href="{{route("projects.edit",[$project])}}">
@@ -51,7 +54,7 @@
                     @foreach($projects as $project)
                         <tr>
                             <td class="nombre">{{$project->name}}</td>
-                            <td><img class="imagen-tabla" src="{{$project->cover}}"></td>           
+                            <td><img class="imagen-tabla" src="{{$url}}{{$project->cover}}"></td>           
                         
                             <td>
                                 <a class="btn btn-warning boton" href="{{route("projects.edit",[$project])}}">

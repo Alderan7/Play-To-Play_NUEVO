@@ -3,6 +3,9 @@
     'js_files' => ['app']])
     
 @section('content')
+@php
+    $url = config('global.storage')
+@endphp
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
 <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 <link href="{{ asset('css/edit_game.css') }}" rel="stylesheet">

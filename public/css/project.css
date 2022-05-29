@@ -232,6 +232,7 @@ label {
 .boton {
   background-color: #769EC4;
   border: 1px solid #769EC4;
+  border-radius: 20px;
   width: 210px;
   height: 60px;
   color: #FFF;

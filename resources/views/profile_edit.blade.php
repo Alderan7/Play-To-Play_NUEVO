@@ -1,6 +1,9 @@
 @extends('layouts.header')
 
 @section('content')
+@php
+    $url = config('global.storage')
+@endphp
 <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 <link href="{{ asset('css/edit_profile.css') }}" rel="stylesheet">
 <div class="container margen">
@@ -16,9 +19,9 @@
                             <label for="name" class="col-md-4 col-form-label text-md-start">{{ __('Avatar Actual') }}</label>                            
                             <div class="col-md-6">
                             @if (is_null($usuario->avatar))
-                                <img class="avatar" src="http://127.0.0.1/public/images/default.svg">
+                                <img class="avatar" src="{{$url}}default.svg">
                             @else
-                                <img class="avatar" src="http://127.0.0.1/public/images/{{ $usuario->avatar }}">
+                                <img class="avatar" src="{{$url}}{{ $usuario->avatar }}">
                             @endif
                         </div>
                         <div class="row mb-3">                            

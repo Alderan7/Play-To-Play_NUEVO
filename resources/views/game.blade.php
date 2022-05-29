@@ -3,6 +3,9 @@
     'js_files' => ['app']])
     
 @section('content')
+@php
+    $url = config('global.storage')
+@endphp
 <link href="{{ asset('css/game.css') }}" rel="stylesheet">
 <div id="game" class="margen container">  
 <h1>{{$juego[0]->name}}</h1>
@@ -21,19 +24,19 @@
         </div>
         @guest
                 <div class="caratula-pago en-biblioteca">
-                    <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
+                    <img src="{{$url}}{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
                     <p class="no-login">Para poder jugar a este juego, <a href="{{ route('register') }}">{{ __('regístrate') }}</a> o <a href="{{ route('login') }}">{{ __('inicia sesión') }}</a>.</p>
 
                 </div>  
         @else
                 @if ($pertenece==true)
                 <div class="caratula-pago en-biblioteca">
-                    <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
+                    <img src="{{$url}}{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
                     <a href="/user" class="boton">Play</a>
                 </div>        
                 @elseif ($juego[0]->price==0.00 || Auth::user()->hasRole(['user-all']) || (Auth::user()->hasRole(['user-mid']) && $novedad==True))
                 <div class="caratula-pago gratis">
-                    <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
+                    <img src="{{$url}}{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
                     <h2>Gratis</h2>
                     <form action="{{ url("user") }}" method="post">
                         @csrf
@@ -44,7 +47,7 @@
                 </div>
                 @else
                 <div v-else class="caratula-pago">
-                    <img src="{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
+                    <img src="{{$url}}{{$juego[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
                     <h2>{{$juego[0]->price}}€</h2>
                     <form action="/paypal" method="post">     
                         @csrf   
@@ -69,9 +72,9 @@
                             <div class="comment mt-4 text-justify float-left">
                                 <div>
                                 @if($comentario->avatar!=null)
-                                <img src="http://127.0.0.1/public/images/{{$comentario->avatar}}" alt="" class="rounded-circle" width="40" height="40">
+                                <img src="{{$url}}/{{$comentario->avatar}}" alt="" class="rounded-circle" width="40" height="40">
                                 @else
-                                <img src="http://127.0.0.1/public/images/default.svg" alt="" class="rounded-circle" width="40" height="40">
+                                <img src="{{$url}}/default.svg" alt="" class="rounded-circle" width="40" height="40">
                                 @endif
                                     <h4>{{$comentario->name}}</h4>                                                               
                                     <span>{{$comentario->created_at}}</span>

@@ -101,12 +101,9 @@ class GamesController extends Controller
 
         
 
-        $juego = new Game($request->input());
-        $storage_url= config('global.storage');
-        $completeurlname=$storage_url.$filenametostore; 
-        $completeurlname2=$storage_url.$filenametostore2;     
-        $juego['cover']=$completeurlname;
-        $juego['archives']=$completeurlname2;
+        $juego = new Game($request->input());     
+        $juego['cover']=$filenametostore;
+        $juego['archives']=$filenametostore2;
         $juego->saveOrFail();
         toastr()->success('Juego creado Correctamente');
         return redirect()->route("games.index")->with(["mensaje" => "Juego creado",
@@ -198,13 +195,13 @@ class GamesController extends Controller
 
 
             if($request->hasFile('cover-game')) {
-                $completeurlname=$storage_url.$filenametostore; 
-                $variable['cover']=$completeurlname;
+                //$completeurlname=$storage_url.$filenametostore; 
+                $variable['cover']=$filenametostore;
                 }
                 
             if($request->hasFile('archives')) {
-                $completeurlname2=$storage_url.$filenametostore2;             
-                $variable['archives']=$completeurlname2;
+                //$completeurlname2=$storage_url.$filenametostore2;             
+                $variable['archives']=$filenametostore2;
             }          
 
             $game->fill($variable)->saveOrFail();
@@ -212,7 +209,6 @@ class GamesController extends Controller
             return redirect()->route("games.index")->with(["mensaje" => "Juego actualizado"]);
         }else{
             $variable=$request->input();
-            $variable['cover']=$variable['cover'];
             $game->fill($variable)->saveOrFail();
             toastr()->success('Juego editado Correctamente');
             return redirect()->route("games.index")->with(["mensaje" => "Juego actualizado"]);

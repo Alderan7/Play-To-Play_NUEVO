@@ -3,12 +3,15 @@
     'js_files' => ['app']])
     
 @section('content')
+@php
+    $url = config('global.storage')
+@endphp
 <link href="{{ asset('css/project.css') }}" rel="stylesheet">
 <div id="project" class="margen container">  
 <h1>{{$proyecto[0]->name}}</h1>
     <div class="container contenedor-juego">
         <div class="video-texto">
-            <img src="{{$proyecto[0]->image}}" class="img-fluid borde-luminoso imagen" alt="...">
+            <img src="{{$url}}{{$proyecto[0]->image}}" class="img-fluid borde-luminoso imagen" alt="...">
             <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
                 <p>{{$proyecto[0]->text1}}</p>
             </div>
@@ -20,7 +23,7 @@
             </div>
         </div>
         <div class="caratula-pago">
-            <img src="{{$proyecto[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
+            <img src="{{$url}}{{$proyecto[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
             <!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">-->
             <form action="/paypal" method="post">     
                 @csrf   
@@ -48,12 +51,14 @@
                             <div class="comment mt-4 text-justify float-left">
                                 <div>
                                 @if($comentario->avatar!=null)
-                                <img src="http://127.0.0.1/public/images/{{$comentario->avatar}}" alt="" class="rounded-circle" width="40" height="40">
+                                <img src="{{$url}}{{$comentario->avatar}}" alt="" class="rounded-circle" width="40" height="40">
                                 @else
-                                <img src="http://127.0.0.1/public/images/default.svg" alt="" class="rounded-circle" width="40" height="40">
+                                <img src="{{$url}}default.svg" alt="" class="rounded-circle" width="40" height="40">
                                 @endif
                                     <h4>{{$comentario->name}}</h4>                                                               
                                     <span>{{$comentario->created_at}}</span>
+                                    @guest
+                                    @else
                                     @if (Auth::user()->id == $comentario -> id_user || Auth::user()->hasRole(['administrator']))  
                                     <form class="boton-eliminar" action="{{ url("project/{$comentario->id}") }}" method="post">
                                         @method("delete")
@@ -63,6 +68,7 @@
                                         </button>
                                     </form>    
                                     @endif
+                                    @endguest
                                 </div>
                                 <br>
                                 <p>{{$comentario->commentary}}</p>                                

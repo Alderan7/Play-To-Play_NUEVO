@@ -214,7 +214,7 @@ Route::get('/games_all', function (Request $request) {
             $juegos = DB::table('games')->orderBy('price', 'desc')->get();
         }else{
             $busqueda= '%'.$request->busqueda.'%';
-            $juegos = DB::table('games')->get();
+            $juegos = DB::table('games')->orderBy('name', 'asc')->get();
         }
     }
     $generos_juegos = genre_games();
@@ -229,7 +229,7 @@ Route::get('/projects_all', function (Request $request) {
         $busqueda= '%'.$request->busqueda.'%';
         $proyectos = DB::table('projects')->where('name','LIKE',$busqueda)->get();
     }else{
-        $proyectos = DB::table('projects')->get();
+        $proyectos = DB::table('projects')->orderBy('name', 'asc')->get();
     }
     $generos_juegos = genre_games();
     $generos_proyectos = genre_projects();  
@@ -331,7 +331,6 @@ Route::get('/game/{id}', function ($id) {
             $pertenece=True;
         }
     }
-
     $novedad = False;
     $novedades= DB::table('games')
         ->selectRaw('games.id')

@@ -105,11 +105,11 @@ class ProjectsController extends Controller
 
             //Store $filenametostore in the database
             $proyecto = new Project($request->input());
-            $storage_url= config('global.storage');
-            $completeurlname=$storage_url.$filenametostore; 
-            $completeurlname2=$storage_url.$filenametostore2; 
-            $proyecto['image']=$completeurlname2;
-            $proyecto['cover']=$completeurlname;
+            //$storage_url= config('global.storage');
+            //$completeurlname=$storage_url.$filenametostore; 
+            //$completeurlname2=$storage_url.$filenametostore2; 
+            $proyecto['image']=$filenametostore2;
+            $proyecto['cover']=$filenametostore;
             $proyecto->saveOrFail();
 
             $user = Auth::user();
@@ -172,57 +172,57 @@ class ProjectsController extends Controller
     public function update(Request $request, project $project)
     {
 
-        if($request->hasFile('cover-game') || $request->hasFile('image-game')) {
+        if($request->hasFile('cover') || $request->hasFile('image')) {
 
-            if($request->hasFile('cover-game')) {
+            if($request->hasFile('cover')) {
             //get filename with extension
-            $filenamewithextension = $request->file('cover-game')->getClientOriginalName();
+            $filenamewithextension = $request->file('cover')->getClientOriginalName();
 
             //get filename without extension
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
 
             //get file extension
-            $extension = $request->file('cover-game')->getClientOriginalExtension();
+            $extension = $request->file('cover')->getClientOriginalExtension();
 
             //filename to store
             $filenametostore = $filename.'_'.uniqid().'.'.$extension;
 
             //Upload File to external server
-            Storage::disk('ftp')->put($filenametostore, fopen($request->file('cover-game'), 'r+'));
+            Storage::disk('ftp')->put($filenametostore, fopen($request->file('cover'), 'r+'));
 
             //Store $filenametostore in the database
             }
             
-            if($request->hasFile('image-game')) {
+            if($request->hasFile('image')) {
             //get filename with extension
-            $filenamewithextension = $request->file('image-game')->getClientOriginalName();
+            $filenamewithextension = $request->file('image')->getClientOriginalName();
     
             //get filename without extension
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
     
             //get file extension
-            $extension = $request->file('image-game')->getClientOriginalExtension();
+            $extension = $request->file('image')->getClientOriginalExtension();
     
             //filename to store
             $filenametostore2 = $filename.'_'.uniqid().'.'.$extension;
     
             //Upload File to external server
-            Storage::disk('ftp')->put($filenametostore2, fopen($request->file('image-game'), 'r+'));
+            Storage::disk('ftp')->put($filenametostore2, fopen($request->file('image'), 'r+'));
             //Store $filenametostore in the database
 
             }
             $variable=$request->input();
-            $storage_url= config('global.storage');
+            //$storage_url= config('global.storage');
 
 
-            if($request->hasFile('cover-game')) {
-                $completeurlname=$storage_url.$filenametostore; 
-                $variable['cover']=$completeurlname;
+            if($request->hasFile('cover')) {
+                //$completeurlname=$storage_url.$filenametostore; 
+                $variable['cover']=$filenametostore;
                 }
                 
-            if($request->hasFile('image-game')) {
-                $completeurlname2=$storage_url.$filenametostore2;             
-                $variable['image-game']=$completeurlname2;
+            if($request->hasFile('image')) {
+                //$completeurlname2=$storage_url.$filenametostore2;             
+                $variable['image']=$filenametostore2;
             }          
 
             $project->fill($variable)->saveOrFail();

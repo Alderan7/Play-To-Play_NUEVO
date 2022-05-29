@@ -3,6 +3,9 @@
     'js_files' => ['app']])
     
 @section('content')
+@php
+    $url = config('global.storage')
+@endphp
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
 <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 <link href="{{ asset('css/edit_game.css') }}" rel="stylesheet">
@@ -47,7 +50,6 @@
                         <label class="label">Carátula del Proyecto</label>
                         <input autocomplete="off" id="cover-game" name="cover" class="form-control"
                         type="file" placeholder="Caratula del juego">  
-
                 </div>
                 <div class="botones-juego">
                     <button class="btn btn-success">Guardar</button>

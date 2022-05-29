@@ -3,6 +3,9 @@
     'js_files' => ['app']])
     
 @section('content')
+@php
+    $url = config('global.storage')
+@endphp
 <link href="{{ asset('css/games.css') }}" rel="stylesheet">
 <link href="{{ asset('css/tables.css') }}" rel="stylesheet">
 <div class="container margen">
@@ -26,7 +29,7 @@
                 @foreach($games as $game)
                     <tr>                                            
                         <td class="nombre">{{$game->name}}</td>
-                        <td><img class="imagen-tabla" src="{{$game->cover}}"></td>
+                        <td><img class="imagen-tabla" src="{{$url}}{{$game->cover}}"></td>
                         <td>
                             <a class="btn btn-warning boton" href="{{route("games.edit",[$game])}}">
                                 <i class="fa fa-edit">Editar</i>
