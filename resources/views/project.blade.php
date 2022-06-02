@@ -11,7 +11,7 @@
 <h1>{{$proyecto[0]->name}}</h1>
     <div class="container contenedor-juego">
         <div class="video-texto">
-            <img src="{{$url}}{{$proyecto[0]->image}}" class="img-fluid borde-luminoso imagen" alt="...">
+        <img src="{{url('storage/images/'.$proyecto[0]->image )}}" class="img-fluid borde-luminoso imagen" alt="...">
             <div data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="0" class="scrollspy-example" tabindex="0">
                 <p>{{$proyecto[0]->text1}}</p>
             </div>
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="caratula-pago">
-            <img src="{{$url}}{{$proyecto[0]->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
+            <img src="{{url('storage/images/'.$proyecto[0]->cover )}}" class="img-fluid borde-luminoso caratula" alt="...">
             <!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">-->
             <form action="/paypal" method="post">     
                 @csrf   

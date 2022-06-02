@@ -33,7 +33,7 @@
                     @foreach($projects_creator as $project)
                         <tr>
                             <td class="nombre">{{$project->name}}</td>
-                            <td><img class="imagen-tabla" src="{{$url}}{{$project->cover}}"></td>           
+                            <td><img class="imagen-tabla" src="{{url('storage/images/'.$project->cover )}}"></td>           
                         
                             <td>
                                 <a class="btn btn-warning boton" href="{{route("projects.edit",[$project])}}">
@@ -54,7 +54,7 @@
                     @foreach($projects as $project)
                         <tr>
                             <td class="nombre">{{$project->name}}</td>
-                            <td><img class="imagen-tabla" src="{{$url}}{{$project->cover}}"></td>           
+                            <td><img class="imagen-tabla" src="{{url('storage/images/'.$project->cover )}}"></td>           
                         
                             <td>
                                 <a class="btn btn-warning boton" href="{{route("projects.edit",[$project])}}">

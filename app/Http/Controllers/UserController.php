@@ -51,7 +51,7 @@ class UserController extends Controller
             $filenametostore = $filename.'_'.uniqid().'.'.$extension;
 
             //Upload File to external server
-            Storage::disk('ftp')->put($filenametostore, fopen($request->file('avatar'), 'r+'));
+            Storage::disk('public')->put($filenametostore, fopen($request->file('avatar'), 'r+'));
 
             //Store $filenametostore in the database
             // Get current user

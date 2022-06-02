@@ -19,9 +19,9 @@
                             <label for="name" class="col-md-4 col-form-label text-md-start">{{ __('Avatar Actual') }}</label>                            
                             <div class="col-md-6">
                             @if (is_null($usuario->avatar))
-                                <img class="avatar" src="{{$url}}default.svg">
+                                <img class="avatar" src="{{url('storage/images/'.'default.svg')}}">
                             @else
-                                <img class="avatar" src="{{$url}}{{ $usuario->avatar }}">
+                                <img class="avatar" src="{{url('storage/images/'.$usuario->avatar )}}">
                             @endif
                         </div>
                         <div class="row mb-3">                            

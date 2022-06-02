@@ -54,7 +54,7 @@
             @foreach($juegos as $item)
             <div class="juego">
                 <div class="interno">
-                <a href="/game/{{ $item->id }}" class="btn-card"><img class="rounded mx-auto d-block imagen-juego" src="{{$url}}{{$item->cover}}"  alt="Card image cap">
+                <a href="/game/{{ $item->id }}" class="btn-card"><img class="rounded mx-auto d-block imagen-juego" src="{{url('storage/images/'.$item->cover)}}"  alt="Card image cap">
                     <div class="nombre-juego">{{ $item->name }}</div>
                     @if($item->price==0)
                         <div class="precio-juego">Gratis</div>
@@ -71,7 +71,7 @@
         @foreach($proyectos as $item)
             <div class="juego">
                 <div class="interno">
-                <a href="/project/{{ $item->id }}" class="btn-card"><img class="rounded mx-auto d-block imagen-juego" src="{{$url}}{{$item->cover}}"  alt="Card image cap">
+                <a href="/project/{{ $item->id }}" class="btn-card"><img class="rounded mx-auto d-block imagen-juego" src="{{url('storage/images/'.$item->cover)}}"  alt="Card image cap">
                     <div class="nombre-juego">{{ $item->name }}</div>
                 </a> 
                 </div>

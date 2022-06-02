@@ -19,7 +19,12 @@
                             <label for="name" class="col-md-4 col-form-label text-md-start">{{ __('Nombre') }}</label>
 
                             <div class="col-md-7">
-                                <input id="name" type="text" class="form-control" name="name" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre" required autocomplete="name" autofocus>
+                                @error('nombre')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -27,7 +32,12 @@
                             <label for="email" class="col-md-4 col-form-label text-md-start">{{ __('Correo Electrónico') }}</label>
 
                             <div class="col-md-7">
-                                <input id="email" type="email" class="form-control" name="email" required autocomplete="email">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required autocomplete="email">
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -35,7 +45,12 @@
                             <label for="email" class="col-md-4 col-form-label text-md-start">{{ __('Teléfono') }}</label>
 
                             <div class="col-md-7">
-                                <input id="telefono" type="tel" class="form-control" name="tel" required autocomplete="tel">
+                                <input id="telefono" type="tel" class="form-control @error('telefono') is-invalid @enderror" name="telefono" required autocomplete="tel">
+                                @error('telefono')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -43,24 +58,34 @@
                             <label for="tipo" class="col-md-4 col-form-label text-md-start">{{ __('Tipo de Usuario') }}</label>
                           <div class="col-md-7">
                               <div class="input-group mb-3">
-                                <select class="form-select" name="type" id="inputGroupSelect02">
-                                  <option selected>Selecciona el tipo de plan</option>
+                                <select class="form-select @error('tipo') is-invalid @enderror" name="tipo" id="inputGroupSelect02">
+                                  <option selected disabled>Selecciona el tipo de plan</option>
                                   <option value="Gratuito">Gratuito - Usuario</option>
                                   <option value="Novedades">Novedades - Usuario</option>
                                   <option value="Catálogo">Catálogo - Usuario</option>
                                   <option value="Cinco">Cinco - Creador</option>
                                   <option value="Diez">Diez - Creador</option>
                                   <option value="Ilimitado">Ilimitado - Creador</option>
-                                </select>
+                                </select>                                
                                 <label class="input-group-text" for="inputGroupSelect02">Planes</label>
-                              </div>
+                                @error('tipo')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                              </div>                              
                             </div>
                         </div>
 
                         <div class="row mb-3">
                             <label for="mensaje" class="col-md-4 col-sm-5 col-form-label text-md-start">{{ __('Mensaje') }}</label>
                             <div class="col-md-7 col-sm-5">
-                              <textarea rows="4" cols="50" class="form-control" id="mensaje" name="message">Introduce tu mensaje</textarea>
+                              <textarea rows="4" cols="50" class="form-control @error('mensaje') is-invalid @enderror" id="mensaje" name="mensaje" placeholder="Introduce tu mensaje"></textarea>
+                              @error('mensaje')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

@@ -37,7 +37,7 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => storage_path('app/public'),
+            'root' => storage_path('app/public/images'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
@@ -58,7 +58,7 @@ return [
             'host' => env('FTP_HOST'),
             'username' => env('FTP_USERNAME'),
             'password' => env('FTP_PASSWORD'),
-            'root' => '/public/images' // for example: /public_html/images
+            'root' => '/public/images', // for example: /public_html/images
         ],
 
     ],
@@ -75,7 +75,7 @@ return [
     */
 
     'links' => [
-        public_path('storage') => storage_path('storage/app/public'),
+        public_path('storage') => storage_path('app/public'),
     ],
 
 ];

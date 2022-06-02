@@ -51,7 +51,7 @@
                             <input required value="{{$game->video}}" autocomplete="off" name="video" class="form-control"
                             type="text" placeholder="Video">      
                             <label class="label">Carátula</label>
-                            <img src="{{$url}}{{$game->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
+                            <img src="{{url('storage/images/'.$game->cover)}}" class="img-fluid borde-luminoso caratula" alt="...">
                             <input autocomplete="off" id="cover-game" name="cover-game" class="form-control"
                             type="file" placeholder="Caratula del juego">  
                             <input required value="{{$game->cover}}" id="url-game" autocomplete="off" name="cover" class="form-control"

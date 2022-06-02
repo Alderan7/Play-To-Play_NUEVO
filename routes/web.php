@@ -145,13 +145,22 @@ Route::post('/forget-password-reset', function(Request $request){
 //Proceso mediante el que el usuario puede enviar un Mail a la atención de los admins de Play To Play
 
 Route::post('/send-mail', function(Request $request){
+
+    $request->validate([
+        'nombre' => 'required',
+        'email' => 'required|email',
+        'telefono' => 'required|digits:9',
+        'tipo' => 'required',
+        'mensaje' => 'required'
+    ]);
+
     $email = $request->get('email');
     Mail::send('mail', [
-        'name' => $request->get('name'),
+        'name' => $request->get('nombre'),
         'email' => $request->get('email'),
-        'msg' => $request->get('message'),
-        'type'=> $request->get('type'),
-        'tel'=>$request->get('tel')],
+        'msg' => $request->get('mensaje'),
+        'type'=> $request->get('tipo'),
+        'tel'=>$request->get('telefono')],
         function ($message) {
                 $message->from('playtoplayapp@gmail.com');
                 $message->to('playtoplayapp@gmail.com', 'Alderan')

@@ -51,13 +51,13 @@
                      <div class="separador"></div>
                     <div class="media">
                             <label class="label">Imagen del Proyecto</label>
-                            <img id="imagen" src="{{$url}}{{$project->image}}">
+                            <img id="imagen" src="{{url('storage/images/'.$project->image )}}">
                             <!--<input required value="{{$project->image}}" autocomplete="off" name="image" class="form-control"
                             type="text" placeholder="{{$project->image}}"> -->
                             <input autocomplete="off" id="image-game" name="image" class="form-control"
                             type="file" placeholder="Caratula del juego">     
                             <label class="label">Carátula del Proyecto</label>
-                            <img src="{{$url}}{{$project->cover}}" class="img-fluid borde-luminoso caratula" alt="...">
+                            <img src="{{url('storage/images/'.$project->cover )}}" class="img-fluid borde-luminoso caratula" alt="...">
                             <input autocomplete="off" id="cover-game" name="cover" class="form-control"
                             type="file" placeholder="Caratula del juego">  
                             <!--<input required value="{{$project->cover}}" id="url-game" autocomplete="off" name="cover" class="form-control"

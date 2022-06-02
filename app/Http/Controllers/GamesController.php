@@ -74,7 +74,7 @@ class GamesController extends Controller
             $filenametostore = $filename.'_'.uniqid().'.'.$extension;
     
             //Upload File to external server
-            Storage::disk('ftp')->put($filenametostore, fopen($request->file('cover'), 'r+'));
+            Storage::disk('public')->put($filenametostore, fopen($request->file('cover'), 'r+'));
     
             //Store $filenametostore in the database
         }
@@ -95,7 +95,7 @@ class GamesController extends Controller
             $filenametostore2 = $filename.'_'.uniqid().'.'.$extension;
     
             //Upload File to external server
-            Storage::disk('ftp')->put($filenametostore2, fopen($request->file('archives'), 'r+'));
+            Storage::disk('public')->put($filenametostore2, fopen($request->file('archives'), 'r+'));
             //Store $filenametostore in the database
         }
 
@@ -167,7 +167,7 @@ class GamesController extends Controller
             $filenametostore = $filename.'_'.uniqid().'.'.$extension;
 
             //Upload File to external server
-            Storage::disk('ftp')->put($filenametostore, fopen($request->file('cover-game'), 'r+'));
+            Storage::disk('public')->put($filenametostore, fopen($request->file('cover-game'), 'r+'));
 
             //Store $filenametostore in the database
             }
@@ -186,7 +186,7 @@ class GamesController extends Controller
             $filenametostore2 = $filename.'_'.uniqid().'.'.$extension;
     
             //Upload File to external server
-            Storage::disk('ftp')->put($filenametostore2, fopen($request->file('archives'), 'r+'));
+            Storage::disk('public')->put($filenametostore2, fopen($request->file('archives'), 'r+'));
             //Store $filenametostore in the database
 
             }
